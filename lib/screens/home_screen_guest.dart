@@ -17,6 +17,9 @@ import 'package:BetterNotes/subjects/OBOPRO/admin_Qobo.dart';
 import 'package:BetterNotes/subjects/PEDUC2/admin_Aped.dart';
 import 'package:BetterNotes/subjects/PEDUC2/admin_Eped.dart';
 import 'package:BetterNotes/subjects/PEDUC2/admin_Qped.dart';
+import 'package:BetterNotes/subjects/PURCOM/guest_Apur.dart';
+import 'package:BetterNotes/subjects/PURCOM/guest_Epur.dart';
+import 'package:BetterNotes/subjects/PURCOM/guest_Qpur.dart';
 import 'package:BetterNotes/widgets/admin_card.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
@@ -493,21 +496,21 @@ class _GuestScreenState extends State<GuestScreen> {
                             Navigator.push(
                               context,
                               MaterialPageRoute(
-                                  builder: (context) => GuestScreen(
+                                  builder: (context) => APURGuestScreen(
                                       backgroundColor: backgroundColor)),
                             );
                           } else if (newValue == 'Quizzes') {
                             Navigator.push(
                               context,
                               MaterialPageRoute(
-                                  builder: (context) => GuestScreen(
+                                  builder: (context) => QPURGuestScreen(
                                       backgroundColor: backgroundColor)),
                             );
                           } else if (newValue == 'Exams') {
                             Navigator.push(
                               context,
                               MaterialPageRoute(
-                                  builder: (context) => GuestScreen(
+                                  builder: (context) => EPURGuestScreen(
                                       backgroundColor: backgroundColor)),
                             );
                           }

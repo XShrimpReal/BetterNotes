@@ -19,6 +19,9 @@ import 'package:BetterNotes/subjects/OBOPRO/admin_Qobo.dart';
 import 'package:BetterNotes/subjects/PEDUC2/admin_Aped.dart';
 import 'package:BetterNotes/subjects/PEDUC2/admin_Eped.dart';
 import 'package:BetterNotes/subjects/PEDUC2/admin_Qped.dart';
+import 'package:BetterNotes/subjects/PURCOM/admin_Apur.dart';
+import 'package:BetterNotes/subjects/PURCOM/admin_Epur.dart';
+import 'package:BetterNotes/subjects/PURCOM/admin_Qpur.dart';
 import 'package:BetterNotes/widgets/admin_card.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
@@ -45,7 +48,7 @@ class _AdminScreenState extends State<AdminScreen> {
   final String _selectedOption4 = 'DSTRU1';
   final String _selectedOption5 = 'PEDUC2';
   final String _selectedOption6 = 'PURCOM';
-  final String _selectedOption7 = 'NSTP02';
+  final String _selectedOption7 = 'PURCOM';
   final String _selectedOption8 = 'CHENGR';
   final String _selectedOption9 = 'ARTAPP';
   final String _selectedOption10 = 'PHENGR';
@@ -493,21 +496,21 @@ class _AdminScreenState extends State<AdminScreen> {
                             Navigator.push(
                               context,
                               MaterialPageRoute(
-                                  builder: (context) => GuestScreen(
+                                  builder: (context) => AdminPURScreen(
                                       backgroundColor: backgroundColor)),
                             );
                           } else if (newValue == 'Quizzes') {
                             Navigator.push(
                               context,
                               MaterialPageRoute(
-                                  builder: (context) => GuestScreen(
+                                  builder: (context) => QPURAdminCALScreen(
                                       backgroundColor: backgroundColor)),
                             );
                           } else if (newValue == 'Exams') {
                             Navigator.push(
                               context,
                               MaterialPageRoute(
-                                  builder: (context) => GuestScreen(
+                                  builder: (context) => EPURAdminCALScreen(
                                       backgroundColor: backgroundColor)),
                             );
                           }
