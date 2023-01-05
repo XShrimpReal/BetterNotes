@@ -82,8 +82,8 @@ class _HomeScreenState extends State<HomeScreen> {
                   }
                 }
               },
-              style:
-                  ElevatedButton.styleFrom(backgroundColor: Color(0xFF463F3B)),
+              style: ElevatedButton.styleFrom(
+                  backgroundColor: const Color(0xFF463F3B)),
               child: const Text('LOGIN'),
             ),
           ],
