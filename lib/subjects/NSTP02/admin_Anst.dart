@@ -6,6 +6,9 @@ import 'package:BetterNotes/style/app_style.dart';
 import 'package:BetterNotes/subjects/CAL2/admin_Acal2.dart';
 import 'package:BetterNotes/subjects/CAL2/admin_Ecal2.dart';
 import 'package:BetterNotes/subjects/CAL2/admin_Qcal2.dart';
+import 'package:BetterNotes/subjects/CHENGR/admin_Ache.dart';
+import 'package:BetterNotes/subjects/CHENGR/admin_Eche.dart';
+import 'package:BetterNotes/subjects/CHENGR/admin_Qche.dart';
 import 'package:BetterNotes/subjects/DSTRU1/admin_Adst.dart';
 import 'package:BetterNotes/subjects/DSTRU1/admin_Edst.dart';
 import 'package:BetterNotes/subjects/DSTRU1/admin_Qdst.dart';
@@ -625,21 +628,21 @@ class _AdminNSTScreenState extends State<AdminNSTScreen> {
                             Navigator.push(
                               context,
                               MaterialPageRoute(
-                                  builder: (context) => GuestScreen(
+                                  builder: (context) => AdminCHEScreen(
                                       backgroundColor: backgroundColor)),
                             );
                           } else if (newValue == 'Quizzes') {
                             Navigator.push(
                               context,
                               MaterialPageRoute(
-                                  builder: (context) => GuestScreen(
+                                  builder: (context) => QCHEAdminCALScreen(
                                       backgroundColor: backgroundColor)),
                             );
                           } else if (newValue == 'Exams') {
                             Navigator.push(
                               context,
                               MaterialPageRoute(
-                                  builder: (context) => GuestScreen(
+                                  builder: (context) => ECHEAdminCALScreen(
                                       backgroundColor: backgroundColor)),
                             );
                           }
