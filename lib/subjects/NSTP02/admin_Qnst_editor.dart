@@ -4,14 +4,14 @@ import 'package:BetterNotes/style/app_style.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 
-class QPURAdminEditorScreen extends StatefulWidget {
-  const QPURAdminEditorScreen({Key? key}) : super(key: key);
+class QNSTAdminEditorScreen extends StatefulWidget {
+  const QNSTAdminEditorScreen({Key? key}) : super(key: key);
 
   @override
-  State<QPURAdminEditorScreen> createState() => _QPURAdminEditorScreenState();
+  State<QNSTAdminEditorScreen> createState() => _QNSTAdminEditorScreenState();
 }
 
-class _QPURAdminEditorScreenState extends State<QPURAdminEditorScreen> {
+class _QNSTAdminEditorScreenState extends State<QNSTAdminEditorScreen> {
   int color_id = Random().nextInt(AppStyle.cardsColor.length);
 
   late TextEditingController _titleController = TextEditingController();
@@ -100,10 +100,10 @@ class _QPURAdminEditorScreenState extends State<QPURAdminEditorScreen> {
       floatingActionButton: FloatingActionButton(
         backgroundColor: AppStyle.accentColor,
         onPressed: () async {
-          FirebaseFirestore.instance.collection('QPURnotes').add({
-            'QPURnote_title': _titleController.text,
-            'QPURnote_content': _mainController.text,
-            'QPURcolor_id': color_id
+          FirebaseFirestore.instance.collection('QNSTnotes').add({
+            'QNSTnote_title': _titleController.text,
+            'QNSTnote_content': _mainController.text,
+            'QNSTcolor_id': color_id
           }).then((value) {
             print(value.id);
             Navigator.pop(context);

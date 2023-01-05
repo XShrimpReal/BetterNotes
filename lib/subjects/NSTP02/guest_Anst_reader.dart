@@ -4,12 +4,12 @@ import 'package:flutter/material.dart';
 
 enum SampleItem { itemOne, itemTwo, itemThree }
 
-class APURGuestReaderScreen extends StatefulWidget {
-  APURGuestReaderScreen(this.doc, {Key? key}) : super(key: key);
+class ANSTGuestReaderScreen extends StatefulWidget {
+  ANSTGuestReaderScreen(this.doc, {Key? key}) : super(key: key);
   QueryDocumentSnapshot doc;
 
   @override
-  _APURGuestReaderScreenState createState() => _APURGuestReaderScreenState();
+  _ANSTGuestReaderScreenState createState() => _ANSTGuestReaderScreenState();
 }
 
 class NoteAction {
@@ -18,7 +18,7 @@ class NoteAction {
   NoteAction(this.title, this.content);
 }
 
-class _APURGuestReaderScreenState extends State<APURGuestReaderScreen> {
+class _ANSTGuestReaderScreenState extends State<ANSTGuestReaderScreen> {
   late TextEditingController _mainController;
   late TextEditingController _titleController;
 
@@ -28,11 +28,11 @@ class _APURGuestReaderScreenState extends State<APURGuestReaderScreen> {
   void initState() {
     super.initState();
     _mainController =
-        TextEditingController(text: widget.doc['APURnote_content']);
+        TextEditingController(text: widget.doc['ANSTnote_content']);
 
     super.initState();
     _titleController =
-        TextEditingController(text: widget.doc['APURnote_title']);
+        TextEditingController(text: widget.doc['ANSTnote_title']);
   }
 
   @override
@@ -42,16 +42,16 @@ class _APURGuestReaderScreenState extends State<APURGuestReaderScreen> {
       return Container();
     }
 
-    var color_id = widget.doc['APURcolor_id'];
+    var color_id = widget.doc['ANSTcolor_id'];
 
     return WillPopScope(
         onWillPop: () async {
           await FirebaseFirestore.instance
-              .collection('APURnotes')
+              .collection('ANSTnotes')
               .doc(widget.doc.id)
               .update({
-            'APURnote_content': _mainController.text,
-            'APURnote_title': _titleController.text
+            'ANSTnote_content': _mainController.text,
+            'ANSTnote_title': _titleController.text
           });
           return true;
         },
@@ -64,7 +64,7 @@ class _APURGuestReaderScreenState extends State<APURGuestReaderScreen> {
             title: RichText(
               text: TextSpan(
                 style: AppStyle.mainTitle.copyWith(color: Colors.black),
-                text: widget.doc['APURnote_title'] as String,
+                text: widget.doc['ANSTnote_title'] as String,
               ),
             ),
             actions: [],
@@ -78,7 +78,7 @@ class _APURGuestReaderScreenState extends State<APURGuestReaderScreen> {
                   child: RichText(
                     text: TextSpan(
                       style: AppStyle.mainContent.copyWith(color: Colors.black),
-                      text: widget.doc['APEDnote_content'] as String,
+                      text: widget.doc['ANSTnote_content'] as String,
                     ),
                   ),
                 ),

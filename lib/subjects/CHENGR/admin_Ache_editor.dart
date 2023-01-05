@@ -4,14 +4,14 @@ import 'package:BetterNotes/style/app_style.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 
-class ENSTAdminEditorScreen extends StatefulWidget {
-  const ENSTAdminEditorScreen({Key? key}) : super(key: key);
+class ACHEAdminEditorScreen extends StatefulWidget {
+  const ACHEAdminEditorScreen({Key? key}) : super(key: key);
 
   @override
-  State<ENSTAdminEditorScreen> createState() => _ENSTAdminEditorScreenState();
+  State<ACHEAdminEditorScreen> createState() => _ACHEAdminEditorScreenState();
 }
 
-class _ENSTAdminEditorScreenState extends State<ENSTAdminEditorScreen> {
+class _ACHEAdminEditorScreenState extends State<ACHEAdminEditorScreen> {
   int color_id = Random().nextInt(AppStyle.cardsColor.length);
 
   late TextEditingController _titleController = TextEditingController();
@@ -100,10 +100,10 @@ class _ENSTAdminEditorScreenState extends State<ENSTAdminEditorScreen> {
       floatingActionButton: FloatingActionButton(
         backgroundColor: AppStyle.accentColor,
         onPressed: () async {
-          FirebaseFirestore.instance.collection('ENSTnotes').add({
-            'ENSTnote_title': _titleController.text,
-            'ENSTnote_content': _mainController.text,
-            'ENSTcolor_id': color_id
+          FirebaseFirestore.instance.collection('ACHEnotes').add({
+            'ACHEnote_title': _titleController.text,
+            'ACHEnote_content': _mainController.text,
+            'ACHEcolor_id': color_id
           }).then((value) {
             print(value.id);
             Navigator.pop(context);

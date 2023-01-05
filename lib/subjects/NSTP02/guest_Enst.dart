@@ -12,31 +12,34 @@ import 'package:BetterNotes/subjects/DSTRU1/guest_Qdst.dart';
 import 'package:BetterNotes/subjects/ENGIDA/guest_Aeng.dart';
 import 'package:BetterNotes/subjects/ENGIDA/guest_Eeng.dart';
 import 'package:BetterNotes/subjects/ENGIDA/guest_Qeng.dart';
+import 'package:BetterNotes/subjects/NSTP02/Enst_card.dart';
+import 'package:BetterNotes/subjects/NSTP02/guest_Anst.dart';
+import 'package:BetterNotes/subjects/NSTP02/guest_Enst_reader.dart';
+import 'package:BetterNotes/subjects/NSTP02/guest_Qnst.dart';
 import 'package:BetterNotes/subjects/OBOPRO/guest_Aobo.dart';
 import 'package:BetterNotes/subjects/OBOPRO/guest_Eobo.dart';
 import 'package:BetterNotes/subjects/OBOPRO/guest_Qobo.dart';
 import 'package:BetterNotes/subjects/PEDUC2/guest_Aped.dart';
 import 'package:BetterNotes/subjects/PEDUC2/guest_Eped.dart';
 import 'package:BetterNotes/subjects/PEDUC2/guest_Qped.dart';
-import 'package:BetterNotes/subjects/PURCOM/Epur_card.dart';
 import 'package:BetterNotes/subjects/PURCOM/guest_Apur.dart';
-import 'package:BetterNotes/subjects/PURCOM/guest_Epur_reader.dart';
+import 'package:BetterNotes/subjects/PURCOM/guest_Epur.dart';
 import 'package:BetterNotes/subjects/PURCOM/guest_Qpur.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 
-class EPURGuestScreen extends StatefulWidget {
+class ENSTGuestScreen extends StatefulWidget {
   final Color backgroundColor;
-  const EPURGuestScreen({Key? key, required this.backgroundColor})
+  const ENSTGuestScreen({Key? key, required this.backgroundColor})
       : super(key: key);
 
   @override
-  _EPURGuestScreenState createState() =>
-      _EPURGuestScreenState(backgroundColor: AppStyle.mainColor);
+  _ENSTGuestScreenState createState() =>
+      _ENSTGuestScreenState(backgroundColor: AppStyle.mainColor);
 }
 
-class _EPURGuestScreenState extends State<EPURGuestScreen> {
+class _ENSTGuestScreenState extends State<ENSTGuestScreen> {
   final Color backgroundColor;
   final TextEditingController _searchController = TextEditingController();
   final TextEditingController _usernameController = TextEditingController();
@@ -558,21 +561,21 @@ class _EPURGuestScreenState extends State<EPURGuestScreen> {
                             Navigator.push(
                               context,
                               MaterialPageRoute(
-                                  builder: (context) => GuestScreen(
+                                  builder: (context) => ANSTGuestScreen(
                                       backgroundColor: backgroundColor)),
                             );
                           } else if (newValue == 'Quizzes') {
                             Navigator.push(
                               context,
                               MaterialPageRoute(
-                                  builder: (context) => GuestScreen(
+                                  builder: (context) => QNSTGuestScreen(
                                       backgroundColor: backgroundColor)),
                             );
                           } else if (newValue == 'Exams') {
                             Navigator.push(
                               context,
                               MaterialPageRoute(
-                                  builder: (context) => GuestScreen(
+                                  builder: (context) => ENSTGuestScreen(
                                       backgroundColor: backgroundColor)),
                             );
                           }
@@ -795,7 +798,7 @@ class _EPURGuestScreenState extends State<EPURGuestScreen> {
 
   final GlobalKey<ScaffoldState> _scaffoldKey = GlobalKey<ScaffoldState>();
 
-  _EPURGuestScreenState({required this.backgroundColor});
+  _ENSTGuestScreenState({required this.backgroundColor});
 
   @override
   Widget build(BuildContext context) {
@@ -805,7 +808,7 @@ class _EPURGuestScreenState extends State<EPURGuestScreen> {
       backgroundColor: AppStyle.mainColor,
       appBar: AppBar(
         elevation: 0,
-        title: const Text('PURCOM (Guest)'),
+        title: const Text('NSTP02 (Guest)'),
         centerTitle: true,
         backgroundColor: AppStyle.mainColor,
         actions: [
@@ -879,11 +882,11 @@ class _EPURGuestScreenState extends State<EPURGuestScreen> {
               child: StreamBuilder<QuerySnapshot>(
                 stream: _searchController.text.isEmpty
                     ? FirebaseFirestore.instance
-                        .collection('EPURnotes')
+                        .collection('ENSTnotes')
                         .snapshots()
                     : FirebaseFirestore.instance
-                        .collection('EPURnotes')
-                        .where('EPURnote_title',
+                        .collection('ENSTnotes')
+                        .where('ENSTnote_title',
                             isGreaterThanOrEqualTo:
                                 _searchController.text.toUpperCase(),
                             isLessThan:
@@ -900,7 +903,7 @@ class _EPURGuestScreenState extends State<EPURGuestScreen> {
                     final List<DocumentSnapshot> matchingNotes = [];
                     for (var i = 0; i < notes.length; i++) {
                       final note = notes[i];
-                      if (note['EPURnote_title']
+                      if (note['ENSTnote_title']
                           .toString()
                           .toUpperCase()
                           .contains(_searchController.text.toUpperCase())) {
@@ -915,7 +918,7 @@ class _EPURGuestScreenState extends State<EPURGuestScreen> {
                                     context,
                                     MaterialPageRoute(
                                         builder: (context) =>
-                                            EPURGuestReaderScreen(note)));
+                                            ENSTGuestReaderScreen(note)));
                               }, note))
                           .toList(),
                     );

@@ -5,12 +5,12 @@ import 'package:image_picker/image_picker.dart';
 
 enum SampleItem { itemOne, itemTwo, itemThree }
 
-class ANSTAdminReaderScreen extends StatefulWidget {
-  ANSTAdminReaderScreen(this.doc, {Key? key}) : super(key: key);
+class QCHEAdminReaderScreen extends StatefulWidget {
+  QCHEAdminReaderScreen(this.doc, {Key? key}) : super(key: key);
   QueryDocumentSnapshot doc;
 
   @override
-  _ANSTAdminReaderScreenState createState() => _ANSTAdminReaderScreenState();
+  _QCHEAdminReaderScreenState createState() => _QCHEAdminReaderScreenState();
 }
 
 class NoteAction {
@@ -19,7 +19,7 @@ class NoteAction {
   NoteAction(this.title, this.content);
 }
 
-class _ANSTAdminReaderScreenState extends State<ANSTAdminReaderScreen> {
+class _QCHEAdminReaderScreenState extends State<QCHEAdminReaderScreen> {
   late TextEditingController _mainController;
   late TextEditingController _titleController;
 
@@ -115,7 +115,7 @@ class _ANSTAdminReaderScreenState extends State<ANSTAdminReaderScreen> {
   void initState() {
     super.initState();
     _mainController =
-        TextEditingController(text: widget.doc['ANSTnote_content']);
+        TextEditingController(text: widget.doc['QCHEnote_content']);
     _mainController.addListener(() {
       // Add the current text as an action to the history
       _addAction(_titleController.text, _mainController.text);
@@ -123,7 +123,7 @@ class _ANSTAdminReaderScreenState extends State<ANSTAdminReaderScreen> {
 
     super.initState();
     _titleController =
-        TextEditingController(text: widget.doc['ANSTnote_title']);
+        TextEditingController(text: widget.doc['QCHEnote_title']);
     _titleController.addListener(() {
       // Add the current text as an action to the history
       _addAction(_titleController.text, _mainController.text);
@@ -133,16 +133,16 @@ class _ANSTAdminReaderScreenState extends State<ANSTAdminReaderScreen> {
 
   @override
   Widget build(BuildContext context) {
-    var color_id = widget.doc['ANSTcolor_id'];
+    var color_id = widget.doc['QCHEcolor_id'];
 
     return WillPopScope(
       onWillPop: () async {
         await FirebaseFirestore.instance
-            .collection('ANSTnotes')
+            .collection('QCHEnotes')
             .doc(widget.doc.id)
             .update({
-          'ANSTnote_content': _mainController.text,
-          'ANSTnote_title': _titleController.text
+          'QCHEnote_content': _mainController.text,
+          'QCHEnote_title': _titleController.text
         });
         return true;
       },

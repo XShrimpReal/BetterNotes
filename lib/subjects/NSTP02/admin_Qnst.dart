@@ -12,32 +12,35 @@ import 'package:BetterNotes/subjects/DSTRU1/admin_Qdst.dart';
 import 'package:BetterNotes/subjects/ENGIDA/admin_Aeng.dart';
 import 'package:BetterNotes/subjects/ENGIDA/admin_Eeng.dart';
 import 'package:BetterNotes/subjects/ENGIDA/admin_Qeng.dart';
+import 'package:BetterNotes/subjects/NSTP02/Qnst_card.dart';
+import 'package:BetterNotes/subjects/NSTP02/admin_Anst.dart';
+import 'package:BetterNotes/subjects/NSTP02/admin_Enst.dart';
+import 'package:BetterNotes/subjects/NSTP02/admin_Qnst_editor.dart';
+import 'package:BetterNotes/subjects/NSTP02/admin_Qnst_reader.dart';
 import 'package:BetterNotes/subjects/OBOPRO/admin_Aobo.dart';
 import 'package:BetterNotes/subjects/OBOPRO/admin_Eobo.dart';
 import 'package:BetterNotes/subjects/OBOPRO/admin_Qobo.dart';
 import 'package:BetterNotes/subjects/PEDUC2/admin_Aped.dart';
 import 'package:BetterNotes/subjects/PEDUC2/admin_Eped.dart';
 import 'package:BetterNotes/subjects/PEDUC2/admin_Qped.dart';
-import 'package:BetterNotes/subjects/PURCOM/Qpur_card.dart';
 import 'package:BetterNotes/subjects/PURCOM/admin_Apur.dart';
 import 'package:BetterNotes/subjects/PURCOM/admin_Epur.dart';
-import 'package:BetterNotes/subjects/PURCOM/admin_Qpur_editor.dart';
-import 'package:BetterNotes/subjects/PURCOM/admin_Qpur_reader.dart';
+import 'package:BetterNotes/subjects/PURCOM/admin_Qpur.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 
-class QPURAdminCALScreen extends StatefulWidget {
+class QNSTAdminCALScreen extends StatefulWidget {
   final Color backgroundColor;
-  const QPURAdminCALScreen({Key? key, required this.backgroundColor})
+  const QNSTAdminCALScreen({Key? key, required this.backgroundColor})
       : super(key: key);
 
   @override
-  _QPURAdminCALScreenState createState() =>
-      _QPURAdminCALScreenState(backgroundColor: AppStyle.mainColor);
+  _QNSTAdminCALScreenState createState() =>
+      _QNSTAdminCALScreenState(backgroundColor: AppStyle.mainColor);
 }
 
-class _QPURAdminCALScreenState extends State<QPURAdminCALScreen> {
+class _QNSTAdminCALScreenState extends State<QNSTAdminCALScreen> {
   final Color backgroundColor;
   final TextEditingController _searchController = TextEditingController();
   final TextEditingController _usernameController = TextEditingController();
@@ -559,21 +562,21 @@ class _QPURAdminCALScreenState extends State<QPURAdminCALScreen> {
                             Navigator.push(
                               context,
                               MaterialPageRoute(
-                                  builder: (context) => GuestScreen(
+                                  builder: (context) => AdminNSTScreen(
                                       backgroundColor: backgroundColor)),
                             );
                           } else if (newValue == 'Quizzes') {
                             Navigator.push(
                               context,
                               MaterialPageRoute(
-                                  builder: (context) => GuestScreen(
+                                  builder: (context) => QNSTAdminCALScreen(
                                       backgroundColor: backgroundColor)),
                             );
                           } else if (newValue == 'Exams') {
                             Navigator.push(
                               context,
                               MaterialPageRoute(
-                                  builder: (context) => GuestScreen(
+                                  builder: (context) => ENSTAdminCALScreen(
                                       backgroundColor: backgroundColor)),
                             );
                           }
@@ -796,7 +799,7 @@ class _QPURAdminCALScreenState extends State<QPURAdminCALScreen> {
 
   final GlobalKey<ScaffoldState> _scaffoldKey = GlobalKey<ScaffoldState>();
 
-  _QPURAdminCALScreenState({required this.backgroundColor});
+  _QNSTAdminCALScreenState({required this.backgroundColor});
 
   @override
   Widget build(BuildContext context) {
@@ -806,7 +809,7 @@ class _QPURAdminCALScreenState extends State<QPURAdminCALScreen> {
       backgroundColor: AppStyle.mainColor,
       appBar: AppBar(
         elevation: 0,
-        title: const Text('PURCOM (Admin)'),
+        title: const Text('NSTP02 (Admin)'),
         centerTitle: true,
         backgroundColor: AppStyle.mainColor,
         actions: [
@@ -880,11 +883,11 @@ class _QPURAdminCALScreenState extends State<QPURAdminCALScreen> {
               child: StreamBuilder<QuerySnapshot>(
                 stream: _searchController.text.isEmpty
                     ? FirebaseFirestore.instance
-                        .collection('QPURnotes')
+                        .collection('QNSTnotes')
                         .snapshots()
                     : FirebaseFirestore.instance
-                        .collection('QPURnotes')
-                        .where('QPURnote_title',
+                        .collection('QNSTnotes')
+                        .where('QNSTnote_title',
                             isGreaterThanOrEqualTo:
                                 _searchController.text.toUpperCase(),
                             isLessThan:
@@ -901,7 +904,7 @@ class _QPURAdminCALScreenState extends State<QPURAdminCALScreen> {
                     final List<DocumentSnapshot> matchingNotes = [];
                     for (var i = 0; i < notes.length; i++) {
                       final note = notes[i];
-                      if (note['QPURnote_title']
+                      if (note['QNSTnote_title']
                           .toString()
                           .toUpperCase()
                           .contains(_searchController.text.toUpperCase())) {
@@ -916,7 +919,7 @@ class _QPURAdminCALScreenState extends State<QPURAdminCALScreen> {
                                     context,
                                     MaterialPageRoute(
                                         builder: (context) =>
-                                            QPURAdminReaderScreen(note)));
+                                            QNSTAdminReaderScreen(note)));
                               }, note))
                           .toList(),
                     );
@@ -933,7 +936,7 @@ class _QPURAdminCALScreenState extends State<QPURAdminCALScreen> {
           Navigator.push(
               context,
               MaterialPageRoute(
-                  builder: (context) => const QPURAdminEditorScreen()));
+                  builder: (context) => const QNSTAdminEditorScreen()));
         },
         backgroundColor: const Color(0xFF8B7D76),
         child: const Icon(

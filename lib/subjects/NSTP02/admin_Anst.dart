@@ -12,32 +12,35 @@ import 'package:BetterNotes/subjects/DSTRU1/admin_Qdst.dart';
 import 'package:BetterNotes/subjects/ENGIDA/admin_Aeng.dart';
 import 'package:BetterNotes/subjects/ENGIDA/admin_Eeng.dart';
 import 'package:BetterNotes/subjects/ENGIDA/admin_Qeng.dart';
+import 'package:BetterNotes/subjects/NSTP02/Anst_card.dart';
+import 'package:BetterNotes/subjects/NSTP02/admin_Anst_editor.dart';
+import 'package:BetterNotes/subjects/NSTP02/admin_Anst_reader.dart';
+import 'package:BetterNotes/subjects/NSTP02/admin_Enst.dart';
+import 'package:BetterNotes/subjects/NSTP02/admin_Qnst.dart';
 import 'package:BetterNotes/subjects/OBOPRO/admin_Aobo.dart';
 import 'package:BetterNotes/subjects/OBOPRO/admin_Eobo.dart';
 import 'package:BetterNotes/subjects/OBOPRO/admin_Qobo.dart';
 import 'package:BetterNotes/subjects/PEDUC2/admin_Aped.dart';
 import 'package:BetterNotes/subjects/PEDUC2/admin_Eped.dart';
 import 'package:BetterNotes/subjects/PEDUC2/admin_Qped.dart';
-import 'package:BetterNotes/subjects/PURCOM/Apur_card.dart';
-import 'package:BetterNotes/subjects/PURCOM/admin_Apur_editor.dart';
-import 'package:BetterNotes/subjects/PURCOM/admin_Apur_reader.dart';
+import 'package:BetterNotes/subjects/PURCOM/admin_Apur.dart';
 import 'package:BetterNotes/subjects/PURCOM/admin_Epur.dart';
 import 'package:BetterNotes/subjects/PURCOM/admin_Qpur.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 
-class AdminPURScreen extends StatefulWidget {
+class AdminNSTScreen extends StatefulWidget {
   final Color backgroundColor;
-  const AdminPURScreen({Key? key, required this.backgroundColor})
+  const AdminNSTScreen({Key? key, required this.backgroundColor})
       : super(key: key);
 
   @override
-  _AdminPURScreenState createState() =>
-      _AdminPURScreenState(backgroundColor: AppStyle.mainColor);
+  _AdminNSTScreenState createState() =>
+      _AdminNSTScreenState(backgroundColor: AppStyle.mainColor);
 }
 
-class _AdminPURScreenState extends State<AdminPURScreen> {
+class _AdminNSTScreenState extends State<AdminNSTScreen> {
   final Color backgroundColor;
   final TextEditingController _searchController = TextEditingController();
   final TextEditingController _usernameController = TextEditingController();
@@ -559,21 +562,21 @@ class _AdminPURScreenState extends State<AdminPURScreen> {
                             Navigator.push(
                               context,
                               MaterialPageRoute(
-                                  builder: (context) => GuestScreen(
+                                  builder: (context) => AdminNSTScreen(
                                       backgroundColor: backgroundColor)),
                             );
                           } else if (newValue == 'Quizzes') {
                             Navigator.push(
                               context,
                               MaterialPageRoute(
-                                  builder: (context) => GuestScreen(
+                                  builder: (context) => QNSTAdminCALScreen(
                                       backgroundColor: backgroundColor)),
                             );
                           } else if (newValue == 'Exams') {
                             Navigator.push(
                               context,
                               MaterialPageRoute(
-                                  builder: (context) => GuestScreen(
+                                  builder: (context) => ENSTAdminCALScreen(
                                       backgroundColor: backgroundColor)),
                             );
                           }
@@ -796,7 +799,7 @@ class _AdminPURScreenState extends State<AdminPURScreen> {
 
   final GlobalKey<ScaffoldState> _scaffoldKey = GlobalKey<ScaffoldState>();
 
-  _AdminPURScreenState({required this.backgroundColor});
+  _AdminNSTScreenState({required this.backgroundColor});
 
   @override
   Widget build(BuildContext context) {
@@ -806,7 +809,7 @@ class _AdminPURScreenState extends State<AdminPURScreen> {
       backgroundColor: AppStyle.mainColor,
       appBar: AppBar(
         elevation: 0,
-        title: const Text('PURCOM (Admin)'),
+        title: const Text('NSTP02 (Admin)'),
         centerTitle: true,
         backgroundColor: AppStyle.mainColor,
         actions: [
@@ -880,11 +883,11 @@ class _AdminPURScreenState extends State<AdminPURScreen> {
               child: StreamBuilder<QuerySnapshot>(
                 stream: _searchController.text.isEmpty
                     ? FirebaseFirestore.instance
-                        .collection('APURnotes')
+                        .collection('ANSTnotes')
                         .snapshots()
                     : FirebaseFirestore.instance
-                        .collection('APURnotes')
-                        .where('APURnote_title',
+                        .collection('ANSTnotes')
+                        .where('ANSTnote_title',
                             isGreaterThanOrEqualTo:
                                 _searchController.text.toUpperCase(),
                             isLessThan:
@@ -901,7 +904,7 @@ class _AdminPURScreenState extends State<AdminPURScreen> {
                     final List<DocumentSnapshot> matchingNotes = [];
                     for (var i = 0; i < notes.length; i++) {
                       final note = notes[i];
-                      if (note['APURnote_title']
+                      if (note['ANSTnote_title']
                           .toString()
                           .toUpperCase()
                           .contains(_searchController.text.toUpperCase())) {
@@ -916,7 +919,7 @@ class _AdminPURScreenState extends State<AdminPURScreen> {
                                     context,
                                     MaterialPageRoute(
                                         builder: (context) =>
-                                            APURAdminReaderScreen(note)));
+                                            ANSTAdminReaderScreen(note)));
                               }, note))
                           .toList(),
                     );
@@ -933,7 +936,7 @@ class _AdminPURScreenState extends State<AdminPURScreen> {
           Navigator.push(
               context,
               MaterialPageRoute(
-                  builder: (context) => const APURAdminEditorScreen()));
+                  builder: (context) => const ANSTAdminEditorScreen()));
         },
         backgroundColor: const Color(0xFF8B7D76),
         child: const Icon(

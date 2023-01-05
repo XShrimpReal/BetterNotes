@@ -4,12 +4,12 @@ import 'package:flutter/material.dart';
 
 enum SampleItem { itemOne, itemTwo, itemThree }
 
-class EPURGuestReaderScreen extends StatefulWidget {
-  EPURGuestReaderScreen(this.doc, {Key? key}) : super(key: key);
+class ENSTGuestReaderScreen extends StatefulWidget {
+  ENSTGuestReaderScreen(this.doc, {Key? key}) : super(key: key);
   QueryDocumentSnapshot doc;
 
   @override
-  _EPURGuestReaderScreenState createState() => _EPURGuestReaderScreenState();
+  _ENSTGuestReaderScreenState createState() => _ENSTGuestReaderScreenState();
 }
 
 class NoteAction {
@@ -18,7 +18,7 @@ class NoteAction {
   NoteAction(this.title, this.content);
 }
 
-class _EPURGuestReaderScreenState extends State<EPURGuestReaderScreen> {
+class _ENSTGuestReaderScreenState extends State<ENSTGuestReaderScreen> {
   late TextEditingController _mainController;
   late TextEditingController _titleController;
 
@@ -28,11 +28,11 @@ class _EPURGuestReaderScreenState extends State<EPURGuestReaderScreen> {
   void initState() {
     super.initState();
     _mainController =
-        TextEditingController(text: widget.doc['EPURnote_content']);
+        TextEditingController(text: widget.doc['ENSTnote_content']);
 
     super.initState();
     _titleController =
-        TextEditingController(text: widget.doc['EPURnote_title']);
+        TextEditingController(text: widget.doc['ENSTnote_title']);
   }
 
   @override
@@ -42,16 +42,16 @@ class _EPURGuestReaderScreenState extends State<EPURGuestReaderScreen> {
       return Container();
     }
 
-    var color_id = widget.doc['EPURcolor_id'];
+    var color_id = widget.doc['ENSTcolor_id'];
 
     return WillPopScope(
         onWillPop: () async {
           await FirebaseFirestore.instance
-              .collection('EPURnotes')
+              .collection('ENSTnotes')
               .doc(widget.doc.id)
               .update({
-            'EPURnote_content': _mainController.text,
-            'EPURnote_title': _titleController.text
+            'ENSTnote_content': _mainController.text,
+            'ENSTnote_title': _titleController.text
           });
           return true;
         },
@@ -64,7 +64,7 @@ class _EPURGuestReaderScreenState extends State<EPURGuestReaderScreen> {
             title: RichText(
               text: TextSpan(
                 style: AppStyle.mainTitle.copyWith(color: Colors.black),
-                text: widget.doc['EPURnote_title'] as String,
+                text: widget.doc['ENSTnote_title'] as String,
               ),
             ),
             actions: [],
@@ -78,7 +78,7 @@ class _EPURGuestReaderScreenState extends State<EPURGuestReaderScreen> {
                   child: RichText(
                     text: TextSpan(
                       style: AppStyle.mainContent.copyWith(color: Colors.black),
-                      text: widget.doc['EPURnote_content'] as String,
+                      text: widget.doc['ENSTnote_content'] as String,
                     ),
                   ),
                 ),

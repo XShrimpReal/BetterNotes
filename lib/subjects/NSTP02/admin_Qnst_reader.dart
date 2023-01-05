@@ -5,12 +5,12 @@ import 'package:image_picker/image_picker.dart';
 
 enum SampleItem { itemOne, itemTwo, itemThree }
 
-class QPURAdminReaderScreen extends StatefulWidget {
-  QPURAdminReaderScreen(this.doc, {Key? key}) : super(key: key);
+class QNSTAdminReaderScreen extends StatefulWidget {
+  QNSTAdminReaderScreen(this.doc, {Key? key}) : super(key: key);
   QueryDocumentSnapshot doc;
 
   @override
-  _QPURAdminReaderScreenState createState() => _QPURAdminReaderScreenState();
+  _QNSTAdminReaderScreenState createState() => _QNSTAdminReaderScreenState();
 }
 
 class NoteAction {
@@ -19,7 +19,7 @@ class NoteAction {
   NoteAction(this.title, this.content);
 }
 
-class _QPURAdminReaderScreenState extends State<QPURAdminReaderScreen> {
+class _QNSTAdminReaderScreenState extends State<QNSTAdminReaderScreen> {
   late TextEditingController _mainController;
   late TextEditingController _titleController;
 
@@ -115,7 +115,7 @@ class _QPURAdminReaderScreenState extends State<QPURAdminReaderScreen> {
   void initState() {
     super.initState();
     _mainController =
-        TextEditingController(text: widget.doc['QPURnote_content']);
+        TextEditingController(text: widget.doc['QNSTnote_content']);
     _mainController.addListener(() {
       // Add the current text as an action to the history
       _addAction(_titleController.text, _mainController.text);
@@ -123,7 +123,7 @@ class _QPURAdminReaderScreenState extends State<QPURAdminReaderScreen> {
 
     super.initState();
     _titleController =
-        TextEditingController(text: widget.doc['QPURnote_title']);
+        TextEditingController(text: widget.doc['QNSTnote_title']);
     _titleController.addListener(() {
       // Add the current text as an action to the history
       _addAction(_titleController.text, _mainController.text);
@@ -133,16 +133,16 @@ class _QPURAdminReaderScreenState extends State<QPURAdminReaderScreen> {
 
   @override
   Widget build(BuildContext context) {
-    var color_id = widget.doc['QPURcolor_id'];
+    var color_id = widget.doc['QNSTcolor_id'];
 
     return WillPopScope(
       onWillPop: () async {
         await FirebaseFirestore.instance
-            .collection('QPURnotes')
+            .collection('QNSTnotes')
             .doc(widget.doc.id)
             .update({
-          'QPURnote_content': _mainController.text,
-          'QPURnote_title': _titleController.text
+          'QNSTnote_content': _mainController.text,
+          'QNSTnote_title': _titleController.text
         });
         return true;
       },

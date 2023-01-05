@@ -12,32 +12,35 @@ import 'package:BetterNotes/subjects/DSTRU1/admin_Qdst.dart';
 import 'package:BetterNotes/subjects/ENGIDA/admin_Aeng.dart';
 import 'package:BetterNotes/subjects/ENGIDA/admin_Eeng.dart';
 import 'package:BetterNotes/subjects/ENGIDA/admin_Qeng.dart';
+import 'package:BetterNotes/subjects/NSTP02/Enst_card.dart';
+import 'package:BetterNotes/subjects/NSTP02/admin_Anst.dart';
+import 'package:BetterNotes/subjects/NSTP02/admin_Enst_editor.dart';
+import 'package:BetterNotes/subjects/NSTP02/admin_Enst_reader.dart';
+import 'package:BetterNotes/subjects/NSTP02/admin_Qnst.dart';
 import 'package:BetterNotes/subjects/OBOPRO/admin_Aobo.dart';
 import 'package:BetterNotes/subjects/OBOPRO/admin_Eobo.dart';
 import 'package:BetterNotes/subjects/OBOPRO/admin_Qobo.dart';
 import 'package:BetterNotes/subjects/PEDUC2/admin_Aped.dart';
 import 'package:BetterNotes/subjects/PEDUC2/admin_Eped.dart';
 import 'package:BetterNotes/subjects/PEDUC2/admin_Qped.dart';
-import 'package:BetterNotes/subjects/PURCOM/Epur_card.dart';
 import 'package:BetterNotes/subjects/PURCOM/admin_Apur.dart';
-import 'package:BetterNotes/subjects/PURCOM/admin_Epur_editor.dart';
-import 'package:BetterNotes/subjects/PURCOM/admin_Epur_reader.dart';
+import 'package:BetterNotes/subjects/PURCOM/admin_Epur.dart';
 import 'package:BetterNotes/subjects/PURCOM/admin_Qpur.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 
-class EPURAdminCALScreen extends StatefulWidget {
+class ENSTAdminCALScreen extends StatefulWidget {
   final Color backgroundColor;
-  const EPURAdminCALScreen({Key? key, required this.backgroundColor})
+  const ENSTAdminCALScreen({Key? key, required this.backgroundColor})
       : super(key: key);
 
   @override
-  _EPURAdminCALScreenState createState() =>
-      _EPURAdminCALScreenState(backgroundColor: AppStyle.mainColor);
+  _ENSTAdminCALScreenState createState() =>
+      _ENSTAdminCALScreenState(backgroundColor: AppStyle.mainColor);
 }
 
-class _EPURAdminCALScreenState extends State<EPURAdminCALScreen> {
+class _ENSTAdminCALScreenState extends State<ENSTAdminCALScreen> {
   final Color backgroundColor;
   final TextEditingController _searchController = TextEditingController();
   final TextEditingController _usernameController = TextEditingController();
@@ -559,21 +562,21 @@ class _EPURAdminCALScreenState extends State<EPURAdminCALScreen> {
                             Navigator.push(
                               context,
                               MaterialPageRoute(
-                                  builder: (context) => GuestScreen(
+                                  builder: (context) => AdminNSTScreen(
                                       backgroundColor: backgroundColor)),
                             );
                           } else if (newValue == 'Quizzes') {
                             Navigator.push(
                               context,
                               MaterialPageRoute(
-                                  builder: (context) => GuestScreen(
+                                  builder: (context) => QNSTAdminCALScreen(
                                       backgroundColor: backgroundColor)),
                             );
                           } else if (newValue == 'Exams') {
                             Navigator.push(
                               context,
                               MaterialPageRoute(
-                                  builder: (context) => GuestScreen(
+                                  builder: (context) => ENSTAdminCALScreen(
                                       backgroundColor: backgroundColor)),
                             );
                           }
@@ -796,7 +799,7 @@ class _EPURAdminCALScreenState extends State<EPURAdminCALScreen> {
 
   final GlobalKey<ScaffoldState> _scaffoldKey = GlobalKey<ScaffoldState>();
 
-  _EPURAdminCALScreenState({required this.backgroundColor});
+  _ENSTAdminCALScreenState({required this.backgroundColor});
 
   @override
   Widget build(BuildContext context) {
@@ -806,7 +809,7 @@ class _EPURAdminCALScreenState extends State<EPURAdminCALScreen> {
       backgroundColor: AppStyle.mainColor,
       appBar: AppBar(
         elevation: 0,
-        title: const Text('PURCOM (Admin)'),
+        title: const Text('NSTP02 (Admin)'),
         centerTitle: true,
         backgroundColor: AppStyle.mainColor,
         actions: [
@@ -880,11 +883,11 @@ class _EPURAdminCALScreenState extends State<EPURAdminCALScreen> {
               child: StreamBuilder<QuerySnapshot>(
                 stream: _searchController.text.isEmpty
                     ? FirebaseFirestore.instance
-                        .collection('EPURnotes')
+                        .collection('ENSTnotes')
                         .snapshots()
                     : FirebaseFirestore.instance
-                        .collection('EPURnotes')
-                        .where('EPURnote_title',
+                        .collection('ENSTnotes')
+                        .where('ENSTnote_title',
                             isGreaterThanOrEqualTo:
                                 _searchController.text.toUpperCase(),
                             isLessThan:
@@ -901,7 +904,7 @@ class _EPURAdminCALScreenState extends State<EPURAdminCALScreen> {
                     final List<DocumentSnapshot> matchingNotes = [];
                     for (var i = 0; i < notes.length; i++) {
                       final note = notes[i];
-                      if (note['EPURnote_title']
+                      if (note['ENSTnote_title']
                           .toString()
                           .toUpperCase()
                           .contains(_searchController.text.toUpperCase())) {
@@ -916,7 +919,7 @@ class _EPURAdminCALScreenState extends State<EPURAdminCALScreen> {
                                     context,
                                     MaterialPageRoute(
                                         builder: (context) =>
-                                            EPURAdminReaderScreen(note)));
+                                            ENSTAdminReaderScreen(note)));
                               }, note))
                           .toList(),
                     );
@@ -933,7 +936,7 @@ class _EPURAdminCALScreenState extends State<EPURAdminCALScreen> {
           Navigator.push(
               context,
               MaterialPageRoute(
-                  builder: (context) => const EPURAdminEditorScreen()));
+                  builder: (context) => const ENSTAdminEditorScreen()));
         },
         backgroundColor: const Color(0xFF8B7D76),
         child: const Icon(

@@ -4,12 +4,12 @@ import 'package:flutter/material.dart';
 
 enum SampleItem { itemOne, itemTwo, itemThree }
 
-class QNSTGuestReaderScreen extends StatefulWidget {
-  QNSTGuestReaderScreen(this.doc, {Key? key}) : super(key: key);
+class ACHEGuestReaderScreen extends StatefulWidget {
+  ACHEGuestReaderScreen(this.doc, {Key? key}) : super(key: key);
   QueryDocumentSnapshot doc;
 
   @override
-  _QNSTGuestReaderScreenState createState() => _QNSTGuestReaderScreenState();
+  _ACHEGuestReaderScreenState createState() => _ACHEGuestReaderScreenState();
 }
 
 class NoteAction {
@@ -18,7 +18,7 @@ class NoteAction {
   NoteAction(this.title, this.content);
 }
 
-class _QNSTGuestReaderScreenState extends State<QNSTGuestReaderScreen> {
+class _ACHEGuestReaderScreenState extends State<ACHEGuestReaderScreen> {
   late TextEditingController _mainController;
   late TextEditingController _titleController;
 
@@ -28,11 +28,11 @@ class _QNSTGuestReaderScreenState extends State<QNSTGuestReaderScreen> {
   void initState() {
     super.initState();
     _mainController =
-        TextEditingController(text: widget.doc['QNSTnote_content']);
+        TextEditingController(text: widget.doc['ACHEnote_content']);
 
     super.initState();
     _titleController =
-        TextEditingController(text: widget.doc['QNSTnote_title']);
+        TextEditingController(text: widget.doc['ACHEnote_title']);
   }
 
   @override
@@ -42,16 +42,16 @@ class _QNSTGuestReaderScreenState extends State<QNSTGuestReaderScreen> {
       return Container();
     }
 
-    var color_id = widget.doc['QNSTcolor_id'];
+    var color_id = widget.doc['ACHEcolor_id'];
 
     return WillPopScope(
         onWillPop: () async {
           await FirebaseFirestore.instance
-              .collection('QNSTnotes')
+              .collection('ACHEnotes')
               .doc(widget.doc.id)
               .update({
-            'QNSTnote_content': _mainController.text,
-            'QNSTnote_title': _titleController.text
+            'ACHEnote_content': _mainController.text,
+            'ACHEnote_title': _titleController.text
           });
           return true;
         },
@@ -64,7 +64,7 @@ class _QNSTGuestReaderScreenState extends State<QNSTGuestReaderScreen> {
             title: RichText(
               text: TextSpan(
                 style: AppStyle.mainTitle.copyWith(color: Colors.black),
-                text: widget.doc['QNSTnote_title'] as String,
+                text: widget.doc['ACHEnote_title'] as String,
               ),
             ),
             actions: [],
@@ -78,7 +78,7 @@ class _QNSTGuestReaderScreenState extends State<QNSTGuestReaderScreen> {
                   child: RichText(
                     text: TextSpan(
                       style: AppStyle.mainContent.copyWith(color: Colors.black),
-                      text: widget.doc['QNSTnote_content'] as String,
+                      text: widget.doc['ACHEnote_content'] as String,
                     ),
                   ),
                 ),

@@ -5,12 +5,18 @@ import 'package:BetterNotes/style/app_style.dart';
 import 'package:BetterNotes/subjects/CAL2/admin_Acal2.dart';
 import 'package:BetterNotes/subjects/CAL2/admin_Ecal2.dart';
 import 'package:BetterNotes/subjects/CAL2/admin_Qcal2.dart';
+import 'package:BetterNotes/subjects/CHENGR/guest_Ache.dart';
+import 'package:BetterNotes/subjects/CHENGR/guest_Eche.dart';
+import 'package:BetterNotes/subjects/CHENGR/guest_Qche.dart';
 import 'package:BetterNotes/subjects/DSTRU1/admin_Adst.dart';
 import 'package:BetterNotes/subjects/DSTRU1/admin_Edst.dart';
 import 'package:BetterNotes/subjects/DSTRU1/admin_Qdst.dart';
 import 'package:BetterNotes/subjects/ENGIDA/admin_Aeng.dart';
 import 'package:BetterNotes/subjects/ENGIDA/admin_Eeng.dart';
 import 'package:BetterNotes/subjects/ENGIDA/admin_Qeng.dart';
+import 'package:BetterNotes/subjects/NSTP02/guest_Anst.dart';
+import 'package:BetterNotes/subjects/NSTP02/guest_Enst.dart';
+import 'package:BetterNotes/subjects/NSTP02/guest_Qnst.dart';
 import 'package:BetterNotes/subjects/OBOPRO/admin_Aobo.dart';
 import 'package:BetterNotes/subjects/OBOPRO/admin_Eobo.dart';
 import 'package:BetterNotes/subjects/OBOPRO/admin_Qobo.dart';
@@ -560,21 +566,21 @@ class _GuestScreenState extends State<GuestScreen> {
                             Navigator.push(
                               context,
                               MaterialPageRoute(
-                                  builder: (context) => GuestScreen(
+                                  builder: (context) => ANSTGuestScreen(
                                       backgroundColor: backgroundColor)),
                             );
                           } else if (newValue == 'Quizzes') {
                             Navigator.push(
                               context,
                               MaterialPageRoute(
-                                  builder: (context) => GuestScreen(
+                                  builder: (context) => QNSTGuestScreen(
                                       backgroundColor: backgroundColor)),
                             );
                           } else if (newValue == 'Exams') {
                             Navigator.push(
                               context,
                               MaterialPageRoute(
-                                  builder: (context) => GuestScreen(
+                                  builder: (context) => ENSTGuestScreen(
                                       backgroundColor: backgroundColor)),
                             );
                           }
@@ -623,21 +629,21 @@ class _GuestScreenState extends State<GuestScreen> {
                             Navigator.push(
                               context,
                               MaterialPageRoute(
-                                  builder: (context) => GuestScreen(
+                                  builder: (context) => ACHEGuestScreen(
                                       backgroundColor: backgroundColor)),
                             );
                           } else if (newValue == 'Quizzes') {
                             Navigator.push(
                               context,
                               MaterialPageRoute(
-                                  builder: (context) => GuestScreen(
+                                  builder: (context) => QCHEGuestScreen(
                                       backgroundColor: backgroundColor)),
                             );
                           } else if (newValue == 'Exams') {
                             Navigator.push(
                               context,
                               MaterialPageRoute(
-                                  builder: (context) => GuestScreen(
+                                  builder: (context) => ECHEGuestScreen(
                                       backgroundColor: backgroundColor)),
                             );
                           }

@@ -1,15 +1,16 @@
-import 'package:BetterNotes/screens/admin_editor.dart';
-import 'package:BetterNotes/screens/admin_reader.dart';
 import 'package:BetterNotes/screens/home_screen.dart';
+import 'package:BetterNotes/screens/home_screen_admin.dart';
 import 'package:BetterNotes/screens/home_screen_guest.dart';
 import 'package:BetterNotes/screens/settings.dart';
 import 'package:BetterNotes/style/app_style.dart';
 import 'package:BetterNotes/subjects/CAL2/admin_Acal2.dart';
 import 'package:BetterNotes/subjects/CAL2/admin_Ecal2.dart';
 import 'package:BetterNotes/subjects/CAL2/admin_Qcal2.dart';
+import 'package:BetterNotes/subjects/CHENGR/Qche_card.dart';
 import 'package:BetterNotes/subjects/CHENGR/admin_Ache.dart';
 import 'package:BetterNotes/subjects/CHENGR/admin_Eche.dart';
-import 'package:BetterNotes/subjects/CHENGR/admin_Qche.dart';
+import 'package:BetterNotes/subjects/CHENGR/admin_Qche_editor.dart';
+import 'package:BetterNotes/subjects/CHENGR/admin_Qche_reader.dart';
 import 'package:BetterNotes/subjects/DSTRU1/admin_Adst.dart';
 import 'package:BetterNotes/subjects/DSTRU1/admin_Edst.dart';
 import 'package:BetterNotes/subjects/DSTRU1/admin_Qdst.dart';
@@ -28,36 +29,35 @@ import 'package:BetterNotes/subjects/PEDUC2/admin_Qped.dart';
 import 'package:BetterNotes/subjects/PURCOM/admin_Apur.dart';
 import 'package:BetterNotes/subjects/PURCOM/admin_Epur.dart';
 import 'package:BetterNotes/subjects/PURCOM/admin_Qpur.dart';
-import 'package:BetterNotes/widgets/admin_card.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 
-class AdminScreen extends StatefulWidget {
+class QCHEAdminCALScreen extends StatefulWidget {
   final Color backgroundColor;
-  const AdminScreen({Key? key, required this.backgroundColor})
+  const QCHEAdminCALScreen({Key? key, required this.backgroundColor})
       : super(key: key);
 
   @override
-  _AdminScreenState createState() =>
-      _AdminScreenState(backgroundColor: AppStyle.mainColor);
+  _QCHEAdminCALScreenState createState() =>
+      _QCHEAdminCALScreenState(backgroundColor: AppStyle.mainColor);
 }
 
-class _AdminScreenState extends State<AdminScreen> {
+class _QCHEAdminCALScreenState extends State<QCHEAdminCALScreen> {
   final Color backgroundColor;
   final TextEditingController _searchController = TextEditingController();
   final TextEditingController _usernameController = TextEditingController();
   final TextEditingController _passwordController = TextEditingController();
   String _selectedOption = 'Calculus 2';
-  final String _selectedOption2 = 'OBOPRO';
-  final String _selectedOption3 = 'ENGIDA';
-  final String _selectedOption4 = 'DSTRU1';
-  final String _selectedOption5 = 'PEDUC2';
-  final String _selectedOption6 = 'PURCOM';
-  final String _selectedOption7 = 'NSTP02';
-  final String _selectedOption8 = 'CHENGR';
-  final String _selectedOption9 = 'ARTAPP';
-  final String _selectedOption10 = 'PHENGR';
+  String _selectedOption2 = 'OBOPRO';
+  String _selectedOption3 = 'ENGIDA';
+  String _selectedOption4 = 'DSTRU1';
+  String _selectedOption5 = 'PEDUC2';
+  String _selectedOption6 = 'PURCOM';
+  String _selectedOption7 = 'NSTP02';
+  String _selectedOption8 = 'CHENGR';
+  String _selectedOption9 = 'ARTAPP';
+  String _selectedOption10 = 'PHENGR';
 
   bool _isValid() {
     final username = _usernameController.text;
@@ -149,7 +149,7 @@ class _AdminScreenState extends State<AdminScreen> {
                     mainAxisSize: MainAxisSize.min,
                     children: [
                       Text(
-                        "Login ",
+                        "Login",
                         style: GoogleFonts.roboto(
                             color: Colors.black,
                             fontWeight: FontWeight.bold,
@@ -161,7 +161,6 @@ class _AdminScreenState extends State<AdminScreen> {
               ),
             ],
           ),
-          const Divider(),
           Row(
             mainAxisAlignment: MainAxisAlignment.start,
             children: [
@@ -803,7 +802,7 @@ class _AdminScreenState extends State<AdminScreen> {
 
   final GlobalKey<ScaffoldState> _scaffoldKey = GlobalKey<ScaffoldState>();
 
-  _AdminScreenState({required this.backgroundColor});
+  _QCHEAdminCALScreenState({required this.backgroundColor});
 
   @override
   Widget build(BuildContext context) {
@@ -813,7 +812,7 @@ class _AdminScreenState extends State<AdminScreen> {
       backgroundColor: AppStyle.mainColor,
       appBar: AppBar(
         elevation: 0,
-        title: const Text('Speical Notes (Admin)'),
+        title: const Text('CHENGR (Admin)'),
         centerTitle: true,
         backgroundColor: AppStyle.mainColor,
         actions: [
@@ -846,7 +845,7 @@ class _AdminScreenState extends State<AdminScreen> {
             Row(
               children: [
                 Text(
-                  "Homepage",
+                  "Quizzes",
                   style: GoogleFonts.roboto(
                       color: Colors.white,
                       fontWeight: FontWeight.bold,
@@ -887,11 +886,11 @@ class _AdminScreenState extends State<AdminScreen> {
               child: StreamBuilder<QuerySnapshot>(
                 stream: _searchController.text.isEmpty
                     ? FirebaseFirestore.instance
-                        .collection('Snotes')
+                        .collection('QCHEnotes')
                         .snapshots()
                     : FirebaseFirestore.instance
-                        .collection('Snotes')
-                        .where('Snote_title',
+                        .collection('QCHEnotes')
+                        .where('QCHEnote_title',
                             isGreaterThanOrEqualTo:
                                 _searchController.text.toUpperCase(),
                             isLessThan:
@@ -908,7 +907,7 @@ class _AdminScreenState extends State<AdminScreen> {
                     final List<DocumentSnapshot> matchingNotes = [];
                     for (var i = 0; i < notes.length; i++) {
                       final note = notes[i];
-                      if (note['Snote_title']
+                      if (note['QCHEnote_title']
                           .toString()
                           .toUpperCase()
                           .contains(_searchController.text.toUpperCase())) {
@@ -923,7 +922,7 @@ class _AdminScreenState extends State<AdminScreen> {
                                     context,
                                     MaterialPageRoute(
                                         builder: (context) =>
-                                            AdminReaderScreen(note)));
+                                            QCHEAdminReaderScreen(note)));
                               }, note))
                           .toList(),
                     );
@@ -940,7 +939,7 @@ class _AdminScreenState extends State<AdminScreen> {
           Navigator.push(
               context,
               MaterialPageRoute(
-                  builder: (context) => const AdminEditorScreen()));
+                  builder: (context) => const QCHEAdminEditorScreen()));
         },
         backgroundColor: const Color(0xFF8B7D76),
         child: const Icon(

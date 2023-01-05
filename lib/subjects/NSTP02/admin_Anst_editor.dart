@@ -4,14 +4,14 @@ import 'package:BetterNotes/style/app_style.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 
-class APURAdminEditorScreen extends StatefulWidget {
-  const APURAdminEditorScreen({Key? key}) : super(key: key);
+class ANSTAdminEditorScreen extends StatefulWidget {
+  const ANSTAdminEditorScreen({Key? key}) : super(key: key);
 
   @override
-  State<APURAdminEditorScreen> createState() => _APURAdminEditorScreenState();
+  State<ANSTAdminEditorScreen> createState() => _ANSTAdminEditorScreenState();
 }
 
-class _APURAdminEditorScreenState extends State<APURAdminEditorScreen> {
+class _ANSTAdminEditorScreenState extends State<ANSTAdminEditorScreen> {
   int color_id = Random().nextInt(AppStyle.cardsColor.length);
 
   late TextEditingController _titleController = TextEditingController();
@@ -100,10 +100,10 @@ class _APURAdminEditorScreenState extends State<APURAdminEditorScreen> {
       floatingActionButton: FloatingActionButton(
         backgroundColor: AppStyle.accentColor,
         onPressed: () async {
-          FirebaseFirestore.instance.collection('APURnotes').add({
-            'APURnote_title': _titleController.text,
-            'APURnote_content': _mainController.text,
-            'APURcolor_id': color_id
+          FirebaseFirestore.instance.collection('ANSTnotes').add({
+            'ANSTnote_title': _titleController.text,
+            'ANSTnote_content': _mainController.text,
+            'ANSTcolor_id': color_id
           }).then((value) {
             print(value.id);
             Navigator.pop(context);

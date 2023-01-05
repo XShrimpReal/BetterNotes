@@ -10,7 +10,7 @@ Widget noteCard(Function()? onTap, QueryDocumentSnapshot doc) {
       padding: const EdgeInsets.all(8),
       margin: const EdgeInsets.all(8),
       decoration: BoxDecoration(
-        color: AppStyle.cardsColor[doc['APURcolor_id']],
+        color: AppStyle.cardsColor[doc['ANSTcolor_id']],
         borderRadius: BorderRadius.circular(8),
       ),
       child: Column(
@@ -22,7 +22,7 @@ Widget noteCard(Function()? onTap, QueryDocumentSnapshot doc) {
               Flexible(
                 fit: FlexFit.tight,
                 child: Text(
-                  doc["APURnote_title"],
+                  doc["ANSTnote_title"],
                   style: AppStyle.mainTitle,
                   overflow: TextOverflow.ellipsis,
                   maxLines: null,
@@ -34,7 +34,7 @@ Widget noteCard(Function()? onTap, QueryDocumentSnapshot doc) {
             height: 8,
           ),
           Text(
-            doc["APURnote_content"],
+            doc["ANSTnote_content"],
             style: AppStyle.mainContent,
             maxLines: null,
           ),

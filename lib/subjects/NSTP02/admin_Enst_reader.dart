@@ -5,12 +5,12 @@ import 'package:image_picker/image_picker.dart';
 
 enum SampleItem { itemOne, itemTwo, itemThree }
 
-class EPURAdminReaderScreen extends StatefulWidget {
-  EPURAdminReaderScreen(this.doc, {Key? key}) : super(key: key);
+class ENSTAdminReaderScreen extends StatefulWidget {
+  ENSTAdminReaderScreen(this.doc, {Key? key}) : super(key: key);
   QueryDocumentSnapshot doc;
 
   @override
-  _EPURAdminReaderScreenState createState() => _EPURAdminReaderScreenState();
+  _ENSTAdminReaderScreenState createState() => _ENSTAdminReaderScreenState();
 }
 
 class NoteAction {
@@ -19,7 +19,7 @@ class NoteAction {
   NoteAction(this.title, this.content);
 }
 
-class _EPURAdminReaderScreenState extends State<EPURAdminReaderScreen> {
+class _ENSTAdminReaderScreenState extends State<ENSTAdminReaderScreen> {
   late TextEditingController _mainController;
   late TextEditingController _titleController;
 
@@ -115,7 +115,7 @@ class _EPURAdminReaderScreenState extends State<EPURAdminReaderScreen> {
   void initState() {
     super.initState();
     _mainController =
-        TextEditingController(text: widget.doc['EPURnote_content']);
+        TextEditingController(text: widget.doc['ENSTnote_content']);
     _mainController.addListener(() {
       // Add the current text as an action to the history
       _addAction(_titleController.text, _mainController.text);
@@ -123,7 +123,7 @@ class _EPURAdminReaderScreenState extends State<EPURAdminReaderScreen> {
 
     super.initState();
     _titleController =
-        TextEditingController(text: widget.doc['EPURnote_title']);
+        TextEditingController(text: widget.doc['ENSTnote_title']);
     _titleController.addListener(() {
       // Add the current text as an action to the history
       _addAction(_titleController.text, _mainController.text);
@@ -133,16 +133,16 @@ class _EPURAdminReaderScreenState extends State<EPURAdminReaderScreen> {
 
   @override
   Widget build(BuildContext context) {
-    var color_id = widget.doc['EPURcolor_id'];
+    var color_id = widget.doc['ENSTcolor_id'];
 
     return WillPopScope(
       onWillPop: () async {
         await FirebaseFirestore.instance
-            .collection('EPURnotes')
+            .collection('ENSTnotes')
             .doc(widget.doc.id)
             .update({
-          'EPURnote_content': _mainController.text,
-          'EPURnote_title': _titleController.text
+          'ENSTnote_content': _mainController.text,
+          'ENSTnote_title': _titleController.text
         });
         return true;
       },

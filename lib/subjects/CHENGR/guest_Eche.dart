@@ -1,63 +1,62 @@
-import 'package:BetterNotes/screens/admin_editor.dart';
-import 'package:BetterNotes/screens/admin_reader.dart';
 import 'package:BetterNotes/screens/home_screen.dart';
+import 'package:BetterNotes/screens/home_screen_admin.dart';
 import 'package:BetterNotes/screens/home_screen_guest.dart';
 import 'package:BetterNotes/screens/settings.dart';
 import 'package:BetterNotes/style/app_style.dart';
-import 'package:BetterNotes/subjects/CAL2/admin_Acal2.dart';
-import 'package:BetterNotes/subjects/CAL2/admin_Ecal2.dart';
-import 'package:BetterNotes/subjects/CAL2/admin_Qcal2.dart';
-import 'package:BetterNotes/subjects/CHENGR/admin_Ache.dart';
-import 'package:BetterNotes/subjects/CHENGR/admin_Eche.dart';
-import 'package:BetterNotes/subjects/CHENGR/admin_Qche.dart';
-import 'package:BetterNotes/subjects/DSTRU1/admin_Adst.dart';
-import 'package:BetterNotes/subjects/DSTRU1/admin_Edst.dart';
-import 'package:BetterNotes/subjects/DSTRU1/admin_Qdst.dart';
-import 'package:BetterNotes/subjects/ENGIDA/admin_Aeng.dart';
-import 'package:BetterNotes/subjects/ENGIDA/admin_Eeng.dart';
-import 'package:BetterNotes/subjects/ENGIDA/admin_Qeng.dart';
-import 'package:BetterNotes/subjects/NSTP02/admin_Anst.dart';
-import 'package:BetterNotes/subjects/NSTP02/admin_Enst.dart';
-import 'package:BetterNotes/subjects/NSTP02/admin_Qnst.dart';
-import 'package:BetterNotes/subjects/OBOPRO/admin_Aobo.dart';
-import 'package:BetterNotes/subjects/OBOPRO/admin_Eobo.dart';
-import 'package:BetterNotes/subjects/OBOPRO/admin_Qobo.dart';
-import 'package:BetterNotes/subjects/PEDUC2/admin_Aped.dart';
-import 'package:BetterNotes/subjects/PEDUC2/admin_Eped.dart';
-import 'package:BetterNotes/subjects/PEDUC2/admin_Qped.dart';
-import 'package:BetterNotes/subjects/PURCOM/admin_Apur.dart';
-import 'package:BetterNotes/subjects/PURCOM/admin_Epur.dart';
-import 'package:BetterNotes/subjects/PURCOM/admin_Qpur.dart';
-import 'package:BetterNotes/widgets/admin_card.dart';
+import 'package:BetterNotes/subjects/CAL2/guest_Acal2.dart';
+import 'package:BetterNotes/subjects/CAL2/guest_Ecal2.dart';
+import 'package:BetterNotes/subjects/CAL2/guest_Qcal2.dart';
+import 'package:BetterNotes/subjects/CHENGR/Eche_card.dart';
+import 'package:BetterNotes/subjects/CHENGR/guest_Ache.dart';
+import 'package:BetterNotes/subjects/CHENGR/guest_Eche_reader.dart';
+import 'package:BetterNotes/subjects/CHENGR/guest_Qche.dart';
+import 'package:BetterNotes/subjects/DSTRU1/guest_Adst.dart';
+import 'package:BetterNotes/subjects/DSTRU1/guest_Edst.dart';
+import 'package:BetterNotes/subjects/DSTRU1/guest_Qdst.dart';
+import 'package:BetterNotes/subjects/ENGIDA/guest_Aeng.dart';
+import 'package:BetterNotes/subjects/ENGIDA/guest_Eeng.dart';
+import 'package:BetterNotes/subjects/ENGIDA/guest_Qeng.dart';
+import 'package:BetterNotes/subjects/NSTP02/guest_Anst.dart';
+import 'package:BetterNotes/subjects/NSTP02/guest_Enst.dart';
+import 'package:BetterNotes/subjects/NSTP02/guest_Qnst.dart';
+import 'package:BetterNotes/subjects/OBOPRO/guest_Aobo.dart';
+import 'package:BetterNotes/subjects/OBOPRO/guest_Eobo.dart';
+import 'package:BetterNotes/subjects/OBOPRO/guest_Qobo.dart';
+import 'package:BetterNotes/subjects/PEDUC2/guest_Aped.dart';
+import 'package:BetterNotes/subjects/PEDUC2/guest_Eped.dart';
+import 'package:BetterNotes/subjects/PEDUC2/guest_Qped.dart';
+import 'package:BetterNotes/subjects/PURCOM/guest_Apur.dart';
+import 'package:BetterNotes/subjects/PURCOM/guest_Epur.dart';
+import 'package:BetterNotes/subjects/PURCOM/guest_Qpur.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 
-class AdminScreen extends StatefulWidget {
+class ECHEGuestScreen extends StatefulWidget {
   final Color backgroundColor;
-  const AdminScreen({Key? key, required this.backgroundColor})
+  const ECHEGuestScreen({Key? key, required this.backgroundColor})
       : super(key: key);
 
   @override
-  _AdminScreenState createState() =>
-      _AdminScreenState(backgroundColor: AppStyle.mainColor);
+  _ECHEGuestScreenState createState() =>
+      _ECHEGuestScreenState(backgroundColor: AppStyle.mainColor);
 }
 
-class _AdminScreenState extends State<AdminScreen> {
+class _ECHEGuestScreenState extends State<ECHEGuestScreen> {
   final Color backgroundColor;
   final TextEditingController _searchController = TextEditingController();
   final TextEditingController _usernameController = TextEditingController();
   final TextEditingController _passwordController = TextEditingController();
   String _selectedOption = 'Calculus 2';
-  final String _selectedOption2 = 'OBOPRO';
-  final String _selectedOption3 = 'ENGIDA';
-  final String _selectedOption4 = 'DSTRU1';
-  final String _selectedOption5 = 'PEDUC2';
-  final String _selectedOption6 = 'PURCOM';
-  final String _selectedOption7 = 'NSTP02';
-  final String _selectedOption8 = 'CHENGR';
-  final String _selectedOption9 = 'ARTAPP';
-  final String _selectedOption10 = 'PHENGR';
+  String _selectedOption2 = 'OBOPRO';
+  String _selectedOption3 = 'ENGIDA';
+  String _selectedOption4 = 'DSTRU1';
+  String _selectedOption5 = 'PEDUC2';
+  String _selectedOption6 = 'PURCOM';
+  String _selectedOption7 = 'NSTP02';
+  String _selectedOption8 = 'CHENGR';
+  String _selectedOption9 = 'ARTAPP';
+  String _selectedOption10 = 'PHENGR';
 
   bool _isValid() {
     final username = _usernameController.text;
@@ -149,7 +148,7 @@ class _AdminScreenState extends State<AdminScreen> {
                     mainAxisSize: MainAxisSize.min,
                     children: [
                       Text(
-                        "Login ",
+                        "Login",
                         style: GoogleFonts.roboto(
                             color: Colors.black,
                             fontWeight: FontWeight.bold,
@@ -161,7 +160,6 @@ class _AdminScreenState extends State<AdminScreen> {
               ),
             ],
           ),
-          const Divider(),
           Row(
             mainAxisAlignment: MainAxisAlignment.start,
             children: [
@@ -185,21 +183,21 @@ class _AdminScreenState extends State<AdminScreen> {
                             Navigator.push(
                               context,
                               MaterialPageRoute(
-                                  builder: (context) => AdminCALScreen(
+                                  builder: (context) => ACALGuestScreen(
                                       backgroundColor: backgroundColor)),
                             );
                           } else if (newValue == 'Quizzes') {
                             Navigator.push(
                               context,
                               MaterialPageRoute(
-                                  builder: (context) => QCALAdminCALScreen(
+                                  builder: (context) => QCALGuestScreen(
                                       backgroundColor: backgroundColor)),
                             );
                           } else if (newValue == 'Exams') {
                             Navigator.push(
                               context,
                               MaterialPageRoute(
-                                  builder: (context) => ECALAdminCALScreen(
+                                  builder: (context) => ECALGuestScreen(
                                       backgroundColor: backgroundColor)),
                             );
                           }
@@ -249,21 +247,21 @@ class _AdminScreenState extends State<AdminScreen> {
                             Navigator.push(
                               context,
                               MaterialPageRoute(
-                                  builder: (context) => AdminOBOScreen(
+                                  builder: (context) => AOBOGuestScreen(
                                       backgroundColor: backgroundColor)),
                             );
                           } else if (newValue == 'Quizzes') {
                             Navigator.push(
                               context,
                               MaterialPageRoute(
-                                  builder: (context) => QOBOAdminCALScreen(
+                                  builder: (context) => QOBOGuestScreen(
                                       backgroundColor: backgroundColor)),
                             );
                           } else if (newValue == 'Exams') {
                             Navigator.push(
                               context,
                               MaterialPageRoute(
-                                  builder: (context) => EOBOAdminCALScreen(
+                                  builder: (context) => EOBOGuestScreen(
                                       backgroundColor: backgroundColor)),
                             );
                           }
@@ -313,21 +311,21 @@ class _AdminScreenState extends State<AdminScreen> {
                             Navigator.push(
                               context,
                               MaterialPageRoute(
-                                  builder: (context) => AdminENGScreen(
+                                  builder: (context) => AENGGuestScreen(
                                       backgroundColor: backgroundColor)),
                             );
                           } else if (newValue == 'Quizzes') {
                             Navigator.push(
                               context,
                               MaterialPageRoute(
-                                  builder: (context) => QENGAdminCALScreen(
+                                  builder: (context) => QENGGuestScreen(
                                       backgroundColor: backgroundColor)),
                             );
                           } else if (newValue == 'Exams') {
                             Navigator.push(
                               context,
                               MaterialPageRoute(
-                                  builder: (context) => EENGAdminCALScreen(
+                                  builder: (context) => EENGGuestScreen(
                                       backgroundColor: backgroundColor)),
                             );
                           }
@@ -376,21 +374,21 @@ class _AdminScreenState extends State<AdminScreen> {
                             Navigator.push(
                               context,
                               MaterialPageRoute(
-                                  builder: (context) => AdminDSTScreen(
+                                  builder: (context) => ADSTGuestScreen(
                                       backgroundColor: backgroundColor)),
                             );
                           } else if (newValue == 'Quizzes') {
                             Navigator.push(
                               context,
                               MaterialPageRoute(
-                                  builder: (context) => QDSTAdminCALScreen(
+                                  builder: (context) => QDSTGuestScreen(
                                       backgroundColor: backgroundColor)),
                             );
                           } else if (newValue == 'Exams') {
                             Navigator.push(
                               context,
                               MaterialPageRoute(
-                                  builder: (context) => EDSTAdminCALScreen(
+                                  builder: (context) => EDSTGuestScreen(
                                       backgroundColor: backgroundColor)),
                             );
                           }
@@ -439,21 +437,21 @@ class _AdminScreenState extends State<AdminScreen> {
                             Navigator.push(
                               context,
                               MaterialPageRoute(
-                                  builder: (context) => AdminPEDScreen(
+                                  builder: (context) => APEDGuestScreen(
                                       backgroundColor: backgroundColor)),
                             );
                           } else if (newValue == 'Quizzes') {
                             Navigator.push(
                               context,
                               MaterialPageRoute(
-                                  builder: (context) => QPEDAdminCALScreen(
+                                  builder: (context) => QPEDGuestScreen(
                                       backgroundColor: backgroundColor)),
                             );
                           } else if (newValue == 'Exams') {
                             Navigator.push(
                               context,
                               MaterialPageRoute(
-                                  builder: (context) => EPEDAdminCALScreen(
+                                  builder: (context) => EPEDGuestScreen(
                                       backgroundColor: backgroundColor)),
                             );
                           }
@@ -502,21 +500,21 @@ class _AdminScreenState extends State<AdminScreen> {
                             Navigator.push(
                               context,
                               MaterialPageRoute(
-                                  builder: (context) => AdminPURScreen(
+                                  builder: (context) => APURGuestScreen(
                                       backgroundColor: backgroundColor)),
                             );
                           } else if (newValue == 'Quizzes') {
                             Navigator.push(
                               context,
                               MaterialPageRoute(
-                                  builder: (context) => QPURAdminCALScreen(
+                                  builder: (context) => QPURGuestScreen(
                                       backgroundColor: backgroundColor)),
                             );
                           } else if (newValue == 'Exams') {
                             Navigator.push(
                               context,
                               MaterialPageRoute(
-                                  builder: (context) => EPURAdminCALScreen(
+                                  builder: (context) => EPURGuestScreen(
                                       backgroundColor: backgroundColor)),
                             );
                           }
@@ -566,21 +564,21 @@ class _AdminScreenState extends State<AdminScreen> {
                             Navigator.push(
                               context,
                               MaterialPageRoute(
-                                  builder: (context) => AdminNSTScreen(
+                                  builder: (context) => ANSTGuestScreen(
                                       backgroundColor: backgroundColor)),
                             );
                           } else if (newValue == 'Quizzes') {
                             Navigator.push(
                               context,
                               MaterialPageRoute(
-                                  builder: (context) => QNSTAdminCALScreen(
+                                  builder: (context) => QNSTGuestScreen(
                                       backgroundColor: backgroundColor)),
                             );
                           } else if (newValue == 'Exams') {
                             Navigator.push(
                               context,
                               MaterialPageRoute(
-                                  builder: (context) => ENSTAdminCALScreen(
+                                  builder: (context) => ENSTGuestScreen(
                                       backgroundColor: backgroundColor)),
                             );
                           }
@@ -629,21 +627,21 @@ class _AdminScreenState extends State<AdminScreen> {
                             Navigator.push(
                               context,
                               MaterialPageRoute(
-                                  builder: (context) => AdminCHEScreen(
+                                  builder: (context) => ACHEGuestScreen(
                                       backgroundColor: backgroundColor)),
                             );
                           } else if (newValue == 'Quizzes') {
                             Navigator.push(
                               context,
                               MaterialPageRoute(
-                                  builder: (context) => QCHEAdminCALScreen(
+                                  builder: (context) => QCHEGuestScreen(
                                       backgroundColor: backgroundColor)),
                             );
                           } else if (newValue == 'Exams') {
                             Navigator.push(
                               context,
                               MaterialPageRoute(
-                                  builder: (context) => ECHEAdminCALScreen(
+                                  builder: (context) => ECHEGuestScreen(
                                       backgroundColor: backgroundColor)),
                             );
                           }
@@ -803,7 +801,7 @@ class _AdminScreenState extends State<AdminScreen> {
 
   final GlobalKey<ScaffoldState> _scaffoldKey = GlobalKey<ScaffoldState>();
 
-  _AdminScreenState({required this.backgroundColor});
+  _ECHEGuestScreenState({required this.backgroundColor});
 
   @override
   Widget build(BuildContext context) {
@@ -813,7 +811,7 @@ class _AdminScreenState extends State<AdminScreen> {
       backgroundColor: AppStyle.mainColor,
       appBar: AppBar(
         elevation: 0,
-        title: const Text('Speical Notes (Admin)'),
+        title: const Text('CHENGR (Guest)'),
         centerTitle: true,
         backgroundColor: AppStyle.mainColor,
         actions: [
@@ -846,7 +844,7 @@ class _AdminScreenState extends State<AdminScreen> {
             Row(
               children: [
                 Text(
-                  "Homepage",
+                  "Exams",
                   style: GoogleFonts.roboto(
                       color: Colors.white,
                       fontWeight: FontWeight.bold,
@@ -887,11 +885,11 @@ class _AdminScreenState extends State<AdminScreen> {
               child: StreamBuilder<QuerySnapshot>(
                 stream: _searchController.text.isEmpty
                     ? FirebaseFirestore.instance
-                        .collection('Snotes')
+                        .collection('ECHEnotes')
                         .snapshots()
                     : FirebaseFirestore.instance
-                        .collection('Snotes')
-                        .where('Snote_title',
+                        .collection('ECHEnotes')
+                        .where('ECHEnote_title',
                             isGreaterThanOrEqualTo:
                                 _searchController.text.toUpperCase(),
                             isLessThan:
@@ -908,7 +906,7 @@ class _AdminScreenState extends State<AdminScreen> {
                     final List<DocumentSnapshot> matchingNotes = [];
                     for (var i = 0; i < notes.length; i++) {
                       final note = notes[i];
-                      if (note['Snote_title']
+                      if (note['ECHEnote_title']
                           .toString()
                           .toUpperCase()
                           .contains(_searchController.text.toUpperCase())) {
@@ -923,7 +921,7 @@ class _AdminScreenState extends State<AdminScreen> {
                                     context,
                                     MaterialPageRoute(
                                         builder: (context) =>
-                                            AdminReaderScreen(note)));
+                                            ECHEGuestReaderScreen(note)));
                               }, note))
                           .toList(),
                     );
@@ -933,19 +931,6 @@ class _AdminScreenState extends State<AdminScreen> {
               ),
             )
           ],
-        ),
-      ),
-      floatingActionButton: FloatingActionButton(
-        onPressed: () {
-          Navigator.push(
-              context,
-              MaterialPageRoute(
-                  builder: (context) => const AdminEditorScreen()));
-        },
-        backgroundColor: const Color(0xFF8B7D76),
-        child: const Icon(
-          Icons.add,
-          color: Colors.white,
         ),
       ),
     );
