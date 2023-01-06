@@ -2,6 +2,9 @@ import 'package:BetterNotes/screens/home_screen.dart';
 import 'package:BetterNotes/screens/home_screen_admin.dart';
 import 'package:BetterNotes/screens/home_screen_guest.dart';
 import 'package:BetterNotes/screens/settings.dart';
+import 'package:BetterNotes/subjects/ARTAPP/admin_Aart.dart';
+import 'package:BetterNotes/subjects/ARTAPP/admin_Eart.dart';
+import 'package:BetterNotes/subjects/ARTAPP/admin_Qart.dart';
 import 'package:BetterNotes/subjects/CAL2/Ecal_card.dart';
 import 'package:BetterNotes/subjects/CAL2/admin_Acal2.dart';
 import 'package:BetterNotes/subjects/CAL2/admin_Ecal2_editor.dart';
@@ -25,6 +28,9 @@ import 'package:BetterNotes/subjects/OBOPRO/admin_Qobo.dart';
 import 'package:BetterNotes/subjects/PEDUC2/admin_Aped.dart';
 import 'package:BetterNotes/subjects/PEDUC2/admin_Eped.dart';
 import 'package:BetterNotes/subjects/PEDUC2/admin_Qped.dart';
+import 'package:BetterNotes/subjects/PHENGR/admin_Aphe.dart';
+import 'package:BetterNotes/subjects/PHENGR/admin_Ephe.dart';
+import 'package:BetterNotes/subjects/PHENGR/admin_Qphe.dart';
 import 'package:BetterNotes/subjects/PURCOM/admin_Apur.dart';
 import 'package:BetterNotes/subjects/PURCOM/admin_Epur.dart';
 import 'package:BetterNotes/subjects/PURCOM/admin_Qpur.dart';
@@ -130,6 +136,7 @@ class _ECALAdminCALScreenState extends State<ECALAdminCALScreen> {
 
   Drawer _buildDrawer(BuildContext context) {
     return Drawer(
+      width: 220,
       elevation: 0,
       backgroundColor: const Color(0xFFe8d1c5),
       child: Column(
@@ -137,30 +144,15 @@ class _ECALAdminCALScreenState extends State<ECALAdminCALScreen> {
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
           const SizedBox(
-            height: 50,
+            height: 15,
           ),
-          Row(
-            mainAxisAlignment: MainAxisAlignment.start,
-            children: [
-              const SizedBox(width: 45, child: Icon(Icons.lock)),
-              Flexible(
-                child: TextButton(
-                  onPressed: _showLoginDialog,
-                  child: Column(
-                    mainAxisSize: MainAxisSize.min,
-                    children: [
-                      Text(
-                        "Login",
-                        style: GoogleFonts.roboto(
-                            color: Colors.black,
-                            fontWeight: FontWeight.bold,
-                            fontSize: 18),
-                      ),
-                    ],
-                  ),
-                ),
-              ),
-            ],
+          const Image(image: AssetImage('assets/images/app_icon.png')),
+          const SizedBox(
+            height: 7,
+          ),
+          const Divider(
+            color: Color(0xFF463F3B),
+            thickness: 2,
           ),
           Row(
             mainAxisAlignment: MainAxisAlignment.start,
@@ -181,6 +173,9 @@ class _ECALAdminCALScreenState extends State<ECALAdminCALScreen> {
                           setState(() {
                             _selectedOption = newValue ?? '';
                           });
+                          const Divider(
+                            height: 1000,
+                          );
                           if (newValue == 'Assignments') {
                             Navigator.push(
                               context,
@@ -693,21 +688,21 @@ class _ECALAdminCALScreenState extends State<ECALAdminCALScreen> {
                             Navigator.push(
                               context,
                               MaterialPageRoute(
-                                  builder: (context) => GuestScreen(
+                                  builder: (context) => AdminARTScreen(
                                       backgroundColor: backgroundColor)),
                             );
                           } else if (newValue == 'Quizzes') {
                             Navigator.push(
                               context,
                               MaterialPageRoute(
-                                  builder: (context) => GuestScreen(
+                                  builder: (context) => QARTAdminCALScreen(
                                       backgroundColor: backgroundColor)),
                             );
                           } else if (newValue == 'Exams') {
                             Navigator.push(
                               context,
                               MaterialPageRoute(
-                                  builder: (context) => GuestScreen(
+                                  builder: (context) => EARTAdminCALScreen(
                                       backgroundColor: backgroundColor)),
                             );
                           }
@@ -756,21 +751,21 @@ class _ECALAdminCALScreenState extends State<ECALAdminCALScreen> {
                             Navigator.push(
                               context,
                               MaterialPageRoute(
-                                  builder: (context) => GuestScreen(
+                                  builder: (context) => AdminPHEScreen(
                                       backgroundColor: backgroundColor)),
                             );
                           } else if (newValue == 'Quizzes') {
                             Navigator.push(
                               context,
                               MaterialPageRoute(
-                                  builder: (context) => GuestScreen(
+                                  builder: (context) => QPHEAdminCALScreen(
                                       backgroundColor: backgroundColor)),
                             );
                           } else if (newValue == 'Exams') {
                             Navigator.push(
                               context,
                               MaterialPageRoute(
-                                  builder: (context) => GuestScreen(
+                                  builder: (context) => EPHEAdminCALScreen(
                                       backgroundColor: backgroundColor)),
                             );
                           }
@@ -794,6 +789,28 @@ class _ECALAdminCALScreenState extends State<ECALAdminCALScreen> {
                         }).toList(),
                         dropdownColor: const Color(0xFFF1E3DC)),
               ),
+            ],
+          ),
+          const SizedBox(height: 81),
+          Row(
+            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+            children: [
+              IconButton(
+                  onPressed: () {
+                    Navigator.push(
+                      context,
+                      MaterialPageRoute(
+                          builder: (context) =>
+                              HomeScreen(backgroundColor: backgroundColor)),
+                    );
+                  },
+                  icon: const Icon(Icons.exit_to_app_outlined)),
+              IconButton(
+                  onPressed: _showLoginDialog,
+                  icon: const Icon(
+                    Icons.supervised_user_circle_outlined,
+                    size: 30,
+                  )),
             ],
           )
         ],
@@ -825,16 +842,6 @@ class _ECALAdminCALScreenState extends State<ECALAdminCALScreen> {
                         builder: (context) => const SettingsScreen()));
               },
               icon: const Icon(Icons.settings)),
-          IconButton(
-            icon: const Icon(Icons.arrow_back_sharp),
-            onPressed: () {
-              Navigator.push(
-                  context,
-                  MaterialPageRoute(
-                      builder: (context) =>
-                          HomeScreen(backgroundColor: backgroundColor)));
-            },
-          ),
         ],
       ),
       body: Padding(

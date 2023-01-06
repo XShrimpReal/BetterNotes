@@ -134,6 +134,7 @@ class _QPHEGuestScreenState extends State<QPHEGuestScreen> {
 
   Drawer _buildDrawer(BuildContext context) {
     return Drawer(
+      width: 220,
       elevation: 0,
       backgroundColor: const Color(0xFFe8d1c5),
       child: Column(
@@ -141,32 +142,16 @@ class _QPHEGuestScreenState extends State<QPHEGuestScreen> {
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
           const SizedBox(
-            height: 50,
+            height: 15,
           ),
-          Row(
-            mainAxisAlignment: MainAxisAlignment.start,
-            children: [
-              const SizedBox(width: 45, child: Icon(Icons.lock)),
-              Flexible(
-                child: TextButton(
-                  onPressed: _showLoginDialog,
-                  child: Column(
-                    mainAxisSize: MainAxisSize.min,
-                    children: [
-                      Text(
-                        "Login ",
-                        style: GoogleFonts.roboto(
-                            color: Colors.black,
-                            fontWeight: FontWeight.bold,
-                            fontSize: 18),
-                      ),
-                    ],
-                  ),
-                ),
-              ),
-            ],
+          const Image(image: AssetImage('assets/images/app_icon.png')),
+          const SizedBox(
+            height: 7,
           ),
-          const Divider(),
+          const Divider(
+            color: Color(0xFF463F3B),
+            thickness: 2,
+          ),
           Row(
             mainAxisAlignment: MainAxisAlignment.start,
             children: [
@@ -800,6 +785,28 @@ class _QPHEGuestScreenState extends State<QPHEGuestScreen> {
                         dropdownColor: const Color(0xFFF1E3DC)),
               ),
             ],
+          ),
+          const SizedBox(height: 81),
+          Row(
+            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+            children: [
+              IconButton(
+                  onPressed: () {
+                    Navigator.push(
+                      context,
+                      MaterialPageRoute(
+                          builder: (context) =>
+                              HomeScreen(backgroundColor: backgroundColor)),
+                    );
+                  },
+                  icon: const Icon(Icons.exit_to_app_outlined)),
+              IconButton(
+                  onPressed: _showLoginDialog,
+                  icon: const Icon(
+                    Icons.supervised_user_circle_outlined,
+                    size: 30,
+                  )),
+            ],
           )
         ],
       ),
@@ -830,16 +837,6 @@ class _QPHEGuestScreenState extends State<QPHEGuestScreen> {
                         builder: (context) => const SettingsScreen()));
               },
               icon: const Icon(Icons.settings)),
-          IconButton(
-            icon: const Icon(Icons.arrow_back_sharp),
-            onPressed: () {
-              Navigator.push(
-                  context,
-                  MaterialPageRoute(
-                      builder: (context) =>
-                          HomeScreen(backgroundColor: backgroundColor)));
-            },
-          ),
         ],
       ),
       body: Padding(

@@ -60,7 +60,38 @@ class _HomeScreenState extends State<HomeScreen> {
             ],
           ),
           actions: [
-            ElevatedButton(
+            Flexible(
+                child: ElevatedButton(
+              onPressed: () {
+                Navigator.push(
+                  context,
+                  MaterialPageRoute(
+                    builder: (context) =>
+                        AdminScreen(backgroundColor: backgroundColor),
+                  ),
+                );
+              },
+              style:
+                  ElevatedButton.styleFrom(backgroundColor: Color(0xFF463F3B)),
+              child: const Text('ADMIN'),
+            )),
+            Flexible(
+                child: ElevatedButton(
+              onPressed: () {
+                Navigator.push(
+                  context,
+                  MaterialPageRoute(
+                    builder: (context) =>
+                        GuestScreen(backgroundColor: backgroundColor),
+                  ),
+                );
+              },
+              style:
+                  ElevatedButton.styleFrom(backgroundColor: Color(0xFF463F3B)),
+              child: const Text('GUEST'),
+            )),
+            Flexible(
+                child: ElevatedButton(
               onPressed: () {
                 if (_isValid()) {
                   if (_usernameController.text == "Admin") {
@@ -85,112 +116,10 @@ class _HomeScreenState extends State<HomeScreen> {
               style:
                   ElevatedButton.styleFrom(backgroundColor: Color(0xFF463F3B)),
               child: const Text('LOGIN'),
-            ),
+            )),
           ],
         );
       },
-    );
-  }
-
-  Drawer _buildDrawer(BuildContext context) {
-    return Drawer(
-      elevation: 0,
-      backgroundColor: const Color(0xFFe8d1c5),
-      child: Column(
-        mainAxisAlignment: MainAxisAlignment.start,
-        crossAxisAlignment: CrossAxisAlignment.start,
-        children: [
-          const SizedBox(
-            height: 50,
-          ),
-          Row(
-            mainAxisAlignment: MainAxisAlignment.start,
-            children: [
-              const SizedBox(width: 45, child: Icon(Icons.lock)),
-              Flexible(
-                child: TextButton(
-                  onPressed: _showLoginDialog,
-                  child: Column(
-                    mainAxisSize: MainAxisSize.min,
-                    children: [
-                      Text(
-                        "Login",
-                        style: GoogleFonts.roboto(
-                            color: Colors.black,
-                            fontWeight: FontWeight.bold,
-                            fontSize: 18),
-                      ),
-                    ],
-                  ),
-                ),
-              )
-            ],
-          ),
-          Row(
-            mainAxisAlignment: MainAxisAlignment.start,
-            children: [
-              const SizedBox(
-                  width: 45, child: Icon(Icons.admin_panel_settings_outlined)),
-              Flexible(
-                child: TextButton(
-                  onPressed: () {
-                    Navigator.push(
-                      context,
-                      MaterialPageRoute(
-                        builder: (context) =>
-                            AdminScreen(backgroundColor: backgroundColor),
-                      ),
-                    );
-                  },
-                  child: Column(
-                    mainAxisSize: MainAxisSize.min,
-                    children: [
-                      Text(
-                        "ADMIN",
-                        style: GoogleFonts.roboto(
-                            color: Colors.black,
-                            fontWeight: FontWeight.bold,
-                            fontSize: 18),
-                      ),
-                    ],
-                  ),
-                ),
-              )
-            ],
-          ),
-          Row(
-            mainAxisAlignment: MainAxisAlignment.start,
-            children: [
-              const SizedBox(width: 45, child: Icon(Icons.person)),
-              Flexible(
-                child: TextButton(
-                  onPressed: () {
-                    Navigator.push(
-                      context,
-                      MaterialPageRoute(
-                        builder: (context) =>
-                            GuestScreen(backgroundColor: backgroundColor),
-                      ),
-                    );
-                  },
-                  child: Column(
-                    mainAxisSize: MainAxisSize.min,
-                    children: [
-                      Text(
-                        "GUEST",
-                        style: GoogleFonts.roboto(
-                            color: Colors.black,
-                            fontWeight: FontWeight.bold,
-                            fontSize: 18),
-                      ),
-                    ],
-                  ),
-                ),
-              )
-            ],
-          ),
-        ],
-      ),
     );
   }
 
@@ -202,7 +131,6 @@ class _HomeScreenState extends State<HomeScreen> {
   Widget build(BuildContext context) {
     return Scaffold(
       key: _scaffoldKey,
-      drawer: _buildDrawer(context),
       backgroundColor: AppStyle.mainColor,
       appBar: AppBar(
         elevation: 0,
@@ -210,6 +138,14 @@ class _HomeScreenState extends State<HomeScreen> {
         centerTitle: true,
         backgroundColor: AppStyle.mainColor,
         actions: [
+          Row(
+            mainAxisAlignment: MainAxisAlignment.start,
+            children: [
+              IconButton(
+                  onPressed: _showLoginDialog,
+                  icon: const Icon(Icons.supervised_user_circle_outlined)),
+            ],
+          ),
           IconButton(
               onPressed: () {
                 Navigator.push(

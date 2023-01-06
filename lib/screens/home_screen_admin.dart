@@ -792,15 +792,24 @@ class _AdminScreenState extends State<AdminScreen> {
           ),
           const SizedBox(height: 81),
           Row(
-            mainAxisAlignment: MainAxisAlignment.end,
-            mainAxisSize: MainAxisSize.max,
+            mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: [
+              IconButton(
+                  onPressed: () {
+                    Navigator.push(
+                      context,
+                      MaterialPageRoute(
+                          builder: (context) =>
+                              HomeScreen(backgroundColor: backgroundColor)),
+                    );
+                  },
+                  icon: const Icon(Icons.exit_to_app_outlined)),
               IconButton(
                   onPressed: _showLoginDialog,
                   icon: const Icon(
                     Icons.supervised_user_circle_outlined,
                     size: 30,
-                  ))
+                  )),
             ],
           )
         ],
@@ -832,16 +841,6 @@ class _AdminScreenState extends State<AdminScreen> {
                         builder: (context) => const SettingsScreen()));
               },
               icon: const Icon(Icons.settings)),
-          IconButton(
-            icon: const Icon(Icons.arrow_back_sharp),
-            onPressed: () {
-              Navigator.push(
-                  context,
-                  MaterialPageRoute(
-                      builder: (context) =>
-                          HomeScreen(backgroundColor: backgroundColor)));
-            },
-          ),
         ],
       ),
       body: Padding(
