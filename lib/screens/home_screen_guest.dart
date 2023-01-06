@@ -826,7 +826,7 @@ class _GuestScreenState extends State<GuestScreen> {
       backgroundColor: AppStyle.mainColor,
       appBar: AppBar(
         elevation: 0,
-        title: const Text('Speical Notes (Admin)'),
+        title: const Text('Speical Notes (Guest)'),
         centerTitle: true,
         backgroundColor: AppStyle.mainColor,
         actions: [
