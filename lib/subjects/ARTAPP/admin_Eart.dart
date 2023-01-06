@@ -3,52 +3,53 @@ import 'package:BetterNotes/screens/home_screen_admin.dart';
 import 'package:BetterNotes/screens/home_screen_guest.dart';
 import 'package:BetterNotes/screens/settings.dart';
 import 'package:BetterNotes/style/app_style.dart';
-import 'package:BetterNotes/subjects/ARTAPP/guest_Aart.dart';
-import 'package:BetterNotes/subjects/ARTAPP/guest_Eart.dart';
-import 'package:BetterNotes/subjects/ARTAPP/guest_Qart.dart';
-import 'package:BetterNotes/subjects/CAL2/guest_Acal2.dart';
-import 'package:BetterNotes/subjects/CAL2/guest_Ecal2.dart';
-import 'package:BetterNotes/subjects/CAL2/guest_Qcal2.dart';
-import 'package:BetterNotes/subjects/CHENGR/guest_Ache.dart';
-import 'package:BetterNotes/subjects/CHENGR/guest_Eche.dart';
-import 'package:BetterNotes/subjects/CHENGR/guest_Qche.dart';
-import 'package:BetterNotes/subjects/DSTRU1/guest_Adst.dart';
-import 'package:BetterNotes/subjects/DSTRU1/guest_Edst.dart';
-import 'package:BetterNotes/subjects/DSTRU1/guest_Qdst.dart';
-import 'package:BetterNotes/subjects/ENGIDA/guest_Aeng.dart';
-import 'package:BetterNotes/subjects/ENGIDA/guest_Eeng.dart';
-import 'package:BetterNotes/subjects/ENGIDA/guest_Qeng.dart';
-import 'package:BetterNotes/subjects/NSTP02/guest_Anst.dart';
-import 'package:BetterNotes/subjects/NSTP02/guest_Enst.dart';
-import 'package:BetterNotes/subjects/NSTP02/guest_Qnst.dart';
-import 'package:BetterNotes/subjects/OBOPRO/Qobo_card.dart';
-import 'package:BetterNotes/subjects/OBOPRO/guest_Aobo.dart';
-import 'package:BetterNotes/subjects/OBOPRO/guest_Eobo.dart';
-import 'package:BetterNotes/subjects/OBOPRO/guest_Qobo_reader.dart';
-import 'package:BetterNotes/subjects/PEDUC2/guest_Aped.dart';
-import 'package:BetterNotes/subjects/PEDUC2/guest_Eped.dart';
-import 'package:BetterNotes/subjects/PEDUC2/guest_Qped.dart';
-import 'package:BetterNotes/subjects/PHENGR/guest_Aphe.dart';
-import 'package:BetterNotes/subjects/PHENGR/guest_Ephe.dart';
-import 'package:BetterNotes/subjects/PHENGR/guest_Qphe.dart';
-import 'package:BetterNotes/subjects/PURCOM/guest_Apur.dart';
-import 'package:BetterNotes/subjects/PURCOM/guest_Epur.dart';
-import 'package:BetterNotes/subjects/PURCOM/guest_Qpur.dart';
+import 'package:BetterNotes/subjects/ARTAPP/Eart_card.dart';
+import 'package:BetterNotes/subjects/ARTAPP/admin_Aart.dart';
+import 'package:BetterNotes/subjects/ARTAPP/admin_Eart_editor.dart';
+import 'package:BetterNotes/subjects/ARTAPP/admin_Eart_reader.dart';
+import 'package:BetterNotes/subjects/ARTAPP/admin_Qart.dart';
+import 'package:BetterNotes/subjects/CAL2/admin_Acal2.dart';
+import 'package:BetterNotes/subjects/CAL2/admin_Ecal2.dart';
+import 'package:BetterNotes/subjects/CAL2/admin_Qcal2.dart';
+import 'package:BetterNotes/subjects/CHENGR/admin_Ache.dart';
+import 'package:BetterNotes/subjects/CHENGR/admin_Eche.dart';
+import 'package:BetterNotes/subjects/CHENGR/admin_Qche.dart';
+import 'package:BetterNotes/subjects/DSTRU1/admin_Adst.dart';
+import 'package:BetterNotes/subjects/DSTRU1/admin_Edst.dart';
+import 'package:BetterNotes/subjects/DSTRU1/admin_Qdst.dart';
+import 'package:BetterNotes/subjects/ENGIDA/admin_Aeng.dart';
+import 'package:BetterNotes/subjects/ENGIDA/admin_Eeng.dart';
+import 'package:BetterNotes/subjects/ENGIDA/admin_Qeng.dart';
+import 'package:BetterNotes/subjects/NSTP02/admin_Anst.dart';
+import 'package:BetterNotes/subjects/NSTP02/admin_Enst.dart';
+import 'package:BetterNotes/subjects/NSTP02/admin_Qnst.dart';
+import 'package:BetterNotes/subjects/OBOPRO/admin_Aobo.dart';
+import 'package:BetterNotes/subjects/OBOPRO/admin_Eobo.dart';
+import 'package:BetterNotes/subjects/OBOPRO/admin_Qobo.dart';
+import 'package:BetterNotes/subjects/PEDUC2/admin_Aped.dart';
+import 'package:BetterNotes/subjects/PEDUC2/admin_Eped.dart';
+import 'package:BetterNotes/subjects/PEDUC2/admin_Qped.dart';
+import 'package:BetterNotes/subjects/PHENGR/admin_Aphe.dart';
+import 'package:BetterNotes/subjects/PHENGR/admin_Ephe.dart';
+import 'package:BetterNotes/subjects/PHENGR/admin_Qphe.dart';
+import 'package:BetterNotes/subjects/PURCOM/admin_Apur.dart';
+import 'package:BetterNotes/subjects/PURCOM/admin_Epur.dart';
+import 'package:BetterNotes/subjects/PURCOM/admin_Qpur.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 
-class QOBOGuestScreen extends StatefulWidget {
+class EARTAdminCALScreen extends StatefulWidget {
   final Color backgroundColor;
-  const QOBOGuestScreen({Key? key, required this.backgroundColor})
+  const EARTAdminCALScreen({Key? key, required this.backgroundColor})
       : super(key: key);
 
   @override
-  _QOBOGuestScreenState createState() =>
-      _QOBOGuestScreenState(backgroundColor: AppStyle.mainColor);
+  _EARTAdminCALScreenState createState() =>
+      _EARTAdminCALScreenState(backgroundColor: AppStyle.mainColor);
 }
 
-class _QOBOGuestScreenState extends State<QOBOGuestScreen> {
+class _EARTAdminCALScreenState extends State<EARTAdminCALScreen> {
   final Color backgroundColor;
   final TextEditingController _searchController = TextEditingController();
   final TextEditingController _usernameController = TextEditingController();
@@ -190,21 +191,21 @@ class _QOBOGuestScreenState extends State<QOBOGuestScreen> {
                             Navigator.push(
                               context,
                               MaterialPageRoute(
-                                  builder: (context) => ACALGuestScreen(
+                                  builder: (context) => AdminCALScreen(
                                       backgroundColor: backgroundColor)),
                             );
                           } else if (newValue == 'Quizzes') {
                             Navigator.push(
                               context,
                               MaterialPageRoute(
-                                  builder: (context) => ECALGuestScreen(
+                                  builder: (context) => QCALAdminCALScreen(
                                       backgroundColor: backgroundColor)),
                             );
                           } else if (newValue == 'Exams') {
                             Navigator.push(
                               context,
                               MaterialPageRoute(
-                                  builder: (context) => QCALGuestScreen(
+                                  builder: (context) => ECALAdminCALScreen(
                                       backgroundColor: backgroundColor)),
                             );
                           }
@@ -254,21 +255,21 @@ class _QOBOGuestScreenState extends State<QOBOGuestScreen> {
                             Navigator.push(
                               context,
                               MaterialPageRoute(
-                                  builder: (context) => AOBOGuestScreen(
+                                  builder: (context) => AdminOBOScreen(
                                       backgroundColor: backgroundColor)),
                             );
                           } else if (newValue == 'Quizzes') {
                             Navigator.push(
                               context,
                               MaterialPageRoute(
-                                  builder: (context) => QOBOGuestScreen(
+                                  builder: (context) => QOBOAdminCALScreen(
                                       backgroundColor: backgroundColor)),
                             );
                           } else if (newValue == 'Exams') {
                             Navigator.push(
                               context,
                               MaterialPageRoute(
-                                  builder: (context) => EOBOGuestScreen(
+                                  builder: (context) => EOBOAdminCALScreen(
                                       backgroundColor: backgroundColor)),
                             );
                           }
@@ -318,21 +319,21 @@ class _QOBOGuestScreenState extends State<QOBOGuestScreen> {
                             Navigator.push(
                               context,
                               MaterialPageRoute(
-                                  builder: (context) => AENGGuestScreen(
+                                  builder: (context) => AdminENGScreen(
                                       backgroundColor: backgroundColor)),
                             );
                           } else if (newValue == 'Quizzes') {
                             Navigator.push(
                               context,
                               MaterialPageRoute(
-                                  builder: (context) => QENGGuestScreen(
+                                  builder: (context) => QENGAdminCALScreen(
                                       backgroundColor: backgroundColor)),
                             );
                           } else if (newValue == 'Exams') {
                             Navigator.push(
                               context,
                               MaterialPageRoute(
-                                  builder: (context) => EENGGuestScreen(
+                                  builder: (context) => EENGAdminCALScreen(
                                       backgroundColor: backgroundColor)),
                             );
                           }
@@ -381,21 +382,21 @@ class _QOBOGuestScreenState extends State<QOBOGuestScreen> {
                             Navigator.push(
                               context,
                               MaterialPageRoute(
-                                  builder: (context) => ADSTGuestScreen(
+                                  builder: (context) => AdminDSTScreen(
                                       backgroundColor: backgroundColor)),
                             );
                           } else if (newValue == 'Quizzes') {
                             Navigator.push(
                               context,
                               MaterialPageRoute(
-                                  builder: (context) => QDSTGuestScreen(
+                                  builder: (context) => QDSTAdminCALScreen(
                                       backgroundColor: backgroundColor)),
                             );
                           } else if (newValue == 'Exams') {
                             Navigator.push(
                               context,
                               MaterialPageRoute(
-                                  builder: (context) => EDSTGuestScreen(
+                                  builder: (context) => EDSTAdminCALScreen(
                                       backgroundColor: backgroundColor)),
                             );
                           }
@@ -444,21 +445,21 @@ class _QOBOGuestScreenState extends State<QOBOGuestScreen> {
                             Navigator.push(
                               context,
                               MaterialPageRoute(
-                                  builder: (context) => APEDGuestScreen(
+                                  builder: (context) => AdminPEDScreen(
                                       backgroundColor: backgroundColor)),
                             );
                           } else if (newValue == 'Quizzes') {
                             Navigator.push(
                               context,
                               MaterialPageRoute(
-                                  builder: (context) => QPEDGuestScreen(
+                                  builder: (context) => QPEDAdminCALScreen(
                                       backgroundColor: backgroundColor)),
                             );
                           } else if (newValue == 'Exams') {
                             Navigator.push(
                               context,
                               MaterialPageRoute(
-                                  builder: (context) => EPEDGuestScreen(
+                                  builder: (context) => EPEDAdminCALScreen(
                                       backgroundColor: backgroundColor)),
                             );
                           }
@@ -507,21 +508,21 @@ class _QOBOGuestScreenState extends State<QOBOGuestScreen> {
                             Navigator.push(
                               context,
                               MaterialPageRoute(
-                                  builder: (context) => APURGuestScreen(
+                                  builder: (context) => AdminPURScreen(
                                       backgroundColor: backgroundColor)),
                             );
                           } else if (newValue == 'Quizzes') {
                             Navigator.push(
                               context,
                               MaterialPageRoute(
-                                  builder: (context) => QPURGuestScreen(
+                                  builder: (context) => QPURAdminCALScreen(
                                       backgroundColor: backgroundColor)),
                             );
                           } else if (newValue == 'Exams') {
                             Navigator.push(
                               context,
                               MaterialPageRoute(
-                                  builder: (context) => EPURGuestScreen(
+                                  builder: (context) => EPURAdminCALScreen(
                                       backgroundColor: backgroundColor)),
                             );
                           }
@@ -571,21 +572,21 @@ class _QOBOGuestScreenState extends State<QOBOGuestScreen> {
                             Navigator.push(
                               context,
                               MaterialPageRoute(
-                                  builder: (context) => ANSTGuestScreen(
+                                  builder: (context) => AdminNSTScreen(
                                       backgroundColor: backgroundColor)),
                             );
                           } else if (newValue == 'Quizzes') {
                             Navigator.push(
                               context,
                               MaterialPageRoute(
-                                  builder: (context) => QNSTGuestScreen(
+                                  builder: (context) => QNSTAdminCALScreen(
                                       backgroundColor: backgroundColor)),
                             );
                           } else if (newValue == 'Exams') {
                             Navigator.push(
                               context,
                               MaterialPageRoute(
-                                  builder: (context) => ENSTGuestScreen(
+                                  builder: (context) => ENSTAdminCALScreen(
                                       backgroundColor: backgroundColor)),
                             );
                           }
@@ -634,21 +635,21 @@ class _QOBOGuestScreenState extends State<QOBOGuestScreen> {
                             Navigator.push(
                               context,
                               MaterialPageRoute(
-                                  builder: (context) => ACHEGuestScreen(
+                                  builder: (context) => AdminCHEScreen(
                                       backgroundColor: backgroundColor)),
                             );
                           } else if (newValue == 'Quizzes') {
                             Navigator.push(
                               context,
                               MaterialPageRoute(
-                                  builder: (context) => QCHEGuestScreen(
+                                  builder: (context) => QCHEAdminCALScreen(
                                       backgroundColor: backgroundColor)),
                             );
                           } else if (newValue == 'Exams') {
                             Navigator.push(
                               context,
                               MaterialPageRoute(
-                                  builder: (context) => ECHEGuestScreen(
+                                  builder: (context) => ECHEAdminCALScreen(
                                       backgroundColor: backgroundColor)),
                             );
                           }
@@ -698,21 +699,21 @@ class _QOBOGuestScreenState extends State<QOBOGuestScreen> {
                             Navigator.push(
                               context,
                               MaterialPageRoute(
-                                  builder: (context) => AARTGuestScreen(
+                                  builder: (context) => AdminARTScreen(
                                       backgroundColor: backgroundColor)),
                             );
                           } else if (newValue == 'Quizzes') {
                             Navigator.push(
                               context,
                               MaterialPageRoute(
-                                  builder: (context) => QARTGuestScreen(
+                                  builder: (context) => QARTAdminCALScreen(
                                       backgroundColor: backgroundColor)),
                             );
                           } else if (newValue == 'Exams') {
                             Navigator.push(
                               context,
                               MaterialPageRoute(
-                                  builder: (context) => EARTGuestScreen(
+                                  builder: (context) => EARTAdminCALScreen(
                                       backgroundColor: backgroundColor)),
                             );
                           }
@@ -761,21 +762,21 @@ class _QOBOGuestScreenState extends State<QOBOGuestScreen> {
                             Navigator.push(
                               context,
                               MaterialPageRoute(
-                                  builder: (context) => APHEGuestScreen(
+                                  builder: (context) => AdminPHEScreen(
                                       backgroundColor: backgroundColor)),
                             );
                           } else if (newValue == 'Quizzes') {
                             Navigator.push(
                               context,
                               MaterialPageRoute(
-                                  builder: (context) => QPHEGuestScreen(
+                                  builder: (context) => QPHEAdminCALScreen(
                                       backgroundColor: backgroundColor)),
                             );
                           } else if (newValue == 'Exams') {
                             Navigator.push(
                               context,
                               MaterialPageRoute(
-                                  builder: (context) => EPHEGuestScreen(
+                                  builder: (context) => EPHEAdminCALScreen(
                                       backgroundColor: backgroundColor)),
                             );
                           }
@@ -808,7 +809,7 @@ class _QOBOGuestScreenState extends State<QOBOGuestScreen> {
 
   final GlobalKey<ScaffoldState> _scaffoldKey = GlobalKey<ScaffoldState>();
 
-  _QOBOGuestScreenState({required this.backgroundColor});
+  _EARTAdminCALScreenState({required this.backgroundColor});
 
   @override
   Widget build(BuildContext context) {
@@ -818,7 +819,7 @@ class _QOBOGuestScreenState extends State<QOBOGuestScreen> {
       backgroundColor: AppStyle.mainColor,
       appBar: AppBar(
         elevation: 0,
-        title: const Text('OBOPRO (Guest)'),
+        title: const Text('ARTAPP (Admin)'),
         centerTitle: true,
         backgroundColor: AppStyle.mainColor,
         actions: [
@@ -851,7 +852,7 @@ class _QOBOGuestScreenState extends State<QOBOGuestScreen> {
             Row(
               children: [
                 Text(
-                  "Quizzes",
+                  "Exams",
                   style: GoogleFonts.roboto(
                       color: Colors.white,
                       fontWeight: FontWeight.bold,
@@ -892,11 +893,11 @@ class _QOBOGuestScreenState extends State<QOBOGuestScreen> {
               child: StreamBuilder<QuerySnapshot>(
                 stream: _searchController.text.isEmpty
                     ? FirebaseFirestore.instance
-                        .collection('QOBOnotes')
+                        .collection('EARTnotes')
                         .snapshots()
                     : FirebaseFirestore.instance
-                        .collection('QOBOnotes')
-                        .where('QOBOnote_title',
+                        .collection('EARTnotes')
+                        .where('EARTnote_title',
                             isGreaterThanOrEqualTo:
                                 _searchController.text.toUpperCase(),
                             isLessThan:
@@ -913,7 +914,7 @@ class _QOBOGuestScreenState extends State<QOBOGuestScreen> {
                     final List<DocumentSnapshot> matchingNotes = [];
                     for (var i = 0; i < notes.length; i++) {
                       final note = notes[i];
-                      if (note['QOBOnote_title']
+                      if (note['EARTnote_title']
                           .toString()
                           .toUpperCase()
                           .contains(_searchController.text.toUpperCase())) {
@@ -928,7 +929,7 @@ class _QOBOGuestScreenState extends State<QOBOGuestScreen> {
                                     context,
                                     MaterialPageRoute(
                                         builder: (context) =>
-                                            QOBOGuestReaderScreen(note)));
+                                            EARTAdminReaderScreen(note)));
                               }, note))
                           .toList(),
                     );
@@ -938,6 +939,19 @@ class _QOBOGuestScreenState extends State<QOBOGuestScreen> {
               ),
             )
           ],
+        ),
+      ),
+      floatingActionButton: FloatingActionButton(
+        onPressed: () {
+          Navigator.push(
+              context,
+              MaterialPageRoute(
+                  builder: (context) => const EARTAdminEditorScreen()));
+        },
+        backgroundColor: const Color(0xFF8B7D76),
+        child: const Icon(
+          Icons.add,
+          color: Colors.white,
         ),
       ),
     );

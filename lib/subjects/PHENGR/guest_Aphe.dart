@@ -21,14 +21,14 @@ import 'package:BetterNotes/subjects/ENGIDA/guest_Qeng.dart';
 import 'package:BetterNotes/subjects/NSTP02/guest_Anst.dart';
 import 'package:BetterNotes/subjects/NSTP02/guest_Enst.dart';
 import 'package:BetterNotes/subjects/NSTP02/guest_Qnst.dart';
-import 'package:BetterNotes/subjects/OBOPRO/Qobo_card.dart';
 import 'package:BetterNotes/subjects/OBOPRO/guest_Aobo.dart';
 import 'package:BetterNotes/subjects/OBOPRO/guest_Eobo.dart';
-import 'package:BetterNotes/subjects/OBOPRO/guest_Qobo_reader.dart';
+import 'package:BetterNotes/subjects/OBOPRO/guest_Qobo.dart';
 import 'package:BetterNotes/subjects/PEDUC2/guest_Aped.dart';
 import 'package:BetterNotes/subjects/PEDUC2/guest_Eped.dart';
 import 'package:BetterNotes/subjects/PEDUC2/guest_Qped.dart';
-import 'package:BetterNotes/subjects/PHENGR/guest_Aphe.dart';
+import 'package:BetterNotes/subjects/PHENGR/Aphe_card.dart';
+import 'package:BetterNotes/subjects/PHENGR/guest_Aphe_reader.dart';
 import 'package:BetterNotes/subjects/PHENGR/guest_Ephe.dart';
 import 'package:BetterNotes/subjects/PHENGR/guest_Qphe.dart';
 import 'package:BetterNotes/subjects/PURCOM/guest_Apur.dart';
@@ -38,17 +38,17 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 
-class QOBOGuestScreen extends StatefulWidget {
+class APHEGuestScreen extends StatefulWidget {
   final Color backgroundColor;
-  const QOBOGuestScreen({Key? key, required this.backgroundColor})
+  const APHEGuestScreen({Key? key, required this.backgroundColor})
       : super(key: key);
 
   @override
-  _QOBOGuestScreenState createState() =>
-      _QOBOGuestScreenState(backgroundColor: AppStyle.mainColor);
+  _APHEGuestScreenState createState() =>
+      _APHEGuestScreenState(backgroundColor: AppStyle.mainColor);
 }
 
-class _QOBOGuestScreenState extends State<QOBOGuestScreen> {
+class _APHEGuestScreenState extends State<APHEGuestScreen> {
   final Color backgroundColor;
   final TextEditingController _searchController = TextEditingController();
   final TextEditingController _usernameController = TextEditingController();
@@ -808,7 +808,7 @@ class _QOBOGuestScreenState extends State<QOBOGuestScreen> {
 
   final GlobalKey<ScaffoldState> _scaffoldKey = GlobalKey<ScaffoldState>();
 
-  _QOBOGuestScreenState({required this.backgroundColor});
+  _APHEGuestScreenState({required this.backgroundColor});
 
   @override
   Widget build(BuildContext context) {
@@ -818,7 +818,7 @@ class _QOBOGuestScreenState extends State<QOBOGuestScreen> {
       backgroundColor: AppStyle.mainColor,
       appBar: AppBar(
         elevation: 0,
-        title: const Text('OBOPRO (Guest)'),
+        title: const Text('PHENGR (Guest)'),
         centerTitle: true,
         backgroundColor: AppStyle.mainColor,
         actions: [
@@ -851,7 +851,7 @@ class _QOBOGuestScreenState extends State<QOBOGuestScreen> {
             Row(
               children: [
                 Text(
-                  "Quizzes",
+                  "Assignments",
                   style: GoogleFonts.roboto(
                       color: Colors.white,
                       fontWeight: FontWeight.bold,
@@ -892,11 +892,11 @@ class _QOBOGuestScreenState extends State<QOBOGuestScreen> {
               child: StreamBuilder<QuerySnapshot>(
                 stream: _searchController.text.isEmpty
                     ? FirebaseFirestore.instance
-                        .collection('QOBOnotes')
+                        .collection('APHEnotes')
                         .snapshots()
                     : FirebaseFirestore.instance
-                        .collection('QOBOnotes')
-                        .where('QOBOnote_title',
+                        .collection('APHEnotes')
+                        .where('APHEnote_title',
                             isGreaterThanOrEqualTo:
                                 _searchController.text.toUpperCase(),
                             isLessThan:
@@ -913,7 +913,7 @@ class _QOBOGuestScreenState extends State<QOBOGuestScreen> {
                     final List<DocumentSnapshot> matchingNotes = [];
                     for (var i = 0; i < notes.length; i++) {
                       final note = notes[i];
-                      if (note['QOBOnote_title']
+                      if (note['APHEnote_title']
                           .toString()
                           .toUpperCase()
                           .contains(_searchController.text.toUpperCase())) {
@@ -928,7 +928,7 @@ class _QOBOGuestScreenState extends State<QOBOGuestScreen> {
                                     context,
                                     MaterialPageRoute(
                                         builder: (context) =>
-                                            QOBOGuestReaderScreen(note)));
+                                            APHEGuestReaderScreen(note)));
                               }, note))
                           .toList(),
                     );

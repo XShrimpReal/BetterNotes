@@ -3,9 +3,15 @@ import 'package:BetterNotes/screens/home_screen_admin.dart';
 import 'package:BetterNotes/screens/home_screen_guest.dart';
 import 'package:BetterNotes/screens/settings.dart';
 import 'package:BetterNotes/style/app_style.dart';
+import 'package:BetterNotes/subjects/ARTAPP/guest_Aart.dart';
+import 'package:BetterNotes/subjects/ARTAPP/guest_Eart.dart';
+import 'package:BetterNotes/subjects/ARTAPP/guest_Qart.dart';
 import 'package:BetterNotes/subjects/CAL2/guest_Acal2.dart';
 import 'package:BetterNotes/subjects/CAL2/guest_Ecal2.dart';
 import 'package:BetterNotes/subjects/CAL2/guest_Qcal2.dart';
+import 'package:BetterNotes/subjects/CHENGR/guest_Ache.dart';
+import 'package:BetterNotes/subjects/CHENGR/guest_Eche.dart';
+import 'package:BetterNotes/subjects/CHENGR/guest_Qche.dart';
 import 'package:BetterNotes/subjects/DSTRU1/guest_Adst.dart';
 import 'package:BetterNotes/subjects/DSTRU1/guest_Edst.dart';
 import 'package:BetterNotes/subjects/DSTRU1/guest_Qdst.dart';
@@ -22,6 +28,9 @@ import 'package:BetterNotes/subjects/OBOPRO/guest_Qobo.dart';
 import 'package:BetterNotes/subjects/PEDUC2/guest_Aped.dart';
 import 'package:BetterNotes/subjects/PEDUC2/guest_Eped.dart';
 import 'package:BetterNotes/subjects/PEDUC2/guest_Qped.dart';
+import 'package:BetterNotes/subjects/PHENGR/guest_Aphe.dart';
+import 'package:BetterNotes/subjects/PHENGR/guest_Ephe.dart';
+import 'package:BetterNotes/subjects/PHENGR/guest_Qphe.dart';
 import 'package:BetterNotes/subjects/PURCOM/guest_Apur.dart';
 import 'package:BetterNotes/subjects/PURCOM/guest_Epur.dart';
 import 'package:BetterNotes/subjects/PURCOM/guest_Qpur.dart';
@@ -145,7 +154,7 @@ class _ANSTGuestScreenState extends State<ANSTGuestScreen> {
                     mainAxisSize: MainAxisSize.min,
                     children: [
                       Text(
-                        "Login",
+                        "Login ",
                         style: GoogleFonts.roboto(
                             color: Colors.black,
                             fontWeight: FontWeight.bold,
@@ -157,6 +166,7 @@ class _ANSTGuestScreenState extends State<ANSTGuestScreen> {
               ),
             ],
           ),
+          const Divider(),
           Row(
             mainAxisAlignment: MainAxisAlignment.start,
             children: [
@@ -187,14 +197,14 @@ class _ANSTGuestScreenState extends State<ANSTGuestScreen> {
                             Navigator.push(
                               context,
                               MaterialPageRoute(
-                                  builder: (context) => QCALGuestScreen(
+                                  builder: (context) => ECALGuestScreen(
                                       backgroundColor: backgroundColor)),
                             );
                           } else if (newValue == 'Exams') {
                             Navigator.push(
                               context,
                               MaterialPageRoute(
-                                  builder: (context) => ECALGuestScreen(
+                                  builder: (context) => QCALGuestScreen(
                                       backgroundColor: backgroundColor)),
                             );
                           }
@@ -624,21 +634,21 @@ class _ANSTGuestScreenState extends State<ANSTGuestScreen> {
                             Navigator.push(
                               context,
                               MaterialPageRoute(
-                                  builder: (context) => GuestScreen(
+                                  builder: (context) => ACHEGuestScreen(
                                       backgroundColor: backgroundColor)),
                             );
                           } else if (newValue == 'Quizzes') {
                             Navigator.push(
                               context,
                               MaterialPageRoute(
-                                  builder: (context) => GuestScreen(
+                                  builder: (context) => QCHEGuestScreen(
                                       backgroundColor: backgroundColor)),
                             );
                           } else if (newValue == 'Exams') {
                             Navigator.push(
                               context,
                               MaterialPageRoute(
-                                  builder: (context) => GuestScreen(
+                                  builder: (context) => ECHEGuestScreen(
                                       backgroundColor: backgroundColor)),
                             );
                           }
@@ -688,21 +698,21 @@ class _ANSTGuestScreenState extends State<ANSTGuestScreen> {
                             Navigator.push(
                               context,
                               MaterialPageRoute(
-                                  builder: (context) => GuestScreen(
+                                  builder: (context) => AARTGuestScreen(
                                       backgroundColor: backgroundColor)),
                             );
                           } else if (newValue == 'Quizzes') {
                             Navigator.push(
                               context,
                               MaterialPageRoute(
-                                  builder: (context) => GuestScreen(
+                                  builder: (context) => QARTGuestScreen(
                                       backgroundColor: backgroundColor)),
                             );
                           } else if (newValue == 'Exams') {
                             Navigator.push(
                               context,
                               MaterialPageRoute(
-                                  builder: (context) => GuestScreen(
+                                  builder: (context) => EARTGuestScreen(
                                       backgroundColor: backgroundColor)),
                             );
                           }
@@ -751,21 +761,21 @@ class _ANSTGuestScreenState extends State<ANSTGuestScreen> {
                             Navigator.push(
                               context,
                               MaterialPageRoute(
-                                  builder: (context) => GuestScreen(
+                                  builder: (context) => APHEGuestScreen(
                                       backgroundColor: backgroundColor)),
                             );
                           } else if (newValue == 'Quizzes') {
                             Navigator.push(
                               context,
                               MaterialPageRoute(
-                                  builder: (context) => GuestScreen(
+                                  builder: (context) => QPHEGuestScreen(
                                       backgroundColor: backgroundColor)),
                             );
                           } else if (newValue == 'Exams') {
                             Navigator.push(
                               context,
                               MaterialPageRoute(
-                                  builder: (context) => GuestScreen(
+                                  builder: (context) => EPHEGuestScreen(
                                       backgroundColor: backgroundColor)),
                             );
                           }

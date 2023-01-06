@@ -4,6 +4,9 @@ import 'package:BetterNotes/screens/home_screen.dart';
 import 'package:BetterNotes/screens/home_screen_guest.dart';
 import 'package:BetterNotes/screens/settings.dart';
 import 'package:BetterNotes/style/app_style.dart';
+import 'package:BetterNotes/subjects/ARTAPP/admin_Aart.dart';
+import 'package:BetterNotes/subjects/ARTAPP/admin_Eart.dart';
+import 'package:BetterNotes/subjects/ARTAPP/admin_Qart.dart';
 import 'package:BetterNotes/subjects/CAL2/admin_Acal2.dart';
 import 'package:BetterNotes/subjects/CAL2/admin_Ecal2.dart';
 import 'package:BetterNotes/subjects/CAL2/admin_Qcal2.dart';
@@ -25,6 +28,9 @@ import 'package:BetterNotes/subjects/OBOPRO/admin_Qobo.dart';
 import 'package:BetterNotes/subjects/PEDUC2/admin_Aped.dart';
 import 'package:BetterNotes/subjects/PEDUC2/admin_Eped.dart';
 import 'package:BetterNotes/subjects/PEDUC2/admin_Qped.dart';
+import 'package:BetterNotes/subjects/PHENGR/admin_Aphe.dart';
+import 'package:BetterNotes/subjects/PHENGR/admin_Ephe.dart';
+import 'package:BetterNotes/subjects/PHENGR/admin_Qphe.dart';
 import 'package:BetterNotes/subjects/PURCOM/admin_Apur.dart';
 import 'package:BetterNotes/subjects/PURCOM/admin_Epur.dart';
 import 'package:BetterNotes/subjects/PURCOM/admin_Qpur.dart';
@@ -693,21 +699,21 @@ class _AdminScreenState extends State<AdminScreen> {
                             Navigator.push(
                               context,
                               MaterialPageRoute(
-                                  builder: (context) => GuestScreen(
+                                  builder: (context) => AdminARTScreen(
                                       backgroundColor: backgroundColor)),
                             );
                           } else if (newValue == 'Quizzes') {
                             Navigator.push(
                               context,
                               MaterialPageRoute(
-                                  builder: (context) => GuestScreen(
+                                  builder: (context) => QARTAdminCALScreen(
                                       backgroundColor: backgroundColor)),
                             );
                           } else if (newValue == 'Exams') {
                             Navigator.push(
                               context,
                               MaterialPageRoute(
-                                  builder: (context) => GuestScreen(
+                                  builder: (context) => EARTAdminCALScreen(
                                       backgroundColor: backgroundColor)),
                             );
                           }
@@ -756,21 +762,21 @@ class _AdminScreenState extends State<AdminScreen> {
                             Navigator.push(
                               context,
                               MaterialPageRoute(
-                                  builder: (context) => GuestScreen(
+                                  builder: (context) => AdminPHEScreen(
                                       backgroundColor: backgroundColor)),
                             );
                           } else if (newValue == 'Quizzes') {
                             Navigator.push(
                               context,
                               MaterialPageRoute(
-                                  builder: (context) => GuestScreen(
+                                  builder: (context) => QPHEAdminCALScreen(
                                       backgroundColor: backgroundColor)),
                             );
                           } else if (newValue == 'Exams') {
                             Navigator.push(
                               context,
                               MaterialPageRoute(
-                                  builder: (context) => GuestScreen(
+                                  builder: (context) => EPHEAdminCALScreen(
                                       backgroundColor: backgroundColor)),
                             );
                           }
