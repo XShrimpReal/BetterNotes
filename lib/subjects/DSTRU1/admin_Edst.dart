@@ -48,7 +48,7 @@ class _EDSTAdminCALScreenState extends State<EDSTAdminCALScreen> {
   final TextEditingController _searchController = TextEditingController();
   final TextEditingController _usernameController = TextEditingController();
   final TextEditingController _passwordController = TextEditingController();
-  String _selectedOption = 'Calculus 2';
+  String _selectedOption = 'CALCU2';
   String _selectedOption2 = 'OBOPRO';
   String _selectedOption3 = 'ENGIDA';
   String _selectedOption4 = 'DSTRU1';
@@ -168,7 +168,7 @@ class _EDSTAdminCALScreenState extends State<EDSTAdminCALScreen> {
               Flexible(
                 child: _selectedOption == ''
                     ? Text(
-                        'Calculus 2',
+                        'CALCU2',
                         style: GoogleFonts.roboto(
                             color: Colors.black,
                             fontWeight: FontWeight.bold,
@@ -204,7 +204,7 @@ class _EDSTAdminCALScreenState extends State<EDSTAdminCALScreen> {
                           }
                         },
                         items: <String>[
-                          'Calculus 2',
+                          'CALCU2',
                           'Assignments',
                           'Quizzes',
                           'Exams'

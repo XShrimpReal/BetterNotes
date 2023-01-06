@@ -9,9 +9,6 @@ import 'package:BetterNotes/subjects/CAL2/admin_Qcal2.dart';
 import 'package:BetterNotes/subjects/CHENGR/admin_Ache.dart';
 import 'package:BetterNotes/subjects/CHENGR/admin_Eche.dart';
 import 'package:BetterNotes/subjects/CHENGR/admin_Qche.dart';
-import 'package:BetterNotes/subjects/CHENGR/guest_Ache.dart';
-import 'package:BetterNotes/subjects/CHENGR/guest_Eche.dart';
-import 'package:BetterNotes/subjects/CHENGR/guest_Qche.dart';
 import 'package:BetterNotes/subjects/DSTRU1/admin_Adst.dart';
 import 'package:BetterNotes/subjects/DSTRU1/admin_Edst.dart';
 import 'package:BetterNotes/subjects/DSTRU1/admin_Qdst.dart';
@@ -21,9 +18,6 @@ import 'package:BetterNotes/subjects/ENGIDA/admin_Qeng.dart';
 import 'package:BetterNotes/subjects/NSTP02/admin_Anst.dart';
 import 'package:BetterNotes/subjects/NSTP02/admin_Enst.dart';
 import 'package:BetterNotes/subjects/NSTP02/admin_Qnst.dart';
-import 'package:BetterNotes/subjects/NSTP02/guest_Anst.dart';
-import 'package:BetterNotes/subjects/NSTP02/guest_Enst.dart';
-import 'package:BetterNotes/subjects/NSTP02/guest_Qnst.dart';
 import 'package:BetterNotes/subjects/OBOPRO/Eobo_card.dart';
 import 'package:BetterNotes/subjects/OBOPRO/admin_Aobo.dart';
 import 'package:BetterNotes/subjects/OBOPRO/admin_Eobo_editor.dart';
@@ -35,9 +29,6 @@ import 'package:BetterNotes/subjects/PEDUC2/admin_Qped.dart';
 import 'package:BetterNotes/subjects/PURCOM/admin_Apur.dart';
 import 'package:BetterNotes/subjects/PURCOM/admin_Epur.dart';
 import 'package:BetterNotes/subjects/PURCOM/admin_Qpur.dart';
-import 'package:BetterNotes/subjects/PURCOM/guest_Apur.dart';
-import 'package:BetterNotes/subjects/PURCOM/guest_Epur.dart';
-import 'package:BetterNotes/subjects/PURCOM/guest_Qpur.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
@@ -57,7 +48,7 @@ class _EOBOAdminCALScreenState extends State<EOBOAdminCALScreen> {
   final TextEditingController _searchController = TextEditingController();
   final TextEditingController _usernameController = TextEditingController();
   final TextEditingController _passwordController = TextEditingController();
-  String _selectedOption = 'Calculus 2';
+  String _selectedOption = 'CALCU2';
   String _selectedOption2 = 'OBOPRO';
   String _selectedOption3 = 'ENGIDA';
   String _selectedOption4 = 'DSTRU1';
@@ -177,7 +168,7 @@ class _EOBOAdminCALScreenState extends State<EOBOAdminCALScreen> {
               Flexible(
                 child: _selectedOption == ''
                     ? Text(
-                        'Calculus 2',
+                        'CALCU2',
                         style: GoogleFonts.roboto(
                             color: Colors.black,
                             fontWeight: FontWeight.bold,
@@ -213,7 +204,7 @@ class _EOBOAdminCALScreenState extends State<EOBOAdminCALScreen> {
                           }
                         },
                         items: <String>[
-                          'Calculus 2',
+                          'CALCU2',
                           'Assignments',
                           'Quizzes',
                           'Exams'
@@ -494,59 +485,59 @@ class _EOBOAdminCALScreenState extends State<EOBOAdminCALScreen> {
               Flexible(
                 child: _selectedOption6 == ''
                     ? Text(
-                  'PURCOM',
-                  style: GoogleFonts.roboto(
-                      color: Colors.black,
-                      fontWeight: FontWeight.bold,
-                      fontSize: 18),
-                )
+                        'PURCOM',
+                        style: GoogleFonts.roboto(
+                            color: Colors.black,
+                            fontWeight: FontWeight.bold,
+                            fontSize: 18),
+                      )
                     : DropdownButton<String>(
-                    value: _selectedOption6,
-                    onChanged: (String? newValue) {
-                      setState(() {
-                        _selectedOption = newValue ?? '';
-                      });
-                      if (newValue == 'Assignments') {
-                        Navigator.push(
-                          context,
-                          MaterialPageRoute(
-                              builder: (context) => AdminPURScreen(
-                                  backgroundColor: backgroundColor)),
-                        );
-                      } else if (newValue == 'Quizzes') {
-                        Navigator.push(
-                          context,
-                          MaterialPageRoute(
-                              builder: (context) => QPURAdminCALScreen(
-                                  backgroundColor: backgroundColor)),
-                        );
-                      } else if (newValue == 'Exams') {
-                        Navigator.push(
-                          context,
-                          MaterialPageRoute(
-                              builder: (context) => EPURAdminCALScreen(
-                                  backgroundColor: backgroundColor)),
-                        );
-                      }
-                    },
-                    items: <String>[
-                      'PURCOM',
-                      'Assignments',
-                      'Quizzes',
-                      'Exams'
-                    ].map<DropdownMenuItem<String>>((String value) {
-                      return DropdownMenuItem<String>(
-                        value: value,
-                        child: Text(
-                          value,
-                          style: GoogleFonts.roboto(
-                              color: Colors.black,
-                              fontWeight: FontWeight.bold,
-                              fontSize: 18),
-                        ),
-                      );
-                    }).toList(),
-                    dropdownColor: const Color(0xFFF1E3DC)),
+                        value: _selectedOption6,
+                        onChanged: (String? newValue) {
+                          setState(() {
+                            _selectedOption = newValue ?? '';
+                          });
+                          if (newValue == 'Assignments') {
+                            Navigator.push(
+                              context,
+                              MaterialPageRoute(
+                                  builder: (context) => AdminPURScreen(
+                                      backgroundColor: backgroundColor)),
+                            );
+                          } else if (newValue == 'Quizzes') {
+                            Navigator.push(
+                              context,
+                              MaterialPageRoute(
+                                  builder: (context) => QPURAdminCALScreen(
+                                      backgroundColor: backgroundColor)),
+                            );
+                          } else if (newValue == 'Exams') {
+                            Navigator.push(
+                              context,
+                              MaterialPageRoute(
+                                  builder: (context) => EPURAdminCALScreen(
+                                      backgroundColor: backgroundColor)),
+                            );
+                          }
+                        },
+                        items: <String>[
+                          'PURCOM',
+                          'Assignments',
+                          'Quizzes',
+                          'Exams'
+                        ].map<DropdownMenuItem<String>>((String value) {
+                          return DropdownMenuItem<String>(
+                            value: value,
+                            child: Text(
+                              value,
+                              style: GoogleFonts.roboto(
+                                  color: Colors.black,
+                                  fontWeight: FontWeight.bold,
+                                  fontSize: 18),
+                            ),
+                          );
+                        }).toList(),
+                        dropdownColor: const Color(0xFFF1E3DC)),
               ),
             ],
           ),
@@ -558,59 +549,59 @@ class _EOBOAdminCALScreenState extends State<EOBOAdminCALScreen> {
               Flexible(
                 child: _selectedOption7 == ''
                     ? Text(
-                  'NSTP02',
-                  style: GoogleFonts.roboto(
-                      color: Colors.black,
-                      fontWeight: FontWeight.bold,
-                      fontSize: 18),
-                )
+                        'NSTP02',
+                        style: GoogleFonts.roboto(
+                            color: Colors.black,
+                            fontWeight: FontWeight.bold,
+                            fontSize: 18),
+                      )
                     : DropdownButton<String>(
-                    value: _selectedOption7,
-                    onChanged: (String? newValue) {
-                      setState(() {
-                        _selectedOption = newValue ?? '';
-                      });
-                      if (newValue == 'Assignments') {
-                        Navigator.push(
-                          context,
-                          MaterialPageRoute(
-                              builder: (context) => AdminNSTScreen(
-                                  backgroundColor: backgroundColor)),
-                        );
-                      } else if (newValue == 'Quizzes') {
-                        Navigator.push(
-                          context,
-                          MaterialPageRoute(
-                              builder: (context) => QNSTAdminCALScreen(
-                                  backgroundColor: backgroundColor)),
-                        );
-                      } else if (newValue == 'Exams') {
-                        Navigator.push(
-                          context,
-                          MaterialPageRoute(
-                              builder: (context) => ENSTAdminCALScreen(
-                                  backgroundColor: backgroundColor)),
-                        );
-                      }
-                    },
-                    items: <String>[
-                      'NSTP02',
-                      'Assignments',
-                      'Quizzes',
-                      'Exams'
-                    ].map<DropdownMenuItem<String>>((String value) {
-                      return DropdownMenuItem<String>(
-                        value: value,
-                        child: Text(
-                          value,
-                          style: GoogleFonts.roboto(
-                              color: Colors.black,
-                              fontWeight: FontWeight.bold,
-                              fontSize: 18),
-                        ),
-                      );
-                    }).toList(),
-                    dropdownColor: const Color(0xFFF1E3DC)),
+                        value: _selectedOption7,
+                        onChanged: (String? newValue) {
+                          setState(() {
+                            _selectedOption = newValue ?? '';
+                          });
+                          if (newValue == 'Assignments') {
+                            Navigator.push(
+                              context,
+                              MaterialPageRoute(
+                                  builder: (context) => AdminNSTScreen(
+                                      backgroundColor: backgroundColor)),
+                            );
+                          } else if (newValue == 'Quizzes') {
+                            Navigator.push(
+                              context,
+                              MaterialPageRoute(
+                                  builder: (context) => QNSTAdminCALScreen(
+                                      backgroundColor: backgroundColor)),
+                            );
+                          } else if (newValue == 'Exams') {
+                            Navigator.push(
+                              context,
+                              MaterialPageRoute(
+                                  builder: (context) => ENSTAdminCALScreen(
+                                      backgroundColor: backgroundColor)),
+                            );
+                          }
+                        },
+                        items: <String>[
+                          'NSTP02',
+                          'Assignments',
+                          'Quizzes',
+                          'Exams'
+                        ].map<DropdownMenuItem<String>>((String value) {
+                          return DropdownMenuItem<String>(
+                            value: value,
+                            child: Text(
+                              value,
+                              style: GoogleFonts.roboto(
+                                  color: Colors.black,
+                                  fontWeight: FontWeight.bold,
+                                  fontSize: 18),
+                            ),
+                          );
+                        }).toList(),
+                        dropdownColor: const Color(0xFFF1E3DC)),
               ),
             ],
           ),
@@ -621,59 +612,59 @@ class _EOBOAdminCALScreenState extends State<EOBOAdminCALScreen> {
               Flexible(
                 child: _selectedOption8 == ''
                     ? Text(
-                  'CHENGR',
-                  style: GoogleFonts.roboto(
-                      color: Colors.black,
-                      fontWeight: FontWeight.bold,
-                      fontSize: 18),
-                )
+                        'CHENGR',
+                        style: GoogleFonts.roboto(
+                            color: Colors.black,
+                            fontWeight: FontWeight.bold,
+                            fontSize: 18),
+                      )
                     : DropdownButton<String>(
-                    value: _selectedOption8,
-                    onChanged: (String? newValue) {
-                      setState(() {
-                        _selectedOption = newValue ?? '';
-                      });
-                      if (newValue == 'Assignments') {
-                        Navigator.push(
-                          context,
-                          MaterialPageRoute(
-                              builder: (context) => AdminCHEScreen(
-                                  backgroundColor: backgroundColor)),
-                        );
-                      } else if (newValue == 'Quizzes') {
-                        Navigator.push(
-                          context,
-                          MaterialPageRoute(
-                              builder: (context) => QCHEAdminCALScreen(
-                                  backgroundColor: backgroundColor)),
-                        );
-                      } else if (newValue == 'Exams') {
-                        Navigator.push(
-                          context,
-                          MaterialPageRoute(
-                              builder: (context) => ECHEAdminCALScreen(
-                                  backgroundColor: backgroundColor)),
-                        );
-                      }
-                    },
-                    items: <String>[
-                      'CHENGR',
-                      'Assignments',
-                      'Quizzes',
-                      'Exams'
-                    ].map<DropdownMenuItem<String>>((String value) {
-                      return DropdownMenuItem<String>(
-                        value: value,
-                        child: Text(
-                          value,
-                          style: GoogleFonts.roboto(
-                              color: Colors.black,
-                              fontWeight: FontWeight.bold,
-                              fontSize: 18),
-                        ),
-                      );
-                    }).toList(),
-                    dropdownColor: const Color(0xFFF1E3DC)),
+                        value: _selectedOption8,
+                        onChanged: (String? newValue) {
+                          setState(() {
+                            _selectedOption = newValue ?? '';
+                          });
+                          if (newValue == 'Assignments') {
+                            Navigator.push(
+                              context,
+                              MaterialPageRoute(
+                                  builder: (context) => AdminCHEScreen(
+                                      backgroundColor: backgroundColor)),
+                            );
+                          } else if (newValue == 'Quizzes') {
+                            Navigator.push(
+                              context,
+                              MaterialPageRoute(
+                                  builder: (context) => QCHEAdminCALScreen(
+                                      backgroundColor: backgroundColor)),
+                            );
+                          } else if (newValue == 'Exams') {
+                            Navigator.push(
+                              context,
+                              MaterialPageRoute(
+                                  builder: (context) => ECHEAdminCALScreen(
+                                      backgroundColor: backgroundColor)),
+                            );
+                          }
+                        },
+                        items: <String>[
+                          'CHENGR',
+                          'Assignments',
+                          'Quizzes',
+                          'Exams'
+                        ].map<DropdownMenuItem<String>>((String value) {
+                          return DropdownMenuItem<String>(
+                            value: value,
+                            child: Text(
+                              value,
+                              style: GoogleFonts.roboto(
+                                  color: Colors.black,
+                                  fontWeight: FontWeight.bold,
+                                  fontSize: 18),
+                            ),
+                          );
+                        }).toList(),
+                        dropdownColor: const Color(0xFFF1E3DC)),
               ),
             ],
           ),

@@ -54,7 +54,7 @@ class _AdminScreenState extends State<AdminScreen> {
   final TextEditingController _searchController = TextEditingController();
   final TextEditingController _usernameController = TextEditingController();
   final TextEditingController _passwordController = TextEditingController();
-  String _selectedOption = 'Calculus 2';
+  String _selectedOption = 'CALCU2';
   final String _selectedOption2 = 'OBOPRO';
   final String _selectedOption3 = 'ENGIDA';
   final String _selectedOption4 = 'DSTRU1';
@@ -135,6 +135,7 @@ class _AdminScreenState extends State<AdminScreen> {
 
   Drawer _buildDrawer(BuildContext context) {
     return Drawer(
+      width: 220,
       elevation: 0,
       backgroundColor: const Color(0xFFe8d1c5),
       child: Column(
@@ -142,32 +143,16 @@ class _AdminScreenState extends State<AdminScreen> {
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
           const SizedBox(
-            height: 50,
+            height: 15,
           ),
-          Row(
-            mainAxisAlignment: MainAxisAlignment.start,
-            children: [
-              const SizedBox(width: 45, child: Icon(Icons.lock)),
-              Flexible(
-                child: TextButton(
-                  onPressed: _showLoginDialog,
-                  child: Column(
-                    mainAxisSize: MainAxisSize.min,
-                    children: [
-                      Text(
-                        "Login ",
-                        style: GoogleFonts.roboto(
-                            color: Colors.black,
-                            fontWeight: FontWeight.bold,
-                            fontSize: 18),
-                      ),
-                    ],
-                  ),
-                ),
-              ),
-            ],
+          const Image(image: AssetImage('assets/images/app_icon.png')),
+          const SizedBox(
+            height: 7,
           ),
-          const Divider(),
+          const Divider(
+            color: Color(0xFF463F3B),
+            thickness: 2,
+          ),
           Row(
             mainAxisAlignment: MainAxisAlignment.start,
             children: [
@@ -175,7 +160,7 @@ class _AdminScreenState extends State<AdminScreen> {
               Flexible(
                 child: _selectedOption == ''
                     ? Text(
-                        'Calculus 2',
+                        'CALCU2',
                         style: GoogleFonts.roboto(
                             color: Colors.black,
                             fontWeight: FontWeight.bold,
@@ -187,6 +172,9 @@ class _AdminScreenState extends State<AdminScreen> {
                           setState(() {
                             _selectedOption = newValue ?? '';
                           });
+                          const Divider(
+                            height: 1000,
+                          );
                           if (newValue == 'Assignments') {
                             Navigator.push(
                               context,
@@ -211,7 +199,7 @@ class _AdminScreenState extends State<AdminScreen> {
                           }
                         },
                         items: <String>[
-                          'Calculus 2',
+                          'CALCU2',
                           'Assignments',
                           'Quizzes',
                           'Exams'
@@ -800,6 +788,19 @@ class _AdminScreenState extends State<AdminScreen> {
                         }).toList(),
                         dropdownColor: const Color(0xFFF1E3DC)),
               ),
+            ],
+          ),
+          const SizedBox(height: 81),
+          Row(
+            mainAxisAlignment: MainAxisAlignment.end,
+            mainAxisSize: MainAxisSize.max,
+            children: [
+              IconButton(
+                  onPressed: _showLoginDialog,
+                  icon: const Icon(
+                    Icons.supervised_user_circle_outlined,
+                    size: 30,
+                  ))
             ],
           )
         ],
