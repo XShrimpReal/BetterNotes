@@ -182,14 +182,14 @@ class _EARTGuestScreenState extends State<EARTGuestScreen> {
                             Navigator.push(
                               context,
                               MaterialPageRoute(
-                                  builder: (context) => ECALGuestScreen(
+                                  builder: (context) => QCALGuestScreen(
                                       backgroundColor: backgroundColor)),
                             );
                           } else if (newValue == 'Exams') {
                             Navigator.push(
                               context,
                               MaterialPageRoute(
-                                  builder: (context) => QCALGuestScreen(
+                                  builder: (context) => ECALGuestScreen(
                                       backgroundColor: backgroundColor)),
                             );
                           }
@@ -825,7 +825,7 @@ class _EARTGuestScreenState extends State<EARTGuestScreen> {
       backgroundColor: AppStyle.mainColor,
       appBar: AppBar(
         elevation: 0,
-        title: const Text('ARTAPP (Guest)'),
+        title: const Text('ARTAPP '),
         centerTitle: true,
         backgroundColor: AppStyle.mainColor,
         actions: [

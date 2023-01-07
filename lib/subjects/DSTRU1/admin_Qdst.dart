@@ -829,7 +829,7 @@ class _QDSTAdminCALScreenState extends State<QDSTAdminCALScreen> {
       backgroundColor: AppStyle.mainColor,
       appBar: AppBar(
         elevation: 0,
-        title: const Text('DSTRU1 (Admin)'),
+        title: const Text('DSTRU1 '),
         centerTitle: true,
         backgroundColor: AppStyle.mainColor,
         actions: [

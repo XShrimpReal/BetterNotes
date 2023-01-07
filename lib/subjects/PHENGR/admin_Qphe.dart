@@ -829,7 +829,7 @@ class _QPHEAdminCALScreenState extends State<QPHEAdminCALScreen> {
       backgroundColor: AppStyle.mainColor,
       appBar: AppBar(
         elevation: 0,
-        title: const Text('PHENGR (Admin)'),
+        title: const Text('PHENGR '),
         centerTitle: true,
         backgroundColor: AppStyle.mainColor,
         actions: [

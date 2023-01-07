@@ -829,7 +829,7 @@ class _EARTAdminCALScreenState extends State<EARTAdminCALScreen> {
       backgroundColor: AppStyle.mainColor,
       appBar: AppBar(
         elevation: 0,
-        title: const Text('ARTAPP (Admin)'),
+        title: const Text('ARTAPP '),
         centerTitle: true,
         backgroundColor: AppStyle.mainColor,
         actions: [

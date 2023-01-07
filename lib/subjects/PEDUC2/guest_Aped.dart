@@ -182,14 +182,14 @@ class _APEDGuestScreenState extends State<APEDGuestScreen> {
                             Navigator.push(
                               context,
                               MaterialPageRoute(
-                                  builder: (context) => ECALGuestScreen(
+                                  builder: (context) => QCALGuestScreen(
                                       backgroundColor: backgroundColor)),
                             );
                           } else if (newValue == 'Exams') {
                             Navigator.push(
                               context,
                               MaterialPageRoute(
-                                  builder: (context) => QCALGuestScreen(
+                                  builder: (context) => ECALGuestScreen(
                                       backgroundColor: backgroundColor)),
                             );
                           }
@@ -825,7 +825,7 @@ class _APEDGuestScreenState extends State<APEDGuestScreen> {
       backgroundColor: AppStyle.mainColor,
       appBar: AppBar(
         elevation: 0,
-        title: const Text('PEDUC2 (Guest)'),
+        title: const Text('PEDUC2 '),
         centerTitle: true,
         backgroundColor: AppStyle.mainColor,
         actions: [

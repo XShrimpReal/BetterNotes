@@ -182,14 +182,14 @@ class _QPURGuestScreenState extends State<QPURGuestScreen> {
                             Navigator.push(
                               context,
                               MaterialPageRoute(
-                                  builder: (context) => ECALGuestScreen(
+                                  builder: (context) => QCALGuestScreen(
                                       backgroundColor: backgroundColor)),
                             );
                           } else if (newValue == 'Exams') {
                             Navigator.push(
                               context,
                               MaterialPageRoute(
-                                  builder: (context) => QCALGuestScreen(
+                                  builder: (context) => ECALGuestScreen(
                                       backgroundColor: backgroundColor)),
                             );
                           }
@@ -825,7 +825,7 @@ class _QPURGuestScreenState extends State<QPURGuestScreen> {
       backgroundColor: AppStyle.mainColor,
       appBar: AppBar(
         elevation: 0,
-        title: const Text('PURCOM (Guest)'),
+        title: const Text('PURCOM '),
         centerTitle: true,
         backgroundColor: AppStyle.mainColor,
         actions: [

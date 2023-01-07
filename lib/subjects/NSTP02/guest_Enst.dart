@@ -182,14 +182,14 @@ class _ENSTGuestScreenState extends State<ENSTGuestScreen> {
                             Navigator.push(
                               context,
                               MaterialPageRoute(
-                                  builder: (context) => ECALGuestScreen(
+                                  builder: (context) => QCALGuestScreen(
                                       backgroundColor: backgroundColor)),
                             );
                           } else if (newValue == 'Exams') {
                             Navigator.push(
                               context,
                               MaterialPageRoute(
-                                  builder: (context) => QCALGuestScreen(
+                                  builder: (context) => ECALGuestScreen(
                                       backgroundColor: backgroundColor)),
                             );
                           }
@@ -825,7 +825,7 @@ class _ENSTGuestScreenState extends State<ENSTGuestScreen> {
       backgroundColor: AppStyle.mainColor,
       appBar: AppBar(
         elevation: 0,
-        title: const Text('NSTP02 (Guest)'),
+        title: const Text('NSTP02 '),
         centerTitle: true,
         backgroundColor: AppStyle.mainColor,
         actions: [

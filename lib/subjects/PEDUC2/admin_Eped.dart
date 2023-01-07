@@ -829,7 +829,7 @@ class _EPEDAdminCALScreenState extends State<EPEDAdminCALScreen> {
       backgroundColor: AppStyle.mainColor,
       appBar: AppBar(
         elevation: 0,
-        title: const Text('PEDUC2 (Admin)'),
+        title: const Text('PEDUC2 '),
         centerTitle: true,
         backgroundColor: AppStyle.mainColor,
         actions: [

@@ -829,7 +829,7 @@ class _QNSTAdminCALScreenState extends State<QNSTAdminCALScreen> {
       backgroundColor: AppStyle.mainColor,
       appBar: AppBar(
         elevation: 0,
-        title: const Text('NSTP02 (Admin)'),
+        title: const Text('NSTP02 '),
         centerTitle: true,
         backgroundColor: AppStyle.mainColor,
         actions: [

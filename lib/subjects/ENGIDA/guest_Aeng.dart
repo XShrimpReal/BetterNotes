@@ -182,14 +182,14 @@ class _AENGGuestScreenState extends State<AENGGuestScreen> {
                             Navigator.push(
                               context,
                               MaterialPageRoute(
-                                  builder: (context) => ECALGuestScreen(
+                                  builder: (context) => QCALGuestScreen(
                                       backgroundColor: backgroundColor)),
                             );
                           } else if (newValue == 'Exams') {
                             Navigator.push(
                               context,
                               MaterialPageRoute(
-                                  builder: (context) => QCALGuestScreen(
+                                  builder: (context) => ECALGuestScreen(
                                       backgroundColor: backgroundColor)),
                             );
                           }
@@ -825,7 +825,7 @@ class _AENGGuestScreenState extends State<AENGGuestScreen> {
       backgroundColor: AppStyle.mainColor,
       appBar: AppBar(
         elevation: 0,
-        title: const Text('ENGIDA (Guest)'),
+        title: const Text('ENGIDA '),
         centerTitle: true,
         backgroundColor: AppStyle.mainColor,
         actions: [

@@ -829,7 +829,7 @@ class _QARTAdminCALScreenState extends State<QARTAdminCALScreen> {
       backgroundColor: AppStyle.mainColor,
       appBar: AppBar(
         elevation: 0,
-        title: const Text('ARTAPP (Admin)'),
+        title: const Text('ARTAPP '),
         centerTitle: true,
         backgroundColor: AppStyle.mainColor,
         actions: [

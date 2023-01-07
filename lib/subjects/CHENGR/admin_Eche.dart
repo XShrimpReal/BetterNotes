@@ -829,7 +829,7 @@ class _ECHEAdminCALScreenState extends State<ECHEAdminCALScreen> {
       backgroundColor: AppStyle.mainColor,
       appBar: AppBar(
         elevation: 0,
-        title: const Text('CHENGR (Admin)'),
+        title: const Text('CHENGR '),
         centerTitle: true,
         backgroundColor: AppStyle.mainColor,
         actions: [

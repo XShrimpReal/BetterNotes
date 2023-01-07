@@ -829,7 +829,7 @@ class _AdminCALScreenState extends State<AdminCALScreen> {
       backgroundColor: AppStyle.mainColor,
       appBar: AppBar(
         elevation: 0,
-        title: const Text('CALCU2 (Admin)'),
+        title: const Text('CALCU2 '),
         centerTitle: true,
         backgroundColor: AppStyle.mainColor,
         actions: [

@@ -183,14 +183,14 @@ class _GuestScreenState extends State<GuestScreen> {
                             Navigator.push(
                               context,
                               MaterialPageRoute(
-                                  builder: (context) => ECALGuestScreen(
+                                  builder: (context) => QCALGuestScreen(
                                       backgroundColor: backgroundColor)),
                             );
                           } else if (newValue == 'Exams') {
                             Navigator.push(
                               context,
                               MaterialPageRoute(
-                                  builder: (context) => QCALGuestScreen(
+                                  builder: (context) => ECALGuestScreen(
                                       backgroundColor: backgroundColor)),
                             );
                           }
@@ -826,7 +826,7 @@ class _GuestScreenState extends State<GuestScreen> {
       backgroundColor: AppStyle.mainColor,
       appBar: AppBar(
         elevation: 0,
-        title: const Text('Speical Notes (Guest)'),
+        title: const Text('Speical Notes '),
         centerTitle: true,
         backgroundColor: AppStyle.mainColor,
         actions: [

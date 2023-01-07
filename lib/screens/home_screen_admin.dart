@@ -829,7 +829,7 @@ class _AdminScreenState extends State<AdminScreen> {
       backgroundColor: AppStyle.mainColor,
       appBar: AppBar(
         elevation: 0,
-        title: const Text('Speical Notes (Admin)'),
+        title: const Text('Speical Notes '),
         centerTitle: true,
         backgroundColor: AppStyle.mainColor,
         actions: [

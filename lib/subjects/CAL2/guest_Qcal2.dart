@@ -6,7 +6,7 @@ import 'package:BetterNotes/style/app_style.dart';
 import 'package:BetterNotes/subjects/ARTAPP/guest_Aart.dart';
 import 'package:BetterNotes/subjects/ARTAPP/guest_Eart.dart';
 import 'package:BetterNotes/subjects/ARTAPP/guest_Qart.dart';
-import 'package:BetterNotes/subjects/CAL2/Acal_card.dart';
+import 'package:BetterNotes/subjects/CAL2/Qcal_card.dart';
 import 'package:BetterNotes/subjects/CAL2/guest_Acal2.dart';
 import 'package:BetterNotes/subjects/CAL2/guest_Ecal2.dart';
 import 'package:BetterNotes/subjects/CAL2/guest_Qcal2_reader.dart';
@@ -182,14 +182,14 @@ class _QCALGuestScreenState extends State<QCALGuestScreen> {
                             Navigator.push(
                               context,
                               MaterialPageRoute(
-                                  builder: (context) => ECALGuestScreen(
+                                  builder: (context) => QCALGuestScreen(
                                       backgroundColor: backgroundColor)),
                             );
                           } else if (newValue == 'Exams') {
                             Navigator.push(
                               context,
                               MaterialPageRoute(
-                                  builder: (context) => QCALGuestScreen(
+                                  builder: (context) => ECALGuestScreen(
                                       backgroundColor: backgroundColor)),
                             );
                           }
@@ -825,7 +825,7 @@ class _QCALGuestScreenState extends State<QCALGuestScreen> {
       backgroundColor: AppStyle.mainColor,
       appBar: AppBar(
         elevation: 0,
-        title: const Text('CALCU2 (Admin)'),
+        title: const Text('CALCU2 '),
         centerTitle: true,
         backgroundColor: AppStyle.mainColor,
         actions: [
@@ -848,7 +848,7 @@ class _QCALGuestScreenState extends State<QCALGuestScreen> {
             Row(
               children: [
                 Text(
-                  "Exams",
+                  "Quizzes",
                   style: GoogleFonts.roboto(
                       color: Colors.white,
                       fontWeight: FontWeight.bold,

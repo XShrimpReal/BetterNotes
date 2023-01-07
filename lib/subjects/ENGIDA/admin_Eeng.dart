@@ -829,7 +829,7 @@ class _EENGAdminCALScreenState extends State<EENGAdminCALScreen> {
       backgroundColor: AppStyle.mainColor,
       appBar: AppBar(
         elevation: 0,
-        title: const Text('ENGIDA (Admin)'),
+        title: const Text('ENGIDA '),
         centerTitle: true,
         backgroundColor: AppStyle.mainColor,
         actions: [

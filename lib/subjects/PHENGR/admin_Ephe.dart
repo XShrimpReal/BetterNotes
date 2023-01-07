@@ -829,7 +829,7 @@ class _EPHEAdminCALScreenState extends State<EPHEAdminCALScreen> {
       backgroundColor: AppStyle.mainColor,
       appBar: AppBar(
         elevation: 0,
-        title: const Text('PHENGR (Admin)'),
+        title: const Text('PHENGR '),
         centerTitle: true,
         backgroundColor: AppStyle.mainColor,
         actions: [

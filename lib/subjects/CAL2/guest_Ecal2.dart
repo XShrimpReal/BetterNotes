@@ -6,7 +6,7 @@ import 'package:BetterNotes/style/app_style.dart';
 import 'package:BetterNotes/subjects/ARTAPP/guest_Aart.dart';
 import 'package:BetterNotes/subjects/ARTAPP/guest_Eart.dart';
 import 'package:BetterNotes/subjects/ARTAPP/guest_Qart.dart';
-import 'package:BetterNotes/subjects/CAL2/Acal_card.dart';
+import 'package:BetterNotes/subjects/CAL2/Ecal_card.dart';
 import 'package:BetterNotes/subjects/CAL2/guest_Acal2.dart';
 import 'package:BetterNotes/subjects/CAL2/guest_Ecal2_reader.dart';
 import 'package:BetterNotes/subjects/CAL2/guest_Qcal2.dart';
@@ -182,14 +182,14 @@ class _ECALGuestScreenState extends State<ECALGuestScreen> {
                             Navigator.push(
                               context,
                               MaterialPageRoute(
-                                  builder: (context) => ECALGuestScreen(
+                                  builder: (context) => QCALGuestScreen(
                                       backgroundColor: backgroundColor)),
                             );
                           } else if (newValue == 'Exams') {
                             Navigator.push(
                               context,
                               MaterialPageRoute(
-                                  builder: (context) => QCALGuestScreen(
+                                  builder: (context) => ECALGuestScreen(
                                       backgroundColor: backgroundColor)),
                             );
                           }
@@ -825,7 +825,7 @@ class _ECALGuestScreenState extends State<ECALGuestScreen> {
       backgroundColor: AppStyle.mainColor,
       appBar: AppBar(
         elevation: 0,
-        title: const Text('CALCU2 (Admin)'),
+        title: const Text('CALCU2 '),
         centerTitle: true,
         backgroundColor: AppStyle.mainColor,
         actions: [

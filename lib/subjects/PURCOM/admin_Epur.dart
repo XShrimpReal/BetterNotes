@@ -829,7 +829,7 @@ class _EPURAdminCALScreenState extends State<EPURAdminCALScreen> {
       backgroundColor: AppStyle.mainColor,
       appBar: AppBar(
         elevation: 0,
-        title: const Text('PURCOM (Admin)'),
+        title: const Text('PURCOM '),
         centerTitle: true,
         backgroundColor: AppStyle.mainColor,
         actions: [

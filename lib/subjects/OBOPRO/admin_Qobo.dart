@@ -829,7 +829,7 @@ class _QOBOAdminCALScreenState extends State<QOBOAdminCALScreen> {
       backgroundColor: AppStyle.mainColor,
       appBar: AppBar(
         elevation: 0,
-        title: const Text('OBOPRO (Admin)'),
+        title: const Text('OBOPRO '),
         centerTitle: true,
         backgroundColor: AppStyle.mainColor,
         actions: [
