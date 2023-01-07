@@ -1,6 +1,5 @@
-import 'package:BetterNotes/screens/admin_editor.dart';
-import 'package:BetterNotes/screens/admin_reader.dart';
 import 'package:BetterNotes/screens/home_screen.dart';
+import 'package:BetterNotes/screens/home_screen_admin.dart';
 import 'package:BetterNotes/screens/home_screen_guest.dart';
 import 'package:BetterNotes/screens/settings.dart';
 import 'package:BetterNotes/style/app_style.dart';
@@ -34,23 +33,24 @@ import 'package:BetterNotes/subjects/PHENGR/admin_Qphe.dart';
 import 'package:BetterNotes/subjects/PURCOM/admin_Apur.dart';
 import 'package:BetterNotes/subjects/PURCOM/admin_Epur.dart';
 import 'package:BetterNotes/subjects/PURCOM/admin_Qpur.dart';
-import 'package:BetterNotes/subjects/TODO/todo_screen_admin.dart';
-import 'package:BetterNotes/widgets/admin_card.dart';
+import 'package:BetterNotes/subjects/TODO/todo_admin_card.dart';
+import 'package:BetterNotes/subjects/TODO/todo_admin_editor.dart';
+import 'package:BetterNotes/subjects/TODO/todo_admin_reader.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 
-class AdminScreen extends StatefulWidget {
+class TODOAdminScreen extends StatefulWidget {
   final Color backgroundColor;
-  const AdminScreen({Key? key, required this.backgroundColor})
+  const TODOAdminScreen({Key? key, required this.backgroundColor})
       : super(key: key);
 
   @override
-  _AdminScreenState createState() =>
-      _AdminScreenState(backgroundColor: AppStyle.mainColor);
+  _TODOAdminScreenState createState() =>
+      _TODOAdminScreenState(backgroundColor: AppStyle.mainColor);
 }
 
-class _AdminScreenState extends State<AdminScreen> {
+class _TODOAdminScreenState extends State<TODOAdminScreen> {
   final Color backgroundColor;
   final TextEditingController _searchController = TextEditingController();
   final TextEditingController _usernameController = TextEditingController();
@@ -806,16 +806,6 @@ class _AdminScreenState extends State<AdminScreen> {
                   },
                   icon: const Icon(Icons.exit_to_app_outlined)),
               IconButton(
-                  onPressed: () {
-                    Navigator.push(
-                      context,
-                      MaterialPageRoute(
-                          builder: (context) => TODOAdminScreen(
-                              backgroundColor: backgroundColor)),
-                    );
-                  },
-                  icon: const Icon(Icons.calendar_month_outlined)),
-              IconButton(
                   onPressed: _showLoginDialog,
                   icon: const Icon(
                     Icons.supervised_user_circle_outlined,
@@ -830,7 +820,7 @@ class _AdminScreenState extends State<AdminScreen> {
 
   final GlobalKey<ScaffoldState> _scaffoldKey = GlobalKey<ScaffoldState>();
 
-  _AdminScreenState({required this.backgroundColor});
+  _TODOAdminScreenState({required this.backgroundColor});
 
   @override
   Widget build(BuildContext context) {
@@ -840,7 +830,7 @@ class _AdminScreenState extends State<AdminScreen> {
       backgroundColor: AppStyle.mainColor,
       appBar: AppBar(
         elevation: 0,
-        title: const Text('Speical Notes '),
+        title: const Text('TO DO'),
         centerTitle: true,
         backgroundColor: AppStyle.mainColor,
         actions: [
@@ -904,11 +894,11 @@ class _AdminScreenState extends State<AdminScreen> {
               child: StreamBuilder<QuerySnapshot>(
                 stream: _searchController.text.isEmpty
                     ? FirebaseFirestore.instance
-                        .collection('Snotes')
+                        .collection('TODOnotes')
                         .snapshots()
                     : FirebaseFirestore.instance
-                        .collection('Snotes')
-                        .where('Snote_title',
+                        .collection('TODOnotes')
+                        .where('TODOnote_title',
                             isGreaterThanOrEqualTo:
                                 _searchController.text.toUpperCase(),
                             isLessThan:
@@ -925,7 +915,7 @@ class _AdminScreenState extends State<AdminScreen> {
                     final List<DocumentSnapshot> matchingNotes = [];
                     for (var i = 0; i < notes.length; i++) {
                       final note = notes[i];
-                      if (note['Snote_title']
+                      if (note['TODOnote_title']
                           .toString()
                           .toUpperCase()
                           .contains(_searchController.text.toUpperCase())) {
@@ -940,7 +930,7 @@ class _AdminScreenState extends State<AdminScreen> {
                                     context,
                                     MaterialPageRoute(
                                         builder: (context) =>
-                                            AdminReaderScreen(note)));
+                                            TODOAdminReaderScreen(note)));
                               }, note))
                           .toList(),
                     );
@@ -957,7 +947,7 @@ class _AdminScreenState extends State<AdminScreen> {
           Navigator.push(
               context,
               MaterialPageRoute(
-                  builder: (context) => const AdminEditorScreen()));
+                  builder: (context) => const TODOAdminEditorScreen()));
         },
         backgroundColor: const Color(0xFF8B7D76),
         child: const Icon(
