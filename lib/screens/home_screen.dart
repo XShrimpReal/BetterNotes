@@ -8,6 +8,7 @@ import 'package:BetterNotes/widgets/notes_card.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:google_mobile_ads/google_mobile_ads.dart';
 
 class HomeScreen extends StatefulWidget {
   final Color backgroundColor;
@@ -23,6 +24,30 @@ class _HomeScreenState extends State<HomeScreen> {
   final TextEditingController _searchController = TextEditingController();
   final TextEditingController _usernameController = TextEditingController();
   final TextEditingController _passwordController = TextEditingController();
+  InterstitialAd? _interstitialAd;
+
+  @override
+  void initState() {
+    super.initState();
+    loadInterstitial();
+  }
+
+  void loadInterstitial() {
+    var platform = Theme.of(context).platform;
+    String interstitialAd = platform == TargetPlatform.android ? "" : "";
+    InterstitialAd.load(
+        adUnitId: interstitialAd,
+        request: AdRequest(),
+        adLoadCallback: InterstitialAdLoadCallback(
+          onAdLoaded: (InterstitialAd ad) {
+            // Keep a reference to the ad so you can show it later.
+            _interstitialAd = ad;
+          },
+          onAdFailedToLoad: (LoadAdError error) {
+            print('InterstitialAd failed to load: $error');
+          },
+        ));
+  }
 
   bool _isValid() {
     final username = _usernameController.text;
