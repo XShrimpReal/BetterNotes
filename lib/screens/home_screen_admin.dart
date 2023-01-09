@@ -191,44 +191,43 @@ class _AdminScreenState extends State<AdminScreen> {
           ),
           const SizedBox(height: 3),
           Padding(
-            padding: const EdgeInsets.symmetric(horizontal: 5),
-            child: Container(
-              height: 50,
-              decoration: BoxDecoration(
-                borderRadius: BorderRadius.circular(20),
-                color: const Color(0xFF463F3B),
-              ),
-              child: TextButton(
-                onPressed: () {
-                  Navigator.push(
-                    context,
-                    MaterialPageRoute(
-                        builder: (context) =>
-                            AdminScreen(backgroundColor: backgroundColor)),
-                  );
-                },
-                child: Row(
-                  children: [
-                    const Icon(
-                      CupertinoIcons.home,
-                      size: 25,
-                      color: Colors.white,
-                    ),
-                    const SizedBox(
-                      width: 9,
-                    ),
-                    Text(
-                      "Homepage",
-                      style: GoogleFonts.roboto(
-                          color: Colors.white,
-                          fontWeight: FontWeight.bold,
-                          fontSize: 18),
-                    ),
-                  ],
+              padding: const EdgeInsets.symmetric(horizontal: 8),
+              child: Container(
+                height: 50,
+                decoration: BoxDecoration(
+                    borderRadius: BorderRadius.circular(20),
+                    color: const Color(0xFF463F3B)),
+                child: TextButton(
+                  onPressed: () {
+                    Navigator.push(
+                      context,
+                      MaterialPageRoute(
+                          builder: (context) =>
+                              AdminScreen(backgroundColor: backgroundColor)),
+                    );
+                  },
+                  child: Row(
+                    children: [
+                      const SizedBox(width: 3),
+                      const Icon(
+                        CupertinoIcons.home,
+                        size: 25,
+                        color: Colors.white,
+                      ),
+                      const SizedBox(
+                        width: 9,
+                      ),
+                      Text(
+                        "Homepage",
+                        style: GoogleFonts.roboto(
+                            color: Colors.white,
+                            fontWeight: FontWeight.bold,
+                            fontSize: 18),
+                      ),
+                    ],
+                  ),
                 ),
-              ),
-            ),
-          ),
+              )),
           Row(
             mainAxisAlignment: MainAxisAlignment.start,
             children: [
