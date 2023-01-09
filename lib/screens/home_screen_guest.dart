@@ -32,6 +32,7 @@ import 'package:BetterNotes/subjects/PHENGR/guest_Qphe.dart';
 import 'package:BetterNotes/subjects/PURCOM/guest_Apur.dart';
 import 'package:BetterNotes/subjects/PURCOM/guest_Epur.dart';
 import 'package:BetterNotes/subjects/PURCOM/guest_Qpur.dart';
+import 'package:BetterNotes/subjects/TODO/todo_screen_guest.dart';
 import 'package:BetterNotes/widgets/admin_card.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
@@ -801,6 +802,16 @@ class _GuestScreenState extends State<GuestScreen> {
                     );
                   },
                   icon: const Icon(Icons.exit_to_app_outlined)),
+              IconButton(
+                  onPressed: () {
+                    Navigator.push(
+                      context,
+                      MaterialPageRoute(
+                          builder: (context) => TODOGuestScreen(
+                              backgroundColor: backgroundColor)),
+                    );
+                  },
+                  icon: const Icon(Icons.calendar_month_outlined)),
               IconButton(
                   onPressed: _showLoginDialog,
                   icon: const Icon(
