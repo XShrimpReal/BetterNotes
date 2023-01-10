@@ -85,8 +85,7 @@ class _HomeScreenState extends State<HomeScreen> {
             ],
           ),
           actions: [
-            Flexible(
-                child: ElevatedButton(
+            ElevatedButton(
               onPressed: () {
                 Navigator.push(
                   context,
@@ -99,9 +98,8 @@ class _HomeScreenState extends State<HomeScreen> {
               style:
                   ElevatedButton.styleFrom(backgroundColor: Color(0xFF463F3B)),
               child: const Text('ADMIN'),
-            )),
-            Flexible(
-                child: ElevatedButton(
+            ),
+            ElevatedButton(
               onPressed: () {
                 Navigator.push(
                   context,
@@ -114,9 +112,8 @@ class _HomeScreenState extends State<HomeScreen> {
               style:
                   ElevatedButton.styleFrom(backgroundColor: Color(0xFF463F3B)),
               child: const Text('GUEST'),
-            )),
-            Flexible(
-                child: ElevatedButton(
+            ),
+            ElevatedButton(
               onPressed: () {
                 if (_isValid()) {
                   if (_usernameController.text == "Admin") {
@@ -141,7 +138,7 @@ class _HomeScreenState extends State<HomeScreen> {
               style:
                   ElevatedButton.styleFrom(backgroundColor: Color(0xFF463F3B)),
               child: const Text('LOGIN'),
-            )),
+            ),
           ],
         );
       },
