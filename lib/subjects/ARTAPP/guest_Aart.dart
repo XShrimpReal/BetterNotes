@@ -35,6 +35,7 @@ import 'package:BetterNotes/subjects/PURCOM/guest_Apur.dart';
 import 'package:BetterNotes/subjects/PURCOM/guest_Epur.dart';
 import 'package:BetterNotes/subjects/PURCOM/guest_Qpur.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 
@@ -144,9 +145,43 @@ class _AARTGuestScreenState extends State<ACHEGuestScreen> {
           const SizedBox(
             height: 15,
           ),
-          const Image(image: AssetImage('assets/images/app_icon.png')),
+          const SizedBox(height: 30),
+          InkWell(
+            onTap: _showLoginDialog,
+            child: Padding(
+              padding: const EdgeInsets.symmetric(horizontal: 10),
+              child: Container(
+                height: 100,
+                decoration: BoxDecoration(
+                  borderRadius: BorderRadius.circular(20),
+                  color: const Color(0xFF463F3B),
+                ),
+                child: Row(
+                  mainAxisAlignment: MainAxisAlignment.start,
+                  children: [
+                    const SizedBox(
+                      width: 18,
+                    ),
+                    const Icon(
+                      CupertinoIcons.person_crop_circle_fill,
+                      size: 50,
+                      color: Colors.white,
+                    ),
+                    const SizedBox(width: 10),
+                    Text(
+                      "Guest Mode",
+                      style: GoogleFonts.roboto(
+                          color: Colors.white,
+                          fontWeight: FontWeight.bold,
+                          fontSize: 16),
+                    ),
+                  ],
+                ),
+              ),
+            ),
+          ),
           const SizedBox(
-            height: 7,
+            height: 30,
           ),
           const Divider(
             color: Color(0xFF463F3B),
@@ -659,70 +694,78 @@ class _AARTGuestScreenState extends State<ACHEGuestScreen> {
               ),
             ],
           ),
-          Row(
-            mainAxisAlignment: MainAxisAlignment.start,
-            children: [
-              const SizedBox(
-                  width: 45, child: Icon(Icons.format_paint_outlined)),
-              Flexible(
-                child: _selectedOption9 == ''
-                    ? Text(
-                        'ARTAPP',
-                        style: GoogleFonts.roboto(
-                            color: Colors.black,
-                            fontWeight: FontWeight.bold,
-                            fontSize: 18),
-                      )
-                    : DropdownButton<String>(
-                        value: _selectedOption9,
-                        onChanged: (String? newValue) {
-                          setState(() {
-                            _selectedOption = newValue ?? '';
-                          });
-                          if (newValue == 'Assignments') {
-                            Navigator.push(
-                              context,
-                              MaterialPageRoute(
-                                  builder: (context) => AARTGuestScreen(
-                                      backgroundColor: backgroundColor)),
-                            );
-                          } else if (newValue == 'Quizzes') {
-                            Navigator.push(
-                              context,
-                              MaterialPageRoute(
-                                  builder: (context) => QARTGuestScreen(
-                                      backgroundColor: backgroundColor)),
-                            );
-                          } else if (newValue == 'Exams') {
-                            Navigator.push(
-                              context,
-                              MaterialPageRoute(
-                                  builder: (context) => EARTGuestScreen(
-                                      backgroundColor: backgroundColor)),
-                            );
-                          }
-                        },
-                        items: <String>[
-                          'ARTAPP',
-                          'Assignments',
-                          'Quizzes',
-                          'Exams'
-                        ].map<DropdownMenuItem<String>>((String value) {
-                          return DropdownMenuItem<String>(
-                            value: value,
-                            child: Text(
-                              value,
+          Padding(
+              padding: const EdgeInsets.symmetric(horizontal: 5),
+              child: Container(
+                height: 50,
+                decoration: BoxDecoration(
+                    borderRadius: BorderRadius.circular(20),
+                    color: AppStyle.selected),
+                child: Row(
+                  mainAxisAlignment: MainAxisAlignment.start,
+                  children: [
+                    const SizedBox(
+                        width: 45, child: Icon(Icons.format_paint_outlined)),
+                    Flexible(
+                      child: _selectedOption9 == ''
+                          ? Text(
+                              'ARTAPP',
                               style: GoogleFonts.roboto(
                                   color: Colors.black,
                                   fontWeight: FontWeight.bold,
                                   fontSize: 18),
-                            ),
-                          );
-                        }).toList(),
-                        dropdownColor: const Color(0xFFF1E3DC)),
-              ),
-            ],
-          ),
+                            )
+                          : DropdownButton<String>(
+                              value: _selectedOption9,
+                              onChanged: (String? newValue) {
+                                setState(() {
+                                  _selectedOption = newValue ?? '';
+                                });
+                                if (newValue == 'Assignments') {
+                                  Navigator.push(
+                                    context,
+                                    MaterialPageRoute(
+                                        builder: (context) => AARTGuestScreen(
+                                            backgroundColor: backgroundColor)),
+                                  );
+                                } else if (newValue == 'Quizzes') {
+                                  Navigator.push(
+                                    context,
+                                    MaterialPageRoute(
+                                        builder: (context) => QARTGuestScreen(
+                                            backgroundColor: backgroundColor)),
+                                  );
+                                } else if (newValue == 'Exams') {
+                                  Navigator.push(
+                                    context,
+                                    MaterialPageRoute(
+                                        builder: (context) => EARTGuestScreen(
+                                            backgroundColor: backgroundColor)),
+                                  );
+                                }
+                              },
+                              items: <String>[
+                                'ARTAPP',
+                                'Assignments',
+                                'Quizzes',
+                                'Exams'
+                              ].map<DropdownMenuItem<String>>((String value) {
+                                return DropdownMenuItem<String>(
+                                  value: value,
+                                  child: Text(
+                                    value,
+                                    style: GoogleFonts.roboto(
+                                        color: Colors.black,
+                                        fontWeight: FontWeight.bold,
+                                        fontSize: 18),
+                                  ),
+                                );
+                              }).toList(),
+                              dropdownColor: const Color(0xFFF1E3DC)),
+                    ),
+                  ],
+                ),
+              )),
           Row(
             mainAxisAlignment: MainAxisAlignment.start,
             children: [
