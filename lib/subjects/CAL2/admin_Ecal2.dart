@@ -221,73 +221,90 @@ class _ECALAdminCALScreenState extends State<ECALAdminCALScreen> {
               ],
             ),
           ),
-          Row(
-            mainAxisAlignment: MainAxisAlignment.start,
-            children: [
-              const SizedBox(width: 45, child: Icon(Icons.calculate_outlined)),
-              Flexible(
-                child: _selectedOption == ''
-                    ? Text(
-                        'CALCU2',
-                        style: GoogleFonts.roboto(
-                            color: Colors.black,
-                            fontWeight: FontWeight.bold,
-                            fontSize: 18),
-                      )
-                    : DropdownButton<String>(
-                        value: _selectedOption,
-                        onChanged: (String? newValue) {
-                          setState(() {
-                            _selectedOption = newValue ?? '';
-                          });
-                          const Divider(
-                            height: 1000,
-                          );
-                          if (newValue == 'Assignments') {
-                            Navigator.push(
-                              context,
-                              MaterialPageRoute(
-                                  builder: (context) => AdminCALScreen(
-                                      backgroundColor: backgroundColor)),
-                            );
-                          } else if (newValue == 'Quizzes') {
-                            Navigator.push(
-                              context,
-                              MaterialPageRoute(
-                                  builder: (context) => QCALAdminCALScreen(
-                                      backgroundColor: backgroundColor)),
-                            );
-                          } else if (newValue == 'Exams') {
-                            Navigator.push(
-                              context,
-                              MaterialPageRoute(
-                                  builder: (context) => ECALAdminCALScreen(
-                                      backgroundColor: backgroundColor)),
-                            );
-                          }
-                        },
-                        items: <String>[
-                          'CALCU2',
-                          'Assignments',
-                          'Quizzes',
-                          'Exams'
-                        ].map<DropdownMenuItem<String>>((String value) {
-                          return DropdownMenuItem<String>(
-                            value: value,
-                            child: Text(
-                              value,
+          Padding(
+              padding: const EdgeInsets.symmetric(horizontal: 5),
+              child: Container(
+                height: 50,
+                decoration: BoxDecoration(
+                    borderRadius: BorderRadius.circular(20),
+                    color: const Color(0xFF463F3B)),
+                child: Row(
+                  mainAxisAlignment: MainAxisAlignment.start,
+                  children: [
+                    const SizedBox(
+                        width: 45,
+                        child: Icon(
+                          Icons.calculate_outlined,
+                          color: Colors.white,
+                        )),
+                    Flexible(
+                      child: _selectedOption == ''
+                          ? Text(
+                              'CALCU2',
                               style: GoogleFonts.roboto(
                                   color: Colors.black,
                                   fontWeight: FontWeight.bold,
                                   fontSize: 18),
+                            )
+                          : DropdownButton<String>(
+                              value: _selectedOption,
+                              onChanged: (String? newValue) {
+                                setState(() {
+                                  _selectedOption = newValue ?? '';
+                                });
+                                const Divider(
+                                  height: 1000,
+                                );
+                                if (newValue == 'Assignments') {
+                                  Navigator.push(
+                                    context,
+                                    MaterialPageRoute(
+                                        builder: (context) => AdminCALScreen(
+                                            backgroundColor: backgroundColor)),
+                                  );
+                                } else if (newValue == 'Quizzes') {
+                                  Navigator.push(
+                                    context,
+                                    MaterialPageRoute(
+                                        builder: (context) =>
+                                            QCALAdminCALScreen(
+                                                backgroundColor:
+                                                    backgroundColor)),
+                                  );
+                                } else if (newValue == 'Exams') {
+                                  Navigator.push(
+                                    context,
+                                    MaterialPageRoute(
+                                        builder: (context) =>
+                                            ECALAdminCALScreen(
+                                                backgroundColor:
+                                                    backgroundColor)),
+                                  );
+                                }
+                              },
+                              items: <String>[
+                                'CALCU2',
+                                'Assignments',
+                                'Quizzes',
+                                'Exams'
+                              ].map<DropdownMenuItem<String>>((String value) {
+                                return DropdownMenuItem<String>(
+                                  value: value,
+                                  child: Text(
+                                    value,
+                                    style: GoogleFonts.roboto(
+                                        color: Colors.white,
+                                        fontWeight: FontWeight.bold,
+                                        fontSize: 18),
+                                  ),
+                                );
+                              }).toList(),
+                              dropdownColor: const Color(0xFFF1E3DC),
                             ),
-                          );
-                        }).toList(),
-                        dropdownColor: const Color(0xFFF1E3DC),
-                      ),
-              ),
-            ],
-          ),
+                    ),
+                  ],
+                ),
+              )),
           Row(
             mainAxisAlignment: MainAxisAlignment.start,
             children: [

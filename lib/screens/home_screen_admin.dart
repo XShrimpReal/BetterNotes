@@ -196,7 +196,7 @@ class _AdminScreenState extends State<AdminScreen> {
                 height: 50,
                 decoration: BoxDecoration(
                     borderRadius: BorderRadius.circular(20),
-                    color: const Color(0xFF463F3B)),
+                    color: AppStyle.selected),
                 child: TextButton(
                   onPressed: () {
                     Navigator.push(
@@ -212,7 +212,7 @@ class _AdminScreenState extends State<AdminScreen> {
                       const Icon(
                         CupertinoIcons.home,
                         size: 25,
-                        color: Colors.white,
+                        color: Colors.black,
                       ),
                       const SizedBox(
                         width: 9,
@@ -220,7 +220,7 @@ class _AdminScreenState extends State<AdminScreen> {
                       Text(
                         "Homepage",
                         style: GoogleFonts.roboto(
-                            color: Colors.white,
+                            color: Colors.black,
                             fontWeight: FontWeight.bold,
                             fontSize: 18),
                       ),

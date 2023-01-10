@@ -8,6 +8,7 @@ class AppStyle {
   static Color bgColor = const Color(0xffffffff);
   static Color mainColor = const Color(0xff000000);
   static Color accentColor = const Color(0xFFB4A9A3);
+  static Color selected = const Color(0xFFC9B9B0);
 
   // Setting the Cards different Color
 
