@@ -227,7 +227,7 @@ class _ECALAdminCALScreenState extends State<ECALAdminCALScreen> {
                 height: 50,
                 decoration: BoxDecoration(
                     borderRadius: BorderRadius.circular(20),
-                    color: const Color(0xFF463F3B)),
+                    color: AppStyle.selected),
                 child: Row(
                   mainAxisAlignment: MainAxisAlignment.start,
                   children: [
@@ -235,7 +235,7 @@ class _ECALAdminCALScreenState extends State<ECALAdminCALScreen> {
                         width: 45,
                         child: Icon(
                           Icons.calculate_outlined,
-                          color: Colors.white,
+                          color: Colors.black,
                         )),
                     Flexible(
                       child: _selectedOption == ''
@@ -293,7 +293,7 @@ class _ECALAdminCALScreenState extends State<ECALAdminCALScreen> {
                                   child: Text(
                                     value,
                                     style: GoogleFonts.roboto(
-                                        color: Colors.white,
+                                        color: Colors.black,
                                         fontWeight: FontWeight.bold,
                                         fontSize: 18),
                                   ),

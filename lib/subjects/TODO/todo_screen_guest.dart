@@ -171,7 +171,7 @@ class _TODOGuestScreenState extends State<TODOGuestScreen> {
                     ),
                     const SizedBox(width: 10),
                     Text(
-                      "Admin Mode",
+                      "Guest Mode",
                       style: GoogleFonts.roboto(
                           color: Colors.white,
                           fontWeight: FontWeight.bold,
@@ -196,7 +196,7 @@ class _TODOGuestScreenState extends State<TODOGuestScreen> {
                 context,
                 MaterialPageRoute(
                     builder: (context) =>
-                        AdminScreen(backgroundColor: backgroundColor)),
+                        GuestScreen(backgroundColor: backgroundColor)),
               );
             },
             child: Row(

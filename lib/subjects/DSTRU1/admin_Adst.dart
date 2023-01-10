@@ -424,63 +424,68 @@ class _AdminDSTScreenState extends State<AdminDSTScreen> {
                 child: Row(
                   mainAxisAlignment: MainAxisAlignment.start,
                   children: [
-                    const SizedBox(width: 45, child: Icon(Icons.laptop_mac_rounded)),
+                    const SizedBox(
+                        width: 45, child: Icon(Icons.laptop_mac_rounded)),
                     Flexible(
                       child: _selectedOption4 == ''
                           ? Text(
-                        'DSTRU1',
-                        style: GoogleFonts.roboto(
-                            color: Colors.black,
-                            fontWeight: FontWeight.bold,
-                            fontSize: 18),
-                      )
+                              'DSTRU1',
+                              style: GoogleFonts.roboto(
+                                  color: Colors.black,
+                                  fontWeight: FontWeight.bold,
+                                  fontSize: 18),
+                            )
                           : DropdownButton<String>(
-                          value: _selectedOption4,
-                          onChanged: (String? newValue) {
-                            setState(() {
-                              _selectedOption = newValue ?? '';
-                            });
-                            if (newValue == 'Assignments') {
-                              Navigator.push(
-                                context,
-                                MaterialPageRoute(
-                                    builder: (context) => AdminDSTScreen(
-                                        backgroundColor: backgroundColor)),
-                              );
-                            } else if (newValue == 'Quizzes') {
-                              Navigator.push(
-                                context,
-                                MaterialPageRoute(
-                                    builder: (context) => QDSTAdminCALScreen(
-                                        backgroundColor: backgroundColor)),
-                              );
-                            } else if (newValue == 'Exams') {
-                              Navigator.push(
-                                context,
-                                MaterialPageRoute(
-                                    builder: (context) => EDSTAdminCALScreen(
-                                        backgroundColor: backgroundColor)),
-                              );
-                            }
-                          },
-                          items: <String>[
-                            'DSTRU1',
-                            'Assignments',
-                            'Quizzes',
-                            'Exams'
-                          ].map<DropdownMenuItem<String>>((String value) {
-                            return DropdownMenuItem<String>(
-                              value: value,
-                              child: Text(
-                                value,
-                                style: GoogleFonts.roboto(
-                                    color: Colors.black,
-                                    fontWeight: FontWeight.bold,
-                                    fontSize: 18),
-                              ),
-                            );
-                          }).toList(),
-                          dropdownColor: const Color(0xFFF1E3DC)),
+                              value: _selectedOption4,
+                              onChanged: (String? newValue) {
+                                setState(() {
+                                  _selectedOption = newValue ?? '';
+                                });
+                                if (newValue == 'Assignments') {
+                                  Navigator.push(
+                                    context,
+                                    MaterialPageRoute(
+                                        builder: (context) => AdminDSTScreen(
+                                            backgroundColor: backgroundColor)),
+                                  );
+                                } else if (newValue == 'Quizzes') {
+                                  Navigator.push(
+                                    context,
+                                    MaterialPageRoute(
+                                        builder: (context) =>
+                                            QDSTAdminCALScreen(
+                                                backgroundColor:
+                                                    backgroundColor)),
+                                  );
+                                } else if (newValue == 'Exams') {
+                                  Navigator.push(
+                                    context,
+                                    MaterialPageRoute(
+                                        builder: (context) =>
+                                            EDSTAdminCALScreen(
+                                                backgroundColor:
+                                                    backgroundColor)),
+                                  );
+                                }
+                              },
+                              items: <String>[
+                                'DSTRU1',
+                                'Assignments',
+                                'Quizzes',
+                                'Exams'
+                              ].map<DropdownMenuItem<String>>((String value) {
+                                return DropdownMenuItem<String>(
+                                  value: value,
+                                  child: Text(
+                                    value,
+                                    style: GoogleFonts.roboto(
+                                        color: Colors.black,
+                                        fontWeight: FontWeight.bold,
+                                        fontSize: 18),
+                                  ),
+                                );
+                              }).toList(),
+                              dropdownColor: const Color(0xFFF1E3DC)),
                     ),
                   ],
                 ),

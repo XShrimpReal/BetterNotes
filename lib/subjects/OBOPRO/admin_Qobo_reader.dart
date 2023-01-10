@@ -115,7 +115,7 @@ class _QOBOAdminReaderScreenState extends State<QOBOAdminReaderScreen> {
   void initState() {
     super.initState();
     _mainController =
-        TextEditingController(text: widget.doc['QCALnote_content']);
+        TextEditingController(text: widget.doc['QOBOnote_content']);
     _mainController.addListener(() {
       // Add the current text as an action to the history
       _addAction(_titleController.text, _mainController.text);
@@ -123,7 +123,7 @@ class _QOBOAdminReaderScreenState extends State<QOBOAdminReaderScreen> {
 
     super.initState();
     _titleController =
-        TextEditingController(text: widget.doc['QCALnote_title']);
+        TextEditingController(text: widget.doc['QOBOnote_title']);
     _titleController.addListener(() {
       // Add the current text as an action to the history
       _addAction(_titleController.text, _mainController.text);

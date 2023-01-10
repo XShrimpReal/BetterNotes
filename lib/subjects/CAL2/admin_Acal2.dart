@@ -189,14 +189,13 @@ class _AdminCALScreenState extends State<AdminCALScreen> {
             color: Color(0xFF463F3B),
             thickness: 2,
           ),
-          const SizedBox(height: 3),
           TextButton(
             onPressed: () {
               Navigator.push(
                 context,
                 MaterialPageRoute(
                     builder: (context) =>
-                        AdminScreen(backgroundColor: backgroundColor)),
+                        GuestScreen(backgroundColor: backgroundColor)),
               );
             },
             child: Row(

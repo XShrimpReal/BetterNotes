@@ -78,7 +78,7 @@ class _APURGuestReaderScreenState extends State<APURGuestReaderScreen> {
                   child: RichText(
                     text: TextSpan(
                       style: AppStyle.mainContent.copyWith(color: Colors.black),
-                      text: widget.doc['APEDnote_content'] as String,
+                      text: widget.doc['APURnote_content'] as String,
                     ),
                   ),
                 ),

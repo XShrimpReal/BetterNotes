@@ -34,6 +34,7 @@ import 'package:BetterNotes/subjects/PURCOM/Epur_card.dart';
 import 'package:BetterNotes/subjects/PURCOM/guest_Apur.dart';
 import 'package:BetterNotes/subjects/PURCOM/guest_Epur_reader.dart';
 import 'package:BetterNotes/subjects/PURCOM/guest_Qpur.dart';
+import 'package:BetterNotes/subjects/TODO/todo_screen_guest.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
@@ -186,6 +187,36 @@ class _EPURGuestScreenState extends State<EPURGuestScreen> {
           const Divider(
             color: Color(0xFF463F3B),
             thickness: 2,
+          ),
+          TextButton(
+            onPressed: () {
+              Navigator.push(
+                context,
+                MaterialPageRoute(
+                    builder: (context) =>
+                        GuestScreen(backgroundColor: backgroundColor)),
+              );
+            },
+            child: Row(
+              children: [
+                const SizedBox(width: 3),
+                const Icon(
+                  CupertinoIcons.home,
+                  size: 25,
+                  color: Colors.black,
+                ),
+                const SizedBox(
+                  width: 9,
+                ),
+                Text(
+                  "Homepage",
+                  style: GoogleFonts.roboto(
+                      color: Colors.black,
+                      fontWeight: FontWeight.bold,
+                      fontSize: 18),
+                ),
+              ],
+            ),
           ),
           Row(
             mainAxisAlignment: MainAxisAlignment.start,
@@ -504,69 +535,77 @@ class _EPURGuestScreenState extends State<EPURGuestScreen> {
               ),
             ],
           ),
-          Row(
-            mainAxisAlignment: MainAxisAlignment.start,
-            children: [
-              const SizedBox(width: 45, child: Icon(Icons.comment)),
-              Flexible(
-                child: _selectedOption6 == ''
-                    ? Text(
-                        'PURCOM',
-                        style: GoogleFonts.roboto(
-                            color: Colors.black,
-                            fontWeight: FontWeight.bold,
-                            fontSize: 18),
-                      )
-                    : DropdownButton<String>(
-                        value: _selectedOption6,
-                        onChanged: (String? newValue) {
-                          setState(() {
-                            _selectedOption = newValue ?? '';
-                          });
-                          if (newValue == 'Assignments') {
-                            Navigator.push(
-                              context,
-                              MaterialPageRoute(
-                                  builder: (context) => APURGuestScreen(
-                                      backgroundColor: backgroundColor)),
-                            );
-                          } else if (newValue == 'Quizzes') {
-                            Navigator.push(
-                              context,
-                              MaterialPageRoute(
-                                  builder: (context) => QPURGuestScreen(
-                                      backgroundColor: backgroundColor)),
-                            );
-                          } else if (newValue == 'Exams') {
-                            Navigator.push(
-                              context,
-                              MaterialPageRoute(
-                                  builder: (context) => EPURGuestScreen(
-                                      backgroundColor: backgroundColor)),
-                            );
-                          }
-                        },
-                        items: <String>[
-                          'PURCOM',
-                          'Assignments',
-                          'Quizzes',
-                          'Exams'
-                        ].map<DropdownMenuItem<String>>((String value) {
-                          return DropdownMenuItem<String>(
-                            value: value,
-                            child: Text(
-                              value,
+          Padding(
+              padding: const EdgeInsets.symmetric(horizontal: 5),
+              child: Container(
+                height: 50,
+                decoration: BoxDecoration(
+                    borderRadius: BorderRadius.circular(20),
+                    color: AppStyle.selected),
+                child: Row(
+                  mainAxisAlignment: MainAxisAlignment.start,
+                  children: [
+                    const SizedBox(width: 45, child: Icon(Icons.comment)),
+                    Flexible(
+                      child: _selectedOption6 == ''
+                          ? Text(
+                              'PURCOM',
                               style: GoogleFonts.roboto(
                                   color: Colors.black,
                                   fontWeight: FontWeight.bold,
                                   fontSize: 18),
-                            ),
-                          );
-                        }).toList(),
-                        dropdownColor: const Color(0xFFF1E3DC)),
-              ),
-            ],
-          ),
+                            )
+                          : DropdownButton<String>(
+                              value: _selectedOption6,
+                              onChanged: (String? newValue) {
+                                setState(() {
+                                  _selectedOption = newValue ?? '';
+                                });
+                                if (newValue == 'Assignments') {
+                                  Navigator.push(
+                                    context,
+                                    MaterialPageRoute(
+                                        builder: (context) => APURGuestScreen(
+                                            backgroundColor: backgroundColor)),
+                                  );
+                                } else if (newValue == 'Quizzes') {
+                                  Navigator.push(
+                                    context,
+                                    MaterialPageRoute(
+                                        builder: (context) => QPURGuestScreen(
+                                            backgroundColor: backgroundColor)),
+                                  );
+                                } else if (newValue == 'Exams') {
+                                  Navigator.push(
+                                    context,
+                                    MaterialPageRoute(
+                                        builder: (context) => EPURGuestScreen(
+                                            backgroundColor: backgroundColor)),
+                                  );
+                                }
+                              },
+                              items: <String>[
+                                'PURCOM',
+                                'Assignments',
+                                'Quizzes',
+                                'Exams'
+                              ].map<DropdownMenuItem<String>>((String value) {
+                                return DropdownMenuItem<String>(
+                                  value: value,
+                                  child: Text(
+                                    value,
+                                    style: GoogleFonts.roboto(
+                                        color: Colors.black,
+                                        fontWeight: FontWeight.bold,
+                                        fontSize: 18),
+                                  ),
+                                );
+                              }).toList(),
+                              dropdownColor: const Color(0xFFF1E3DC)),
+                    ),
+                  ],
+                ),
+              )),
           Row(
             mainAxisAlignment: MainAxisAlignment.start,
             children: [
@@ -821,26 +860,94 @@ class _EPURGuestScreenState extends State<EPURGuestScreen> {
               ),
             ],
           ),
-          const SizedBox(height: 81),
+          const SizedBox(
+            height: 70,
+          ),
+          const Divider(
+            color: Color(0xFF463F3B),
+            thickness: 2,
+          ),
           Row(
-            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+            mainAxisAlignment: MainAxisAlignment.center,
             children: [
-              IconButton(
-                  onPressed: () {
-                    Navigator.push(
-                      context,
-                      MaterialPageRoute(
-                          builder: (context) =>
-                              HomeScreen(backgroundColor: backgroundColor)),
-                    );
-                  },
-                  icon: const Icon(Icons.exit_to_app_outlined)),
-              IconButton(
-                  onPressed: _showLoginDialog,
-                  icon: const Icon(
-                    Icons.supervised_user_circle_outlined,
-                    size: 30,
-                  )),
+              Padding(
+                padding: const EdgeInsets.symmetric(horizontal: 5),
+                child: Container(
+                  height: 50,
+                  decoration: BoxDecoration(
+                    borderRadius: BorderRadius.circular(20),
+                    color: const Color(0xFF463F3B),
+                  ),
+                  child: TextButton(
+                    onPressed: () {
+                      Navigator.push(
+                        context,
+                        MaterialPageRoute(
+                            builder: (context) =>
+                                HomeScreen(backgroundColor: backgroundColor)),
+                      );
+                    },
+                    child: Row(
+                      children: [
+                        const Icon(
+                          CupertinoIcons.back,
+                          size: 35,
+                          color: Colors.white,
+                        ),
+                        const SizedBox(
+                          width: 5,
+                        ),
+                        Text(
+                          "EXIT",
+                          style: GoogleFonts.roboto(
+                              color: Colors.white,
+                              fontWeight: FontWeight.bold,
+                              fontSize: 16),
+                        ),
+                      ],
+                    ),
+                  ),
+                ),
+              ),
+              Padding(
+                padding: const EdgeInsets.symmetric(horizontal: 5),
+                child: Container(
+                  height: 50,
+                  decoration: BoxDecoration(
+                    borderRadius: BorderRadius.circular(20),
+                    color: const Color(0xFF463F3B),
+                  ),
+                  child: TextButton(
+                    onPressed: () {
+                      Navigator.push(
+                        context,
+                        MaterialPageRoute(
+                            builder: (context) => TODOGuestScreen(
+                                backgroundColor: backgroundColor)),
+                      );
+                    },
+                    child: Row(
+                      children: [
+                        const Icon(
+                          CupertinoIcons.calendar,
+                          size: 35,
+                          color: Colors.white,
+                        ),
+                        const SizedBox(
+                          width: 5,
+                        ),
+                        Text(
+                          "TODO",
+                          style: GoogleFonts.roboto(
+                              color: Colors.white,
+                              fontWeight: FontWeight.bold,
+                              fontSize: 16),
+                        ),
+                      ],
+                    ),
+                  ),
+                ),
+              ),
             ],
           )
         ],

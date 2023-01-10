@@ -50,7 +50,6 @@ Widget noteCard(Function()? onTap, QueryDocumentSnapshot doc) {
           Text(
             doc["note_content"],
             style: AppStyle.mainContent,
-            overflow: TextOverflow.ellipsis,
             maxLines: null,
           ),
         ],

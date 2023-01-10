@@ -28,11 +28,11 @@ class _QOBOGuestReaderScreenState extends State<QOBOGuestReaderScreen> {
   void initState() {
     super.initState();
     _mainController =
-        TextEditingController(text: widget.doc['QCALnote_content']);
+        TextEditingController(text: widget.doc['QOBOnote_content']);
 
     super.initState();
     _titleController =
-        TextEditingController(text: widget.doc['QCALnote_title']);
+        TextEditingController(text: widget.doc['QOBOnote_title']);
   }
 
   @override
@@ -42,16 +42,16 @@ class _QOBOGuestReaderScreenState extends State<QOBOGuestReaderScreen> {
       return Container();
     }
 
-    var color_id = widget.doc['QCALcolor_id'];
+    var color_id = widget.doc['QOBOcolor_id'];
 
     return WillPopScope(
         onWillPop: () async {
           await FirebaseFirestore.instance
-              .collection('QCALnotes')
+              .collection('QOBOnotes')
               .doc(widget.doc.id)
               .update({
-            'QCALnote_content': _mainController.text,
-            'QCALnote_title': _titleController.text
+            'QOBOnote_content': _mainController.text,
+            'QOBOnote_title': _titleController.text
           });
           return true;
         },
@@ -64,7 +64,7 @@ class _QOBOGuestReaderScreenState extends State<QOBOGuestReaderScreen> {
             title: RichText(
               text: TextSpan(
                 style: AppStyle.mainTitle.copyWith(color: Colors.black),
-                text: widget.doc['QCALnote_title'] as String,
+                text: widget.doc['QOBOnote_title'] as String,
               ),
             ),
             actions: [],
@@ -78,7 +78,7 @@ class _QOBOGuestReaderScreenState extends State<QOBOGuestReaderScreen> {
                   child: RichText(
                     text: TextSpan(
                       style: AppStyle.mainContent.copyWith(color: Colors.black),
-                      text: widget.doc['QCALnote_content'] as String,
+                      text: widget.doc['QOBOnote_content'] as String,
                     ),
                   ),
                 ),

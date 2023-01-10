@@ -12,10 +12,10 @@ import 'package:BetterNotes/subjects/CAL2/guest_Qcal2.dart';
 import 'package:BetterNotes/subjects/CHENGR/guest_Ache.dart';
 import 'package:BetterNotes/subjects/CHENGR/guest_Eche.dart';
 import 'package:BetterNotes/subjects/CHENGR/guest_Qche.dart';
+import 'package:BetterNotes/subjects/DSTRU1/Edst_card.dart';
 import 'package:BetterNotes/subjects/DSTRU1/guest_Adst.dart';
 import 'package:BetterNotes/subjects/DSTRU1/guest_Edst_reader.dart';
 import 'package:BetterNotes/subjects/DSTRU1/guest_Qdst.dart';
-import 'package:BetterNotes/subjects/ENGIDA/Eeng_card.dart';
 import 'package:BetterNotes/subjects/ENGIDA/guest_Aeng.dart';
 import 'package:BetterNotes/subjects/ENGIDA/guest_Eeng.dart';
 import 'package:BetterNotes/subjects/ENGIDA/guest_Qeng.dart';
@@ -34,6 +34,7 @@ import 'package:BetterNotes/subjects/PHENGR/guest_Qphe.dart';
 import 'package:BetterNotes/subjects/PURCOM/guest_Apur.dart';
 import 'package:BetterNotes/subjects/PURCOM/guest_Epur.dart';
 import 'package:BetterNotes/subjects/PURCOM/guest_Qpur.dart';
+import 'package:BetterNotes/subjects/TODO/todo_screen_guest.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
@@ -186,6 +187,36 @@ class _EDSTGuestScreenState extends State<EDSTGuestScreen> {
           const Divider(
             color: Color(0xFF463F3B),
             thickness: 2,
+          ),
+          TextButton(
+            onPressed: () {
+              Navigator.push(
+                context,
+                MaterialPageRoute(
+                    builder: (context) =>
+                        GuestScreen(backgroundColor: backgroundColor)),
+              );
+            },
+            child: Row(
+              children: [
+                const SizedBox(width: 3),
+                const Icon(
+                  CupertinoIcons.home,
+                  size: 25,
+                  color: Colors.black,
+                ),
+                const SizedBox(
+                  width: 9,
+                ),
+                Text(
+                  "Homepage",
+                  style: GoogleFonts.roboto(
+                      color: Colors.black,
+                      fontWeight: FontWeight.bold,
+                      fontSize: 18),
+                ),
+              ],
+            ),
           ),
           Row(
             mainAxisAlignment: MainAxisAlignment.start,
@@ -378,69 +409,78 @@ class _EDSTGuestScreenState extends State<EDSTGuestScreen> {
               ),
             ],
           ),
-          Row(
-            mainAxisAlignment: MainAxisAlignment.start,
-            children: [
-              const SizedBox(width: 45, child: Icon(Icons.laptop_mac_rounded)),
-              Flexible(
-                child: _selectedOption4 == ''
-                    ? Text(
-                        'DSTRU1',
-                        style: GoogleFonts.roboto(
-                            color: Colors.black,
-                            fontWeight: FontWeight.bold,
-                            fontSize: 18),
-                      )
-                    : DropdownButton<String>(
-                        value: _selectedOption4,
-                        onChanged: (String? newValue) {
-                          setState(() {
-                            _selectedOption = newValue ?? '';
-                          });
-                          if (newValue == 'Assignments') {
-                            Navigator.push(
-                              context,
-                              MaterialPageRoute(
-                                  builder: (context) => ADSTGuestScreen(
-                                      backgroundColor: backgroundColor)),
-                            );
-                          } else if (newValue == 'Quizzes') {
-                            Navigator.push(
-                              context,
-                              MaterialPageRoute(
-                                  builder: (context) => QDSTGuestScreen(
-                                      backgroundColor: backgroundColor)),
-                            );
-                          } else if (newValue == 'Exams') {
-                            Navigator.push(
-                              context,
-                              MaterialPageRoute(
-                                  builder: (context) => EDSTGuestScreen(
-                                      backgroundColor: backgroundColor)),
-                            );
-                          }
-                        },
-                        items: <String>[
-                          'DSTRU1',
-                          'Assignments',
-                          'Quizzes',
-                          'Exams'
-                        ].map<DropdownMenuItem<String>>((String value) {
-                          return DropdownMenuItem<String>(
-                            value: value,
-                            child: Text(
-                              value,
+          Padding(
+              padding: const EdgeInsets.symmetric(horizontal: 5),
+              child: Container(
+                height: 50,
+                decoration: BoxDecoration(
+                    borderRadius: BorderRadius.circular(20),
+                    color: AppStyle.selected),
+                child: Row(
+                  mainAxisAlignment: MainAxisAlignment.start,
+                  children: [
+                    const SizedBox(
+                        width: 45, child: Icon(Icons.laptop_mac_rounded)),
+                    Flexible(
+                      child: _selectedOption4 == ''
+                          ? Text(
+                              'DSTRU1',
                               style: GoogleFonts.roboto(
                                   color: Colors.black,
                                   fontWeight: FontWeight.bold,
                                   fontSize: 18),
-                            ),
-                          );
-                        }).toList(),
-                        dropdownColor: const Color(0xFFF1E3DC)),
-              ),
-            ],
-          ),
+                            )
+                          : DropdownButton<String>(
+                              value: _selectedOption4,
+                              onChanged: (String? newValue) {
+                                setState(() {
+                                  _selectedOption = newValue ?? '';
+                                });
+                                if (newValue == 'Assignments') {
+                                  Navigator.push(
+                                    context,
+                                    MaterialPageRoute(
+                                        builder: (context) => ADSTGuestScreen(
+                                            backgroundColor: backgroundColor)),
+                                  );
+                                } else if (newValue == 'Quizzes') {
+                                  Navigator.push(
+                                    context,
+                                    MaterialPageRoute(
+                                        builder: (context) => QDSTGuestScreen(
+                                            backgroundColor: backgroundColor)),
+                                  );
+                                } else if (newValue == 'Exams') {
+                                  Navigator.push(
+                                    context,
+                                    MaterialPageRoute(
+                                        builder: (context) => EDSTGuestScreen(
+                                            backgroundColor: backgroundColor)),
+                                  );
+                                }
+                              },
+                              items: <String>[
+                                'DSTRU1',
+                                'Assignments',
+                                'Quizzes',
+                                'Exams'
+                              ].map<DropdownMenuItem<String>>((String value) {
+                                return DropdownMenuItem<String>(
+                                  value: value,
+                                  child: Text(
+                                    value,
+                                    style: GoogleFonts.roboto(
+                                        color: Colors.black,
+                                        fontWeight: FontWeight.bold,
+                                        fontSize: 18),
+                                  ),
+                                );
+                              }).toList(),
+                              dropdownColor: const Color(0xFFF1E3DC)),
+                    ),
+                  ],
+                ),
+              )),
           Row(
             mainAxisAlignment: MainAxisAlignment.start,
             children: [
@@ -821,26 +861,94 @@ class _EDSTGuestScreenState extends State<EDSTGuestScreen> {
               ),
             ],
           ),
-          const SizedBox(height: 81),
+          const SizedBox(
+            height: 70,
+          ),
+          const Divider(
+            color: Color(0xFF463F3B),
+            thickness: 2,
+          ),
           Row(
-            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+            mainAxisAlignment: MainAxisAlignment.center,
             children: [
-              IconButton(
-                  onPressed: () {
-                    Navigator.push(
-                      context,
-                      MaterialPageRoute(
-                          builder: (context) =>
-                              HomeScreen(backgroundColor: backgroundColor)),
-                    );
-                  },
-                  icon: const Icon(Icons.exit_to_app_outlined)),
-              IconButton(
-                  onPressed: _showLoginDialog,
-                  icon: const Icon(
-                    Icons.supervised_user_circle_outlined,
-                    size: 30,
-                  )),
+              Padding(
+                padding: const EdgeInsets.symmetric(horizontal: 5),
+                child: Container(
+                  height: 50,
+                  decoration: BoxDecoration(
+                    borderRadius: BorderRadius.circular(20),
+                    color: const Color(0xFF463F3B),
+                  ),
+                  child: TextButton(
+                    onPressed: () {
+                      Navigator.push(
+                        context,
+                        MaterialPageRoute(
+                            builder: (context) =>
+                                HomeScreen(backgroundColor: backgroundColor)),
+                      );
+                    },
+                    child: Row(
+                      children: [
+                        const Icon(
+                          CupertinoIcons.back,
+                          size: 35,
+                          color: Colors.white,
+                        ),
+                        const SizedBox(
+                          width: 5,
+                        ),
+                        Text(
+                          "EXIT",
+                          style: GoogleFonts.roboto(
+                              color: Colors.white,
+                              fontWeight: FontWeight.bold,
+                              fontSize: 16),
+                        ),
+                      ],
+                    ),
+                  ),
+                ),
+              ),
+              Padding(
+                padding: const EdgeInsets.symmetric(horizontal: 5),
+                child: Container(
+                  height: 50,
+                  decoration: BoxDecoration(
+                    borderRadius: BorderRadius.circular(20),
+                    color: const Color(0xFF463F3B),
+                  ),
+                  child: TextButton(
+                    onPressed: () {
+                      Navigator.push(
+                        context,
+                        MaterialPageRoute(
+                            builder: (context) => TODOGuestScreen(
+                                backgroundColor: backgroundColor)),
+                      );
+                    },
+                    child: Row(
+                      children: [
+                        const Icon(
+                          CupertinoIcons.calendar,
+                          size: 35,
+                          color: Colors.white,
+                        ),
+                        const SizedBox(
+                          width: 5,
+                        ),
+                        Text(
+                          "TODO",
+                          style: GoogleFonts.roboto(
+                              color: Colors.white,
+                              fontWeight: FontWeight.bold,
+                              fontSize: 16),
+                        ),
+                      ],
+                    ),
+                  ),
+                ),
+              ),
             ],
           )
         ],
@@ -860,7 +968,7 @@ class _EDSTGuestScreenState extends State<EDSTGuestScreen> {
       backgroundColor: AppStyle.mainColor,
       appBar: AppBar(
         elevation: 0,
-        title: const Text('CALCU2 '),
+        title: const Text('DSTRU1'),
         centerTitle: true,
         backgroundColor: AppStyle.mainColor,
         actions: [
@@ -924,11 +1032,11 @@ class _EDSTGuestScreenState extends State<EDSTGuestScreen> {
               child: StreamBuilder<QuerySnapshot>(
                 stream: _searchController.text.isEmpty
                     ? FirebaseFirestore.instance
-                        .collection('EENGnotes')
+                        .collection('EDSTnotes')
                         .snapshots()
                     : FirebaseFirestore.instance
-                        .collection('EENGnotes')
-                        .where('EENGnote_title',
+                        .collection('EDSTnotes')
+                        .where('EDSTnote_title',
                             isGreaterThanOrEqualTo:
                                 _searchController.text.toUpperCase(),
                             isLessThan:
@@ -945,7 +1053,7 @@ class _EDSTGuestScreenState extends State<EDSTGuestScreen> {
                     final List<DocumentSnapshot> matchingNotes = [];
                     for (var i = 0; i < notes.length; i++) {
                       final note = notes[i];
-                      if (note['EENGnote_title']
+                      if (note['EDSTnote_title']
                           .toString()
                           .toUpperCase()
                           .contains(_searchController.text.toUpperCase())) {
