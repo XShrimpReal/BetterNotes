@@ -85,34 +85,34 @@ class _HomeScreenState extends State<HomeScreen> {
             ],
           ),
           actions: [
-            ElevatedButton(
-              onPressed: () {
-                Navigator.push(
-                  context,
-                  MaterialPageRoute(
-                    builder: (context) =>
-                        AdminScreen(backgroundColor: backgroundColor),
-                  ),
-                );
-              },
-              style:
-                  ElevatedButton.styleFrom(backgroundColor: Color(0xFF463F3B)),
-              child: const Text('ADMIN'),
-            ),
-            ElevatedButton(
-              onPressed: () {
-                Navigator.push(
-                  context,
-                  MaterialPageRoute(
-                    builder: (context) =>
-                        GuestScreen(backgroundColor: backgroundColor),
-                  ),
-                );
-              },
-              style:
-                  ElevatedButton.styleFrom(backgroundColor: Color(0xFF463F3B)),
-              child: const Text('GUEST'),
-            ),
+            // ElevatedButton(
+            //   onPressed: () {
+            //     Navigator.push(
+            //       context,
+            //       MaterialPageRoute(
+            //         builder: (context) =>
+            //             AdminScreen(backgroundColor: backgroundColor),
+            //       ),
+            //     );
+            //   },
+            //   style:
+            //       ElevatedButton.styleFrom(backgroundColor: Color(0xFF463F3B)),
+            //   child: const Text('ADMIN'),
+            // ),
+            // ElevatedButton(
+            //   onPressed: () {
+            //     Navigator.push(
+            //       context,
+            //       MaterialPageRoute(
+            //         builder: (context) =>
+            //             GuestScreen(backgroundColor: backgroundColor),
+            //       ),
+            //     );
+            //   },
+            //   style:
+            //       ElevatedButton.styleFrom(backgroundColor: Color(0xFF463F3B)),
+            //   child: const Text('GUEST'),
+            // ),
             ElevatedButton(
               onPressed: () {
                 if (_isValid()) {
