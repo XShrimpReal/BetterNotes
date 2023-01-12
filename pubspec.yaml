@@ -29,6 +29,7 @@ dependencies:
   permission_handler: ^10.2.0
   timezone: ^0.9.1
   firebase_auth: ^4.2.5
+  google_mobile_ads: ^2.3.0
 
 
 dev_dependencies:
