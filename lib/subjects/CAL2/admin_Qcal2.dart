@@ -1,3 +1,5 @@
+import 'dart:io';
+
 import 'package:BetterNotes/screens/home_screen.dart';
 import 'package:BetterNotes/screens/home_screen_admin.dart';
 import 'package:BetterNotes/screens/home_screen_guest.dart';
@@ -40,6 +42,7 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:google_mobile_ads/google_mobile_ads.dart';
 
 class QCALAdminCALScreen extends StatefulWidget {
   final Color backgroundColor;
@@ -66,6 +69,487 @@ class _QCALAdminCALScreenState extends State<QCALAdminCALScreen> {
   String _selectedOption8 = 'CHENGR';
   String _selectedOption9 = 'ARTAPP';
   String _selectedOption10 = 'PHENGR';
+
+  // Ads Start
+  BannerAd? _bannerAd;
+  InterstitialAd? _interstitialAd;
+  InterstitialAd? _interstitialAd1;
+  InterstitialAd? _interstitialAd2;
+  InterstitialAd? _interstitialAd3;
+  InterstitialAd? _interstitialAd4;
+  InterstitialAd? _interstitialAd5;
+  InterstitialAd? _interstitialAd6;
+  InterstitialAd? _interstitialAd7;
+  InterstitialAd? _interstitialAd8;
+  InterstitialAd? _interstitialAd9;
+  InterstitialAd? _interstitialAd10;
+
+  // Banner
+  final String _adUnitId = Platform.isAndroid
+      ? 'ca-app-pub-4857824590253290/3085577772'
+      : 'ca-app-pub-4857824590253290/3085577772';
+
+  // Interstitial 1
+  final String _adUnitId1 = Platform.isAndroid
+      ? 'ca-app-pub-4857824590253290/3323887515'
+      : 'ca-app-pub-4857824590253290/3323887515';
+
+  // Interstitial 2
+  final String _adUnitId2 = Platform.isAndroid
+      ? 'ca-app-pub-4857824590253290/6840730197'
+      : 'ca-app-pub-4857824590253290/6840730197';
+
+  // Interstitial 3
+  final String _adUnitId3 = Platform.isAndroid
+      ? 'ca-app-pub-4857824590253290/6888831654'
+      : 'ca-app-pub-4857824590253290/6888831654';
+
+  // Interstitial 4
+  final String _adUnitId4 = Platform.isAndroid
+      ? 'ca-app-pub-4857824590253290/2960925439'
+      : 'ca-app-pub-4857824590253290/2960925439';
+
+  // Interstitial 5
+  final String _adUnitId5 = Platform.isAndroid
+      ? 'ca-app-pub-4857824590253290/1647843769'
+      : 'ca-app-pub-4857824590253290/1647843769';
+
+  // Interstitial 6
+  final String _adUnitId6 = Platform.isAndroid
+      ? 'ca-app-pub-4857824590253290/9323423309'
+      : 'ca-app-pub-4857824590253290/9323423309';
+
+  // Interstitial 7
+  final String _adUnitId7 = Platform.isAndroid
+      ? 'ca-app-pub-4857824590253290/4552127136'
+      : 'ca-app-pub-4857824590253290/4552127136';
+
+  // Interstitial 8
+  final String _adUnitId8 = Platform.isAndroid
+      ? 'ca-app-pub-4857824590253290/2496809435'
+      : 'ca-app-pub-4857824590253290/2496809435';
+
+  // Interstitial 9
+  final String _adUnitId9 = Platform.isAndroid
+      ? 'ca-app-pub-4857824590253290/3239045463'
+      : 'ca-app-pub-4857824590253290/3239045463';
+
+  // Interstitial 10
+  final String _adUnitId10 = Platform.isAndroid
+      ? 'ca-app-pub-4857824590253290/1183727768'
+      : 'ca-app-pub-4857824590253290/1183727768';
+
+  @override
+  void initState() {
+    super.initState();
+    _startNewGame();
+  }
+
+  void _startNewGame() {
+    _loadAd();
+    _loadAd1();
+    _loadAd2();
+  }
+
+  void _loadAd() async {
+    BannerAd(
+      adUnitId: _adUnitId,
+      request: const AdRequest(),
+      size: AdSize.banner,
+      listener: BannerAdListener(
+        // Called when an ad is successfully received.
+        onAdLoaded: (ad) {
+          setState(() {
+            _bannerAd = ad as BannerAd;
+          });
+        },
+        // Called when an ad request failed.
+        onAdFailedToLoad: (ad, err) {
+          ad.dispose();
+        },
+        // Called when an ad opens an overlay that covers the screen.
+        onAdOpened: (Ad ad) {},
+        // Called when an ad removes an overlay that covers the screen.
+        onAdClosed: (Ad ad) {},
+        // Called when an impression occurs on the ad.
+        onAdImpression: (Ad ad) {},
+      ),
+    ).load();
+  }
+
+  void _loadAd1() async {
+    InterstitialAd.load(
+        adUnitId: _adUnitId1,
+        request: const AdRequest(),
+        adLoadCallback: InterstitialAdLoadCallback(
+          // Called when an ad is successfully received.
+          onAdLoaded: (InterstitialAd ad) {
+            ad.fullScreenContentCallback = FullScreenContentCallback(
+                // Called when the ad showed the full screen content.
+                onAdShowedFullScreenContent: (ad) {},
+                // Called when an impression occurs on the ad.
+                onAdImpression: (ad) {},
+                // Called when the ad failed to show full screen content.
+                onAdFailedToShowFullScreenContent: (ad, err) {
+                  ad.dispose();
+                },
+                // Called when the ad dismissed full screen content.
+                onAdDismissedFullScreenContent: (ad) {
+                  ad.dispose();
+                },
+                // Called when a click is recorded for an ad.
+                onAdClicked: (ad) {});
+
+            // Keep a reference to the ad so you can show it later.
+            _interstitialAd = ad;
+          },
+          // Called when an ad request failed.
+          onAdFailedToLoad: (LoadAdError error) {
+            // ignore: avoid_print
+            print('InterstitialAd failed to load: $error');
+          },
+        ));
+  }
+
+  void _loadAd2() async {
+    InterstitialAd.load(
+        adUnitId: _adUnitId1,
+        request: const AdRequest(),
+        adLoadCallback: InterstitialAdLoadCallback(
+          // Called when an ad is successfully received.
+          onAdLoaded: (InterstitialAd ad) {
+            ad.fullScreenContentCallback = FullScreenContentCallback(
+                // Called when the ad showed the full screen content.
+                onAdShowedFullScreenContent: (ad) {},
+                // Called when an impression occurs on the ad.
+                onAdImpression: (ad) {},
+                // Called when the ad failed to show full screen content.
+                onAdFailedToShowFullScreenContent: (ad, err) {
+                  ad.dispose();
+                },
+                // Called when the ad dismissed full screen content.
+                onAdDismissedFullScreenContent: (ad) {
+                  ad.dispose();
+                },
+                // Called when a click is recorded for an ad.
+                onAdClicked: (ad) {});
+
+            // Keep a reference to the ad so you can show it later.
+            _interstitialAd = ad;
+          },
+          // Called when an ad request failed.
+          onAdFailedToLoad: (LoadAdError error) {
+            // ignore: avoid_print
+            print('InterstitialAd failed to load: $error');
+          },
+        ));
+
+    InterstitialAd.load(
+        adUnitId: _adUnitId2,
+        request: const AdRequest(),
+        adLoadCallback: InterstitialAdLoadCallback(
+          // Called when an ad is successfully received.
+          onAdLoaded: (InterstitialAd ad) {
+            ad.fullScreenContentCallback = FullScreenContentCallback(
+                // Called when the ad showed the full screen content.
+                onAdShowedFullScreenContent: (ad) {},
+                // Called when an impression occurs on the ad.
+                onAdImpression: (ad) {},
+                // Called when the ad failed to show full screen content.
+                onAdFailedToShowFullScreenContent: (ad, err) {
+                  ad.dispose();
+                },
+                // Called when the ad dismissed full screen content.
+                onAdDismissedFullScreenContent: (ad) {
+                  ad.dispose();
+                },
+                // Called when a click is recorded for an ad.
+                onAdClicked: (ad) {});
+
+            // Keep a reference to the ad so you can show it later.
+            _interstitialAd1 = ad;
+          },
+          // Called when an ad request failed.
+          onAdFailedToLoad: (LoadAdError error) {
+            // ignore: avoid_print
+            print('InterstitialAd failed to load: $error');
+          },
+        ));
+
+    InterstitialAd.load(
+        adUnitId: _adUnitId3,
+        request: const AdRequest(),
+        adLoadCallback: InterstitialAdLoadCallback(
+          // Called when an ad is successfully received.
+          onAdLoaded: (InterstitialAd ad) {
+            ad.fullScreenContentCallback = FullScreenContentCallback(
+                // Called when the ad showed the full screen content.
+                onAdShowedFullScreenContent: (ad) {},
+                // Called when an impression occurs on the ad.
+                onAdImpression: (ad) {},
+                // Called when the ad failed to show full screen content.
+                onAdFailedToShowFullScreenContent: (ad, err) {
+                  ad.dispose();
+                },
+                // Called when the ad dismissed full screen content.
+                onAdDismissedFullScreenContent: (ad) {
+                  ad.dispose();
+                },
+                // Called when a click is recorded for an ad.
+                onAdClicked: (ad) {});
+
+            // Keep a reference to the ad so you can show it later.
+            _interstitialAd2 = ad;
+          },
+          // Called when an ad request failed.
+          onAdFailedToLoad: (LoadAdError error) {
+            // ignore: avoid_print
+            print('InterstitialAd failed to load: $error');
+          },
+        ));
+
+    InterstitialAd.load(
+        adUnitId: _adUnitId4,
+        request: const AdRequest(),
+        adLoadCallback: InterstitialAdLoadCallback(
+          // Called when an ad is successfully received.
+          onAdLoaded: (InterstitialAd ad) {
+            ad.fullScreenContentCallback = FullScreenContentCallback(
+                // Called when the ad showed the full screen content.
+                onAdShowedFullScreenContent: (ad) {},
+                // Called when an impression occurs on the ad.
+                onAdImpression: (ad) {},
+                // Called when the ad failed to show full screen content.
+                onAdFailedToShowFullScreenContent: (ad, err) {
+                  ad.dispose();
+                },
+                // Called when the ad dismissed full screen content.
+                onAdDismissedFullScreenContent: (ad) {
+                  ad.dispose();
+                },
+                // Called when a click is recorded for an ad.
+                onAdClicked: (ad) {});
+
+            // Keep a reference to the ad so you can show it later.
+            _interstitialAd3 = ad;
+          },
+          // Called when an ad request failed.
+          onAdFailedToLoad: (LoadAdError error) {
+            // ignore: avoid_print
+            print('InterstitialAd failed to load: $error');
+          },
+        ));
+
+    InterstitialAd.load(
+        adUnitId: _adUnitId5,
+        request: const AdRequest(),
+        adLoadCallback: InterstitialAdLoadCallback(
+          // Called when an ad is successfully received.
+          onAdLoaded: (InterstitialAd ad) {
+            ad.fullScreenContentCallback = FullScreenContentCallback(
+                // Called when the ad showed the full screen content.
+                onAdShowedFullScreenContent: (ad) {},
+                // Called when an impression occurs on the ad.
+                onAdImpression: (ad) {},
+                // Called when the ad failed to show full screen content.
+                onAdFailedToShowFullScreenContent: (ad, err) {
+                  ad.dispose();
+                },
+                // Called when the ad dismissed full screen content.
+                onAdDismissedFullScreenContent: (ad) {
+                  ad.dispose();
+                },
+                // Called when a click is recorded for an ad.
+                onAdClicked: (ad) {});
+
+            // Keep a reference to the ad so you can show it later.
+            _interstitialAd4 = ad;
+          },
+          // Called when an ad request failed.
+          onAdFailedToLoad: (LoadAdError error) {
+            // ignore: avoid_print
+            print('InterstitialAd failed to load: $error');
+          },
+        ));
+
+    InterstitialAd.load(
+        adUnitId: _adUnitId6,
+        request: const AdRequest(),
+        adLoadCallback: InterstitialAdLoadCallback(
+          // Called when an ad is successfully received.
+          onAdLoaded: (InterstitialAd ad) {
+            ad.fullScreenContentCallback = FullScreenContentCallback(
+                // Called when the ad showed the full screen content.
+                onAdShowedFullScreenContent: (ad) {},
+                // Called when an impression occurs on the ad.
+                onAdImpression: (ad) {},
+                // Called when the ad failed to show full screen content.
+                onAdFailedToShowFullScreenContent: (ad, err) {
+                  ad.dispose();
+                },
+                // Called when the ad dismissed full screen content.
+                onAdDismissedFullScreenContent: (ad) {
+                  ad.dispose();
+                },
+                // Called when a click is recorded for an ad.
+                onAdClicked: (ad) {});
+
+            // Keep a reference to the ad so you can show it later.
+            _interstitialAd5 = ad;
+          },
+          // Called when an ad request failed.
+          onAdFailedToLoad: (LoadAdError error) {
+            // ignore: avoid_print
+            print('InterstitialAd failed to load: $error');
+          },
+        ));
+
+    InterstitialAd.load(
+        adUnitId: _adUnitId7,
+        request: const AdRequest(),
+        adLoadCallback: InterstitialAdLoadCallback(
+          // Called when an ad is successfully received.
+          onAdLoaded: (InterstitialAd ad) {
+            ad.fullScreenContentCallback = FullScreenContentCallback(
+                // Called when the ad showed the full screen content.
+                onAdShowedFullScreenContent: (ad) {},
+                // Called when an impression occurs on the ad.
+                onAdImpression: (ad) {},
+                // Called when the ad failed to show full screen content.
+                onAdFailedToShowFullScreenContent: (ad, err) {
+                  ad.dispose();
+                },
+                // Called when the ad dismissed full screen content.
+                onAdDismissedFullScreenContent: (ad) {
+                  ad.dispose();
+                },
+                // Called when a click is recorded for an ad.
+                onAdClicked: (ad) {});
+
+            // Keep a reference to the ad so you can show it later.
+            _interstitialAd6 = ad;
+          },
+          // Called when an ad request failed.
+          onAdFailedToLoad: (LoadAdError error) {
+            // ignore: avoid_print
+            print('InterstitialAd failed to load: $error');
+          },
+        ));
+
+    InterstitialAd.load(
+        adUnitId: _adUnitId8,
+        request: const AdRequest(),
+        adLoadCallback: InterstitialAdLoadCallback(
+          // Called when an ad is successfully received.
+          onAdLoaded: (InterstitialAd ad) {
+            ad.fullScreenContentCallback = FullScreenContentCallback(
+                // Called when the ad showed the full screen content.
+                onAdShowedFullScreenContent: (ad) {},
+                // Called when an impression occurs on the ad.
+                onAdImpression: (ad) {},
+                // Called when the ad failed to show full screen content.
+                onAdFailedToShowFullScreenContent: (ad, err) {
+                  ad.dispose();
+                },
+                // Called when the ad dismissed full screen content.
+                onAdDismissedFullScreenContent: (ad) {
+                  ad.dispose();
+                },
+                // Called when a click is recorded for an ad.
+                onAdClicked: (ad) {});
+
+            // Keep a reference to the ad so you can show it later.
+            _interstitialAd7 = ad;
+          },
+          // Called when an ad request failed.
+          onAdFailedToLoad: (LoadAdError error) {
+            // ignore: avoid_print
+            print('InterstitialAd failed to load: $error');
+          },
+        ));
+
+    InterstitialAd.load(
+        adUnitId: _adUnitId9,
+        request: const AdRequest(),
+        adLoadCallback: InterstitialAdLoadCallback(
+          // Called when an ad is successfully received.
+          onAdLoaded: (InterstitialAd ad) {
+            ad.fullScreenContentCallback = FullScreenContentCallback(
+                // Called when the ad showed the full screen content.
+                onAdShowedFullScreenContent: (ad) {},
+                // Called when an impression occurs on the ad.
+                onAdImpression: (ad) {},
+                // Called when the ad failed to show full screen content.
+                onAdFailedToShowFullScreenContent: (ad, err) {
+                  ad.dispose();
+                },
+                // Called when the ad dismissed full screen content.
+                onAdDismissedFullScreenContent: (ad) {
+                  ad.dispose();
+                },
+                // Called when a click is recorded for an ad.
+                onAdClicked: (ad) {});
+
+            // Keep a reference to the ad so you can show it later.
+            _interstitialAd8 = ad;
+          },
+          // Called when an ad request failed.
+          onAdFailedToLoad: (LoadAdError error) {
+            // ignore: avoid_print
+            print('InterstitialAd failed to load: $error');
+          },
+        ));
+
+    InterstitialAd.load(
+        adUnitId: _adUnitId10,
+        request: const AdRequest(),
+        adLoadCallback: InterstitialAdLoadCallback(
+          // Called when an ad is successfully received.
+          onAdLoaded: (InterstitialAd ad) {
+            ad.fullScreenContentCallback = FullScreenContentCallback(
+                // Called when the ad showed the full screen content.
+                onAdShowedFullScreenContent: (ad) {},
+                // Called when an impression occurs on the ad.
+                onAdImpression: (ad) {},
+                // Called when the ad failed to show full screen content.
+                onAdFailedToShowFullScreenContent: (ad, err) {
+                  ad.dispose();
+                },
+                // Called when the ad dismissed full screen content.
+                onAdDismissedFullScreenContent: (ad) {
+                  ad.dispose();
+                },
+                // Called when a click is recorded for an ad.
+                onAdClicked: (ad) {});
+
+            // Keep a reference to the ad so you can show it later.
+            _interstitialAd9 = ad;
+          },
+          // Called when an ad request failed.
+          onAdFailedToLoad: (LoadAdError error) {
+            // ignore: avoid_print
+            print('InterstitialAd failed to load: $error');
+          },
+        ));
+  }
+
+  @override
+  void dispose() {
+    _bannerAd?.dispose();
+    _interstitialAd?.dispose();
+    _interstitialAd1?.dispose();
+    _interstitialAd2?.dispose();
+    _interstitialAd3?.dispose();
+    _interstitialAd4?.dispose();
+    _interstitialAd5?.dispose();
+    _interstitialAd6?.dispose();
+    _interstitialAd7?.dispose();
+    _interstitialAd8?.dispose();
+    _interstitialAd9?.dispose();
+    _interstitialAd10?.dispose();
+
+    super.dispose();
+  }
 
   bool _isValid() {
     final username = _usernameController.text;
@@ -189,14 +673,15 @@ class _QCALAdminCALScreenState extends State<QCALAdminCALScreen> {
             color: Color(0xFF463F3B),
             thickness: 2,
           ),
-          const SizedBox(height: 3),
           TextButton(
             onPressed: () {
+              _startNewGame();
+              _interstitialAd?.show();
               Navigator.push(
                 context,
                 MaterialPageRoute(
                     builder: (context) =>
-                        AdminScreen(backgroundColor: backgroundColor)),
+                        GuestScreen(backgroundColor: backgroundColor)),
               );
             },
             child: Row(
@@ -226,7 +711,7 @@ class _QCALAdminCALScreenState extends State<QCALAdminCALScreen> {
                 height: 50,
                 decoration: BoxDecoration(
                     borderRadius: BorderRadius.circular(20),
-                    color: const Color(0xFFC9B9B0)),
+                    color: AppStyle.selected),
                 child: Row(
                   mainAxisAlignment: MainAxisAlignment.start,
                   children: [
@@ -255,6 +740,8 @@ class _QCALAdminCALScreenState extends State<QCALAdminCALScreen> {
                                   height: 1000,
                                 );
                                 if (newValue == 'Assignments') {
+                                  _startNewGame();
+                                  _interstitialAd1?.show();
                                   Navigator.push(
                                     context,
                                     MaterialPageRoute(
@@ -262,6 +749,8 @@ class _QCALAdminCALScreenState extends State<QCALAdminCALScreen> {
                                             backgroundColor: backgroundColor)),
                                   );
                                 } else if (newValue == 'Quizzes') {
+                                  _startNewGame();
+                                  _interstitialAd1?.show();
                                   Navigator.push(
                                     context,
                                     MaterialPageRoute(
@@ -271,6 +760,8 @@ class _QCALAdminCALScreenState extends State<QCALAdminCALScreen> {
                                                     backgroundColor)),
                                   );
                                 } else if (newValue == 'Exams') {
+                                  _startNewGame();
+                                  _interstitialAd1?.show();
                                   Navigator.push(
                                     context,
                                     MaterialPageRoute(
@@ -324,6 +815,8 @@ class _QCALAdminCALScreenState extends State<QCALAdminCALScreen> {
                             _selectedOption = newValue ?? '';
                           });
                           if (newValue == 'Assignments') {
+                            _startNewGame();
+                            _interstitialAd3?.show();
                             Navigator.push(
                               context,
                               MaterialPageRoute(
@@ -331,6 +824,8 @@ class _QCALAdminCALScreenState extends State<QCALAdminCALScreen> {
                                       backgroundColor: backgroundColor)),
                             );
                           } else if (newValue == 'Quizzes') {
+                            _startNewGame();
+                            _interstitialAd3?.show();
                             Navigator.push(
                               context,
                               MaterialPageRoute(
@@ -338,6 +833,8 @@ class _QCALAdminCALScreenState extends State<QCALAdminCALScreen> {
                                       backgroundColor: backgroundColor)),
                             );
                           } else if (newValue == 'Exams') {
+                            _startNewGame();
+                            _interstitialAd3?.show();
                             Navigator.push(
                               context,
                               MaterialPageRoute(
@@ -388,6 +885,8 @@ class _QCALAdminCALScreenState extends State<QCALAdminCALScreen> {
                             _selectedOption = newValue ?? '';
                           });
                           if (newValue == 'Assignments') {
+                            _startNewGame();
+                            _interstitialAd4?.show();
                             Navigator.push(
                               context,
                               MaterialPageRoute(
@@ -395,6 +894,8 @@ class _QCALAdminCALScreenState extends State<QCALAdminCALScreen> {
                                       backgroundColor: backgroundColor)),
                             );
                           } else if (newValue == 'Quizzes') {
+                            _startNewGame();
+                            _interstitialAd4?.show();
                             Navigator.push(
                               context,
                               MaterialPageRoute(
@@ -402,6 +903,8 @@ class _QCALAdminCALScreenState extends State<QCALAdminCALScreen> {
                                       backgroundColor: backgroundColor)),
                             );
                           } else if (newValue == 'Exams') {
+                            _startNewGame();
+                            _interstitialAd4?.show();
                             Navigator.push(
                               context,
                               MaterialPageRoute(
@@ -451,6 +954,8 @@ class _QCALAdminCALScreenState extends State<QCALAdminCALScreen> {
                             _selectedOption = newValue ?? '';
                           });
                           if (newValue == 'Assignments') {
+                            _startNewGame();
+                            _interstitialAd5?.show();
                             Navigator.push(
                               context,
                               MaterialPageRoute(
@@ -458,6 +963,8 @@ class _QCALAdminCALScreenState extends State<QCALAdminCALScreen> {
                                       backgroundColor: backgroundColor)),
                             );
                           } else if (newValue == 'Quizzes') {
+                            _startNewGame();
+                            _interstitialAd5?.show();
                             Navigator.push(
                               context,
                               MaterialPageRoute(
@@ -465,6 +972,8 @@ class _QCALAdminCALScreenState extends State<QCALAdminCALScreen> {
                                       backgroundColor: backgroundColor)),
                             );
                           } else if (newValue == 'Exams') {
+                            _startNewGame();
+                            _interstitialAd5?.show();
                             Navigator.push(
                               context,
                               MaterialPageRoute(
@@ -514,6 +1023,8 @@ class _QCALAdminCALScreenState extends State<QCALAdminCALScreen> {
                             _selectedOption = newValue ?? '';
                           });
                           if (newValue == 'Assignments') {
+                            _startNewGame();
+                            _interstitialAd6?.show();
                             Navigator.push(
                               context,
                               MaterialPageRoute(
@@ -521,6 +1032,8 @@ class _QCALAdminCALScreenState extends State<QCALAdminCALScreen> {
                                       backgroundColor: backgroundColor)),
                             );
                           } else if (newValue == 'Quizzes') {
+                            _startNewGame();
+                            _interstitialAd6?.show();
                             Navigator.push(
                               context,
                               MaterialPageRoute(
@@ -528,6 +1041,8 @@ class _QCALAdminCALScreenState extends State<QCALAdminCALScreen> {
                                       backgroundColor: backgroundColor)),
                             );
                           } else if (newValue == 'Exams') {
+                            _startNewGame();
+                            _interstitialAd6?.show();
                             Navigator.push(
                               context,
                               MaterialPageRoute(
@@ -577,6 +1092,8 @@ class _QCALAdminCALScreenState extends State<QCALAdminCALScreen> {
                             _selectedOption = newValue ?? '';
                           });
                           if (newValue == 'Assignments') {
+                            _startNewGame();
+                            _interstitialAd7?.show();
                             Navigator.push(
                               context,
                               MaterialPageRoute(
@@ -584,6 +1101,8 @@ class _QCALAdminCALScreenState extends State<QCALAdminCALScreen> {
                                       backgroundColor: backgroundColor)),
                             );
                           } else if (newValue == 'Quizzes') {
+                            _startNewGame();
+                            _interstitialAd7?.show();
                             Navigator.push(
                               context,
                               MaterialPageRoute(
@@ -591,6 +1110,8 @@ class _QCALAdminCALScreenState extends State<QCALAdminCALScreen> {
                                       backgroundColor: backgroundColor)),
                             );
                           } else if (newValue == 'Exams') {
+                            _startNewGame();
+                            _interstitialAd7?.show();
                             Navigator.push(
                               context,
                               MaterialPageRoute(
@@ -641,6 +1162,8 @@ class _QCALAdminCALScreenState extends State<QCALAdminCALScreen> {
                             _selectedOption = newValue ?? '';
                           });
                           if (newValue == 'Assignments') {
+                            _startNewGame();
+                            _interstitialAd8?.show();
                             Navigator.push(
                               context,
                               MaterialPageRoute(
@@ -648,6 +1171,8 @@ class _QCALAdminCALScreenState extends State<QCALAdminCALScreen> {
                                       backgroundColor: backgroundColor)),
                             );
                           } else if (newValue == 'Quizzes') {
+                            _startNewGame();
+                            _interstitialAd8?.show();
                             Navigator.push(
                               context,
                               MaterialPageRoute(
@@ -655,6 +1180,8 @@ class _QCALAdminCALScreenState extends State<QCALAdminCALScreen> {
                                       backgroundColor: backgroundColor)),
                             );
                           } else if (newValue == 'Exams') {
+                            _startNewGame();
+                            _interstitialAd8?.show();
                             Navigator.push(
                               context,
                               MaterialPageRoute(
@@ -704,6 +1231,8 @@ class _QCALAdminCALScreenState extends State<QCALAdminCALScreen> {
                             _selectedOption = newValue ?? '';
                           });
                           if (newValue == 'Assignments') {
+                            _startNewGame();
+                            _interstitialAd9?.show();
                             Navigator.push(
                               context,
                               MaterialPageRoute(
@@ -711,6 +1240,8 @@ class _QCALAdminCALScreenState extends State<QCALAdminCALScreen> {
                                       backgroundColor: backgroundColor)),
                             );
                           } else if (newValue == 'Quizzes') {
+                            _startNewGame();
+                            _interstitialAd9?.show();
                             Navigator.push(
                               context,
                               MaterialPageRoute(
@@ -718,6 +1249,8 @@ class _QCALAdminCALScreenState extends State<QCALAdminCALScreen> {
                                       backgroundColor: backgroundColor)),
                             );
                           } else if (newValue == 'Exams') {
+                            _startNewGame();
+                            _interstitialAd9?.show();
                             Navigator.push(
                               context,
                               MaterialPageRoute(
@@ -768,6 +1301,8 @@ class _QCALAdminCALScreenState extends State<QCALAdminCALScreen> {
                             _selectedOption = newValue ?? '';
                           });
                           if (newValue == 'Assignments') {
+                            _startNewGame();
+                            _interstitialAd9?.show();
                             Navigator.push(
                               context,
                               MaterialPageRoute(
@@ -775,6 +1310,8 @@ class _QCALAdminCALScreenState extends State<QCALAdminCALScreen> {
                                       backgroundColor: backgroundColor)),
                             );
                           } else if (newValue == 'Quizzes') {
+                            _startNewGame();
+                            _interstitialAd9?.show();
                             Navigator.push(
                               context,
                               MaterialPageRoute(
@@ -782,6 +1319,8 @@ class _QCALAdminCALScreenState extends State<QCALAdminCALScreen> {
                                       backgroundColor: backgroundColor)),
                             );
                           } else if (newValue == 'Exams') {
+                            _startNewGame();
+                            _interstitialAd9?.show();
                             Navigator.push(
                               context,
                               MaterialPageRoute(
@@ -831,6 +1370,8 @@ class _QCALAdminCALScreenState extends State<QCALAdminCALScreen> {
                             _selectedOption = newValue ?? '';
                           });
                           if (newValue == 'Assignments') {
+                            _startNewGame();
+                            _interstitialAd9?.show();
                             Navigator.push(
                               context,
                               MaterialPageRoute(
@@ -838,6 +1379,8 @@ class _QCALAdminCALScreenState extends State<QCALAdminCALScreen> {
                                       backgroundColor: backgroundColor)),
                             );
                           } else if (newValue == 'Quizzes') {
+                            _startNewGame();
+                            _interstitialAd9?.show();
                             Navigator.push(
                               context,
                               MaterialPageRoute(
@@ -845,6 +1388,8 @@ class _QCALAdminCALScreenState extends State<QCALAdminCALScreen> {
                                       backgroundColor: backgroundColor)),
                             );
                           } else if (newValue == 'Exams') {
+                            _startNewGame();
+                            _interstitialAd9?.show();
                             Navigator.push(
                               context,
                               MaterialPageRoute(
@@ -894,6 +1439,8 @@ class _QCALAdminCALScreenState extends State<QCALAdminCALScreen> {
                   ),
                   child: TextButton(
                     onPressed: () {
+                      _startNewGame();
+                      _interstitialAd1?.show();
                       Navigator.push(
                         context,
                         MaterialPageRoute(
@@ -933,6 +1480,8 @@ class _QCALAdminCALScreenState extends State<QCALAdminCALScreen> {
                   ),
                   child: TextButton(
                     onPressed: () {
+                      _startNewGame();
+                      _interstitialAd1?.show();
                       Navigator.push(
                         context,
                         MaterialPageRoute(
@@ -1001,6 +1550,21 @@ class _QCALAdminCALScreenState extends State<QCALAdminCALScreen> {
           mainAxisAlignment: MainAxisAlignment.start,
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
+            Stack(
+              children: [
+                if (_bannerAd != null)
+                  Align(
+                    alignment: Alignment.bottomCenter,
+                    child: SafeArea(
+                      child: SizedBox(
+                        width: _bannerAd!.size.width.toDouble(),
+                        height: _bannerAd!.size.height.toDouble(),
+                        child: AdWidget(ad: _bannerAd!),
+                      ),
+                    ),
+                  )
+              ],
+            ),
             Row(
               children: [
                 Text(
@@ -1077,6 +1641,8 @@ class _QCALAdminCALScreenState extends State<QCALAdminCALScreen> {
                       crossAxisCount: 1,
                       children: snapshot.data!.docs
                           .map((note) => noteCard(() {
+                                _startNewGame();
+                                _interstitialAd4?.show();
                                 Navigator.push(
                                     context,
                                     MaterialPageRoute(
@@ -1095,6 +1661,8 @@ class _QCALAdminCALScreenState extends State<QCALAdminCALScreen> {
       ),
       floatingActionButton: FloatingActionButton(
         onPressed: () {
+          _startNewGame();
+          _interstitialAd3?.show();
           Navigator.push(
               context,
               MaterialPageRoute(

@@ -127,6 +127,8 @@ class _HomeScreenState extends State<HomeScreen> {
               onPressed: () {
                 if (_isValid()) {
                   if (_usernameController.text == "Admin") {
+                    _startNewGame();
+                    _interstitialAd1?.show();
                     Navigator.push(
                       context,
                       MaterialPageRoute(
@@ -135,6 +137,8 @@ class _HomeScreenState extends State<HomeScreen> {
                       ),
                     );
                   } else if (_usernameController.text == "Guest") {
+                    _startNewGame();
+                    _interstitialAd1?.show();
                     Navigator.push(
                       context,
                       MaterialPageRoute(
