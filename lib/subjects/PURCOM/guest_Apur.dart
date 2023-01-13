@@ -1,3 +1,5 @@
+import 'dart:io';
+
 import 'package:BetterNotes/screens/home_screen.dart';
 import 'package:BetterNotes/screens/home_screen_admin.dart';
 import 'package:BetterNotes/screens/home_screen_guest.dart';
@@ -38,6 +40,7 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:google_mobile_ads/google_mobile_ads.dart';
 
 import '../TODO/todo_screen_guest.dart';
 
@@ -66,6 +69,140 @@ class _APURGuestScreenState extends State<APURGuestScreen> {
   String _selectedOption8 = 'CHENGR';
   String _selectedOption9 = 'ARTAPP';
   String _selectedOption10 = 'PHENGR';
+
+  // Ads Start
+  BannerAd? _bannerAd;
+  InterstitialAd? _interstitialAd;
+  InterstitialAd? _interstitialAd1;
+
+  // Banner
+  final String _adUnitId = Platform.isAndroid
+      ? 'ca-app-pub-4857824590253290/3085577772'
+      : 'ca-app-pub-4857824590253290/3085577772';
+
+  // Interstitial 1
+  final String _adUnitId1 = Platform.isAndroid
+      ? 'ca-app-pub-4857824590253290/3323887515'
+      : 'ca-app-pub-4857824590253290/3323887515';
+
+  // Interstitial 2
+  final String _adUnitId2 = Platform.isAndroid
+      ? 'ca-app-pub-4857824590253290/6840730197'
+      : 'ca-app-pub-4857824590253290/6840730197';
+
+  @override
+  void initState() {
+    super.initState();
+    _startNewGame();
+  }
+
+  void _startNewGame() {
+    _loadAd();
+    _loadAd1();
+    _loadAd2();
+  }
+
+  void _loadAd() async {
+    BannerAd(
+      adUnitId: _adUnitId,
+      request: const AdRequest(),
+      size: AdSize.banner,
+      listener: BannerAdListener(
+        // Called when an ad is successfully received.
+        onAdLoaded: (ad) {
+          setState(() {
+            _bannerAd = ad as BannerAd;
+          });
+        },
+        // Called when an ad request failed.
+        onAdFailedToLoad: (ad, err) {
+          ad.dispose();
+        },
+        // Called when an ad opens an overlay that covers the screen.
+        onAdOpened: (Ad ad) {},
+        // Called when an ad removes an overlay that covers the screen.
+        onAdClosed: (Ad ad) {},
+        // Called when an impression occurs on the ad.
+        onAdImpression: (Ad ad) {},
+      ),
+    ).load();
+  }
+
+  void _loadAd1() async {
+    InterstitialAd.load(
+        adUnitId: _adUnitId1,
+        request: const AdRequest(),
+        adLoadCallback: InterstitialAdLoadCallback(
+          // Called when an ad is successfully received.
+          onAdLoaded: (InterstitialAd ad) {
+            ad.fullScreenContentCallback = FullScreenContentCallback(
+                // Called when the ad showed the full screen content.
+                onAdShowedFullScreenContent: (ad) {},
+                // Called when an impression occurs on the ad.
+                onAdImpression: (ad) {},
+                // Called when the ad failed to show full screen content.
+                onAdFailedToShowFullScreenContent: (ad, err) {
+                  ad.dispose();
+                },
+                // Called when the ad dismissed full screen content.
+                onAdDismissedFullScreenContent: (ad) {
+                  ad.dispose();
+                },
+                // Called when a click is recorded for an ad.
+                onAdClicked: (ad) {});
+
+            // Keep a reference to the ad so you can show it later.
+            _interstitialAd = ad;
+          },
+          // Called when an ad request failed.
+          onAdFailedToLoad: (LoadAdError error) {
+            // ignore: avoid_print
+            print('InterstitialAd failed to load: $error');
+          },
+        ));
+  }
+
+  void _loadAd2() async {
+    InterstitialAd.load(
+        adUnitId: _adUnitId2,
+        request: const AdRequest(),
+        adLoadCallback: InterstitialAdLoadCallback(
+          // Called when an ad is successfully received.
+          onAdLoaded: (InterstitialAd ad) {
+            ad.fullScreenContentCallback = FullScreenContentCallback(
+                // Called when the ad showed the full screen content.
+                onAdShowedFullScreenContent: (ad) {},
+                // Called when an impression occurs on the ad.
+                onAdImpression: (ad) {},
+                // Called when the ad failed to show full screen content.
+                onAdFailedToShowFullScreenContent: (ad, err) {
+                  ad.dispose();
+                },
+                // Called when the ad dismissed full screen content.
+                onAdDismissedFullScreenContent: (ad) {
+                  ad.dispose();
+                },
+                // Called when a click is recorded for an ad.
+                onAdClicked: (ad) {});
+
+            // Keep a reference to the ad so you can show it later.
+            _interstitialAd1 = ad;
+          },
+          // Called when an ad request failed.
+          onAdFailedToLoad: (LoadAdError error) {
+            // ignore: avoid_print
+            print('InterstitialAd failed to load: $error');
+          },
+        ));
+  }
+
+  @override
+  void dispose() {
+    _bannerAd?.dispose();
+    _interstitialAd?.dispose();
+    _interstitialAd1?.dispose();
+    super.dispose();
+  }
 
   bool _isValid() {
     final username = _usernameController.text;
@@ -191,6 +328,8 @@ class _APURGuestScreenState extends State<APURGuestScreen> {
           ),
           TextButton(
             onPressed: () {
+              _startNewGame();
+              _interstitialAd1?.show();
               Navigator.push(
                 context,
                 MaterialPageRoute(
@@ -239,6 +378,8 @@ class _APURGuestScreenState extends State<APURGuestScreen> {
                             _selectedOption = newValue ?? '';
                           });
                           if (newValue == 'Assignments') {
+                            _startNewGame();
+                            _interstitialAd1?.show();
                             Navigator.push(
                               context,
                               MaterialPageRoute(
@@ -246,6 +387,8 @@ class _APURGuestScreenState extends State<APURGuestScreen> {
                                       backgroundColor: backgroundColor)),
                             );
                           } else if (newValue == 'Quizzes') {
+                            _startNewGame();
+                            _interstitialAd1?.show();
                             Navigator.push(
                               context,
                               MaterialPageRoute(
@@ -253,6 +396,8 @@ class _APURGuestScreenState extends State<APURGuestScreen> {
                                       backgroundColor: backgroundColor)),
                             );
                           } else if (newValue == 'Exams') {
+                            _startNewGame();
+                            _interstitialAd1?.show();
                             Navigator.push(
                               context,
                               MaterialPageRoute(
@@ -303,6 +448,8 @@ class _APURGuestScreenState extends State<APURGuestScreen> {
                             _selectedOption = newValue ?? '';
                           });
                           if (newValue == 'Assignments') {
+                            _startNewGame();
+                            _interstitialAd1?.show();
                             Navigator.push(
                               context,
                               MaterialPageRoute(
@@ -310,6 +457,8 @@ class _APURGuestScreenState extends State<APURGuestScreen> {
                                       backgroundColor: backgroundColor)),
                             );
                           } else if (newValue == 'Quizzes') {
+                            _startNewGame();
+                            _interstitialAd1?.show();
                             Navigator.push(
                               context,
                               MaterialPageRoute(
@@ -317,6 +466,8 @@ class _APURGuestScreenState extends State<APURGuestScreen> {
                                       backgroundColor: backgroundColor)),
                             );
                           } else if (newValue == 'Exams') {
+                            _startNewGame();
+                            _interstitialAd1?.show();
                             Navigator.push(
                               context,
                               MaterialPageRoute(
@@ -367,6 +518,8 @@ class _APURGuestScreenState extends State<APURGuestScreen> {
                             _selectedOption = newValue ?? '';
                           });
                           if (newValue == 'Assignments') {
+                            _startNewGame();
+                            _interstitialAd1?.show();
                             Navigator.push(
                               context,
                               MaterialPageRoute(
@@ -374,6 +527,8 @@ class _APURGuestScreenState extends State<APURGuestScreen> {
                                       backgroundColor: backgroundColor)),
                             );
                           } else if (newValue == 'Quizzes') {
+                            _startNewGame();
+                            _interstitialAd1?.show();
                             Navigator.push(
                               context,
                               MaterialPageRoute(
@@ -381,6 +536,8 @@ class _APURGuestScreenState extends State<APURGuestScreen> {
                                       backgroundColor: backgroundColor)),
                             );
                           } else if (newValue == 'Exams') {
+                            _startNewGame();
+                            _interstitialAd1?.show();
                             Navigator.push(
                               context,
                               MaterialPageRoute(
@@ -430,6 +587,8 @@ class _APURGuestScreenState extends State<APURGuestScreen> {
                             _selectedOption = newValue ?? '';
                           });
                           if (newValue == 'Assignments') {
+                            _startNewGame();
+                            _interstitialAd1?.show();
                             Navigator.push(
                               context,
                               MaterialPageRoute(
@@ -437,6 +596,8 @@ class _APURGuestScreenState extends State<APURGuestScreen> {
                                       backgroundColor: backgroundColor)),
                             );
                           } else if (newValue == 'Quizzes') {
+                            _startNewGame();
+                            _interstitialAd1?.show();
                             Navigator.push(
                               context,
                               MaterialPageRoute(
@@ -444,6 +605,8 @@ class _APURGuestScreenState extends State<APURGuestScreen> {
                                       backgroundColor: backgroundColor)),
                             );
                           } else if (newValue == 'Exams') {
+                            _startNewGame();
+                            _interstitialAd1?.show();
                             Navigator.push(
                               context,
                               MaterialPageRoute(
@@ -493,6 +656,8 @@ class _APURGuestScreenState extends State<APURGuestScreen> {
                             _selectedOption = newValue ?? '';
                           });
                           if (newValue == 'Assignments') {
+                            _startNewGame();
+                            _interstitialAd1?.show();
                             Navigator.push(
                               context,
                               MaterialPageRoute(
@@ -500,6 +665,8 @@ class _APURGuestScreenState extends State<APURGuestScreen> {
                                       backgroundColor: backgroundColor)),
                             );
                           } else if (newValue == 'Quizzes') {
+                            _startNewGame();
+                            _interstitialAd1?.show();
                             Navigator.push(
                               context,
                               MaterialPageRoute(
@@ -507,6 +674,8 @@ class _APURGuestScreenState extends State<APURGuestScreen> {
                                       backgroundColor: backgroundColor)),
                             );
                           } else if (newValue == 'Exams') {
+                            _startNewGame();
+                            _interstitialAd1?.show();
                             Navigator.push(
                               context,
                               MaterialPageRoute(
@@ -563,6 +732,8 @@ class _APURGuestScreenState extends State<APURGuestScreen> {
                                   _selectedOption = newValue ?? '';
                                 });
                                 if (newValue == 'Assignments') {
+                                  _startNewGame();
+                                  _interstitialAd1?.show();
                                   Navigator.push(
                                     context,
                                     MaterialPageRoute(
@@ -570,6 +741,8 @@ class _APURGuestScreenState extends State<APURGuestScreen> {
                                             backgroundColor: backgroundColor)),
                                   );
                                 } else if (newValue == 'Quizzes') {
+                                  _startNewGame();
+                                  _interstitialAd1?.show();
                                   Navigator.push(
                                     context,
                                     MaterialPageRoute(
@@ -577,6 +750,8 @@ class _APURGuestScreenState extends State<APURGuestScreen> {
                                             backgroundColor: backgroundColor)),
                                   );
                                 } else if (newValue == 'Exams') {
+                                  _startNewGame();
+                                  _interstitialAd1?.show();
                                   Navigator.push(
                                     context,
                                     MaterialPageRoute(
@@ -628,6 +803,8 @@ class _APURGuestScreenState extends State<APURGuestScreen> {
                             _selectedOption = newValue ?? '';
                           });
                           if (newValue == 'Assignments') {
+                            _startNewGame();
+                            _interstitialAd1?.show();
                             Navigator.push(
                               context,
                               MaterialPageRoute(
@@ -635,6 +812,8 @@ class _APURGuestScreenState extends State<APURGuestScreen> {
                                       backgroundColor: backgroundColor)),
                             );
                           } else if (newValue == 'Quizzes') {
+                            _startNewGame();
+                            _interstitialAd1?.show();
                             Navigator.push(
                               context,
                               MaterialPageRoute(
@@ -642,6 +821,8 @@ class _APURGuestScreenState extends State<APURGuestScreen> {
                                       backgroundColor: backgroundColor)),
                             );
                           } else if (newValue == 'Exams') {
+                            _startNewGame();
+                            _interstitialAd1?.show();
                             Navigator.push(
                               context,
                               MaterialPageRoute(
@@ -691,6 +872,8 @@ class _APURGuestScreenState extends State<APURGuestScreen> {
                             _selectedOption = newValue ?? '';
                           });
                           if (newValue == 'Assignments') {
+                            _startNewGame();
+                            _interstitialAd1?.show();
                             Navigator.push(
                               context,
                               MaterialPageRoute(
@@ -698,6 +881,8 @@ class _APURGuestScreenState extends State<APURGuestScreen> {
                                       backgroundColor: backgroundColor)),
                             );
                           } else if (newValue == 'Quizzes') {
+                            _startNewGame();
+                            _interstitialAd1?.show();
                             Navigator.push(
                               context,
                               MaterialPageRoute(
@@ -705,6 +890,8 @@ class _APURGuestScreenState extends State<APURGuestScreen> {
                                       backgroundColor: backgroundColor)),
                             );
                           } else if (newValue == 'Exams') {
+                            _startNewGame();
+                            _interstitialAd1?.show();
                             Navigator.push(
                               context,
                               MaterialPageRoute(
@@ -755,6 +942,8 @@ class _APURGuestScreenState extends State<APURGuestScreen> {
                             _selectedOption = newValue ?? '';
                           });
                           if (newValue == 'Assignments') {
+                            _startNewGame();
+                            _interstitialAd1?.show();
                             Navigator.push(
                               context,
                               MaterialPageRoute(
@@ -762,6 +951,8 @@ class _APURGuestScreenState extends State<APURGuestScreen> {
                                       backgroundColor: backgroundColor)),
                             );
                           } else if (newValue == 'Quizzes') {
+                            _startNewGame();
+                            _interstitialAd1?.show();
                             Navigator.push(
                               context,
                               MaterialPageRoute(
@@ -769,6 +960,8 @@ class _APURGuestScreenState extends State<APURGuestScreen> {
                                       backgroundColor: backgroundColor)),
                             );
                           } else if (newValue == 'Exams') {
+                            _startNewGame();
+                            _interstitialAd1?.show();
                             Navigator.push(
                               context,
                               MaterialPageRoute(
@@ -818,6 +1011,8 @@ class _APURGuestScreenState extends State<APURGuestScreen> {
                             _selectedOption = newValue ?? '';
                           });
                           if (newValue == 'Assignments') {
+                            _startNewGame();
+                            _interstitialAd1?.show();
                             Navigator.push(
                               context,
                               MaterialPageRoute(
@@ -825,6 +1020,8 @@ class _APURGuestScreenState extends State<APURGuestScreen> {
                                       backgroundColor: backgroundColor)),
                             );
                           } else if (newValue == 'Quizzes') {
+                            _startNewGame();
+                            _interstitialAd1?.show();
                             Navigator.push(
                               context,
                               MaterialPageRoute(
@@ -832,6 +1029,8 @@ class _APURGuestScreenState extends State<APURGuestScreen> {
                                       backgroundColor: backgroundColor)),
                             );
                           } else if (newValue == 'Exams') {
+                            _startNewGame();
+                            _interstitialAd1?.show();
                             Navigator.push(
                               context,
                               MaterialPageRoute(
@@ -881,6 +1080,8 @@ class _APURGuestScreenState extends State<APURGuestScreen> {
                   ),
                   child: TextButton(
                     onPressed: () {
+                      _startNewGame();
+                      _interstitialAd1?.show();
                       Navigator.push(
                         context,
                         MaterialPageRoute(
@@ -920,6 +1121,8 @@ class _APURGuestScreenState extends State<APURGuestScreen> {
                   ),
                   child: TextButton(
                     onPressed: () {
+                      _startNewGame();
+                      _interstitialAd1?.show();
                       Navigator.push(
                         context,
                         MaterialPageRoute(
@@ -968,7 +1171,7 @@ class _APURGuestScreenState extends State<APURGuestScreen> {
       backgroundColor: AppStyle.mainColor,
       appBar: AppBar(
         elevation: 0,
-        title: const Text('PURCOM '),
+        title: const Text('PURCOM'),
         centerTitle: true,
         backgroundColor: AppStyle.mainColor,
         actions: [
@@ -988,6 +1191,21 @@ class _APURGuestScreenState extends State<APURGuestScreen> {
           mainAxisAlignment: MainAxisAlignment.start,
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
+            Stack(
+              children: [
+                if (_bannerAd != null)
+                  Align(
+                    alignment: Alignment.bottomCenter,
+                    child: SafeArea(
+                      child: SizedBox(
+                        width: _bannerAd!.size.width.toDouble(),
+                        height: _bannerAd!.size.height.toDouble(),
+                        child: AdWidget(ad: _bannerAd!),
+                      ),
+                    ),
+                  )
+              ],
+            ),
             Row(
               children: [
                 Text(
@@ -1064,6 +1282,8 @@ class _APURGuestScreenState extends State<APURGuestScreen> {
                       crossAxisCount: 1,
                       children: snapshot.data!.docs
                           .map((note) => noteCard(() {
+                                _startNewGame();
+                                _interstitialAd1?.show();
                                 Navigator.push(
                                     context,
                                     MaterialPageRoute(

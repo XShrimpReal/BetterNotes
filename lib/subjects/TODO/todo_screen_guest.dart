@@ -1,45 +1,47 @@
+import 'dart:io';
+
 import 'package:BetterNotes/screens/home_screen.dart';
 import 'package:BetterNotes/screens/home_screen_admin.dart';
 import 'package:BetterNotes/screens/home_screen_guest.dart';
 import 'package:BetterNotes/screens/settings.dart';
 import 'package:BetterNotes/style/app_style.dart';
-import 'package:BetterNotes/subjects/ARTAPP/admin_Aart.dart';
-import 'package:BetterNotes/subjects/ARTAPP/admin_Eart.dart';
-import 'package:BetterNotes/subjects/ARTAPP/admin_Qart.dart';
-import 'package:BetterNotes/subjects/CAL2/admin_Acal2.dart';
-import 'package:BetterNotes/subjects/CAL2/admin_Ecal2.dart';
-import 'package:BetterNotes/subjects/CAL2/admin_Qcal2.dart';
-import 'package:BetterNotes/subjects/CHENGR/admin_Ache.dart';
-import 'package:BetterNotes/subjects/CHENGR/admin_Eche.dart';
-import 'package:BetterNotes/subjects/CHENGR/admin_Qche.dart';
-import 'package:BetterNotes/subjects/DSTRU1/admin_Adst.dart';
-import 'package:BetterNotes/subjects/DSTRU1/admin_Edst.dart';
-import 'package:BetterNotes/subjects/DSTRU1/admin_Qdst.dart';
-import 'package:BetterNotes/subjects/ENGIDA/admin_Aeng.dart';
-import 'package:BetterNotes/subjects/ENGIDA/admin_Eeng.dart';
-import 'package:BetterNotes/subjects/ENGIDA/admin_Qeng.dart';
-import 'package:BetterNotes/subjects/NSTP02/admin_Anst.dart';
-import 'package:BetterNotes/subjects/NSTP02/admin_Enst.dart';
-import 'package:BetterNotes/subjects/NSTP02/admin_Qnst.dart';
-import 'package:BetterNotes/subjects/OBOPRO/admin_Aobo.dart';
-import 'package:BetterNotes/subjects/OBOPRO/admin_Eobo.dart';
-import 'package:BetterNotes/subjects/OBOPRO/admin_Qobo.dart';
-import 'package:BetterNotes/subjects/PEDUC2/admin_Aped.dart';
-import 'package:BetterNotes/subjects/PEDUC2/admin_Eped.dart';
-import 'package:BetterNotes/subjects/PEDUC2/admin_Qped.dart';
-import 'package:BetterNotes/subjects/PHENGR/admin_Aphe.dart';
-import 'package:BetterNotes/subjects/PHENGR/admin_Ephe.dart';
-import 'package:BetterNotes/subjects/PHENGR/admin_Qphe.dart';
-import 'package:BetterNotes/subjects/PURCOM/admin_Apur.dart';
-import 'package:BetterNotes/subjects/PURCOM/admin_Epur.dart';
-import 'package:BetterNotes/subjects/PURCOM/admin_Qpur.dart';
+import 'package:BetterNotes/subjects/ARTAPP/guest_Aart.dart';
+import 'package:BetterNotes/subjects/ARTAPP/guest_Eart.dart';
+import 'package:BetterNotes/subjects/ARTAPP/guest_Qart.dart';
+import 'package:BetterNotes/subjects/CAL2/guest_Acal2.dart';
+import 'package:BetterNotes/subjects/CAL2/guest_Ecal2.dart';
+import 'package:BetterNotes/subjects/CAL2/guest_Qcal2.dart';
+import 'package:BetterNotes/subjects/CHENGR/guest_Ache.dart';
+import 'package:BetterNotes/subjects/CHENGR/guest_Eche.dart';
+import 'package:BetterNotes/subjects/CHENGR/guest_Qche.dart';
+import 'package:BetterNotes/subjects/DSTRU1/guest_Adst.dart';
+import 'package:BetterNotes/subjects/DSTRU1/guest_Edst.dart';
+import 'package:BetterNotes/subjects/DSTRU1/guest_Qdst.dart';
+import 'package:BetterNotes/subjects/ENGIDA/guest_Aeng.dart';
+import 'package:BetterNotes/subjects/ENGIDA/guest_Eeng.dart';
+import 'package:BetterNotes/subjects/ENGIDA/guest_Qeng.dart';
+import 'package:BetterNotes/subjects/NSTP02/guest_Anst.dart';
+import 'package:BetterNotes/subjects/NSTP02/guest_Enst.dart';
+import 'package:BetterNotes/subjects/NSTP02/guest_Qnst.dart';
+import 'package:BetterNotes/subjects/OBOPRO/guest_Aobo.dart';
+import 'package:BetterNotes/subjects/OBOPRO/guest_Eobo.dart';
+import 'package:BetterNotes/subjects/OBOPRO/guest_Qobo.dart';
+import 'package:BetterNotes/subjects/PEDUC2/guest_Aped.dart';
+import 'package:BetterNotes/subjects/PEDUC2/guest_Eped.dart';
+import 'package:BetterNotes/subjects/PEDUC2/guest_Qped.dart';
+import 'package:BetterNotes/subjects/PHENGR/guest_Aphe.dart';
+import 'package:BetterNotes/subjects/PHENGR/guest_Ephe.dart';
+import 'package:BetterNotes/subjects/PHENGR/guest_Qphe.dart';
+import 'package:BetterNotes/subjects/PURCOM/guest_Apur.dart';
+import 'package:BetterNotes/subjects/PURCOM/guest_Epur.dart';
+import 'package:BetterNotes/subjects/PURCOM/guest_Qpur.dart';
 import 'package:BetterNotes/subjects/TODO/todo_admin_card.dart';
 import 'package:BetterNotes/subjects/TODO/todo_guest_reader.dart';
-import 'package:BetterNotes/subjects/TODO/todo_screen_admin.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:google_mobile_ads/google_mobile_ads.dart';
 
 class TODOGuestScreen extends StatefulWidget {
   final Color backgroundColor;
@@ -66,6 +68,140 @@ class _TODOGuestScreenState extends State<TODOGuestScreen> {
   final String _selectedOption8 = 'CHENGR';
   final String _selectedOption9 = 'ARTAPP';
   final String _selectedOption10 = 'PHENGR';
+
+  // Ads Start
+  BannerAd? _bannerAd;
+  InterstitialAd? _interstitialAd;
+  InterstitialAd? _interstitialAd1;
+
+  // Banner
+  final String _adUnitId = Platform.isAndroid
+      ? 'ca-app-pub-4857824590253290/3085577772'
+      : 'ca-app-pub-4857824590253290/3085577772';
+
+  // Interstitial 1
+  final String _adUnitId1 = Platform.isAndroid
+      ? 'ca-app-pub-4857824590253290/3323887515'
+      : 'ca-app-pub-4857824590253290/3323887515';
+
+  // Interstitial 2
+  final String _adUnitId2 = Platform.isAndroid
+      ? 'ca-app-pub-4857824590253290/6840730197'
+      : 'ca-app-pub-4857824590253290/6840730197';
+
+  @override
+  void initState() {
+    super.initState();
+    _startNewGame();
+  }
+
+  void _startNewGame() {
+    _loadAd();
+    _loadAd1();
+    _loadAd2();
+  }
+
+  void _loadAd() async {
+    BannerAd(
+      adUnitId: _adUnitId,
+      request: const AdRequest(),
+      size: AdSize.banner,
+      listener: BannerAdListener(
+        // Called when an ad is successfully received.
+        onAdLoaded: (ad) {
+          setState(() {
+            _bannerAd = ad as BannerAd;
+          });
+        },
+        // Called when an ad request failed.
+        onAdFailedToLoad: (ad, err) {
+          ad.dispose();
+        },
+        // Called when an ad opens an overlay that covers the screen.
+        onAdOpened: (Ad ad) {},
+        // Called when an ad removes an overlay that covers the screen.
+        onAdClosed: (Ad ad) {},
+        // Called when an impression occurs on the ad.
+        onAdImpression: (Ad ad) {},
+      ),
+    ).load();
+  }
+
+  void _loadAd1() async {
+    InterstitialAd.load(
+        adUnitId: _adUnitId1,
+        request: const AdRequest(),
+        adLoadCallback: InterstitialAdLoadCallback(
+          // Called when an ad is successfully received.
+          onAdLoaded: (InterstitialAd ad) {
+            ad.fullScreenContentCallback = FullScreenContentCallback(
+                // Called when the ad showed the full screen content.
+                onAdShowedFullScreenContent: (ad) {},
+                // Called when an impression occurs on the ad.
+                onAdImpression: (ad) {},
+                // Called when the ad failed to show full screen content.
+                onAdFailedToShowFullScreenContent: (ad, err) {
+                  ad.dispose();
+                },
+                // Called when the ad dismissed full screen content.
+                onAdDismissedFullScreenContent: (ad) {
+                  ad.dispose();
+                },
+                // Called when a click is recorded for an ad.
+                onAdClicked: (ad) {});
+
+            // Keep a reference to the ad so you can show it later.
+            _interstitialAd = ad;
+          },
+          // Called when an ad request failed.
+          onAdFailedToLoad: (LoadAdError error) {
+            // ignore: avoid_print
+            print('InterstitialAd failed to load: $error');
+          },
+        ));
+  }
+
+  void _loadAd2() async {
+    InterstitialAd.load(
+        adUnitId: _adUnitId2,
+        request: const AdRequest(),
+        adLoadCallback: InterstitialAdLoadCallback(
+          // Called when an ad is successfully received.
+          onAdLoaded: (InterstitialAd ad) {
+            ad.fullScreenContentCallback = FullScreenContentCallback(
+                // Called when the ad showed the full screen content.
+                onAdShowedFullScreenContent: (ad) {},
+                // Called when an impression occurs on the ad.
+                onAdImpression: (ad) {},
+                // Called when the ad failed to show full screen content.
+                onAdFailedToShowFullScreenContent: (ad, err) {
+                  ad.dispose();
+                },
+                // Called when the ad dismissed full screen content.
+                onAdDismissedFullScreenContent: (ad) {
+                  ad.dispose();
+                },
+                // Called when a click is recorded for an ad.
+                onAdClicked: (ad) {});
+
+            // Keep a reference to the ad so you can show it later.
+            _interstitialAd1 = ad;
+          },
+          // Called when an ad request failed.
+          onAdFailedToLoad: (LoadAdError error) {
+            // ignore: avoid_print
+            print('InterstitialAd failed to load: $error');
+          },
+        ));
+  }
+
+  @override
+  void dispose() {
+    _bannerAd?.dispose();
+    _interstitialAd?.dispose();
+    _interstitialAd1?.dispose();
+    super.dispose();
+  }
 
   bool _isValid() {
     final username = _usernameController.text;
@@ -192,6 +328,8 @@ class _TODOGuestScreenState extends State<TODOGuestScreen> {
           const SizedBox(height: 3),
           TextButton(
             onPressed: () {
+              _startNewGame();
+              _interstitialAd1?.show();
               Navigator.push(
                 context,
                 MaterialPageRoute(
@@ -239,28 +377,31 @@ class _TODOGuestScreenState extends State<TODOGuestScreen> {
                           setState(() {
                             _selectedOption = newValue ?? '';
                           });
-                          const Divider(
-                            height: 1000,
-                          );
                           if (newValue == 'Assignments') {
+                            _startNewGame();
+                            _interstitialAd1?.show();
                             Navigator.push(
                               context,
                               MaterialPageRoute(
-                                  builder: (context) => AdminCALScreen(
+                                  builder: (context) => ACALGuestScreen(
                                       backgroundColor: backgroundColor)),
                             );
                           } else if (newValue == 'Quizzes') {
+                            _startNewGame();
+                            _interstitialAd1?.show();
                             Navigator.push(
                               context,
                               MaterialPageRoute(
-                                  builder: (context) => QCALAdminCALScreen(
+                                  builder: (context) => QCALGuestScreen(
                                       backgroundColor: backgroundColor)),
                             );
                           } else if (newValue == 'Exams') {
+                            _startNewGame();
+                            _interstitialAd1?.show();
                             Navigator.push(
                               context,
                               MaterialPageRoute(
-                                  builder: (context) => ECALAdminCALScreen(
+                                  builder: (context) => ECALGuestScreen(
                                       backgroundColor: backgroundColor)),
                             );
                           }
@@ -307,24 +448,30 @@ class _TODOGuestScreenState extends State<TODOGuestScreen> {
                             _selectedOption = newValue ?? '';
                           });
                           if (newValue == 'Assignments') {
+                            _startNewGame();
+                            _interstitialAd1?.show();
                             Navigator.push(
                               context,
                               MaterialPageRoute(
-                                  builder: (context) => AdminOBOScreen(
+                                  builder: (context) => AOBOGuestScreen(
                                       backgroundColor: backgroundColor)),
                             );
                           } else if (newValue == 'Quizzes') {
+                            _startNewGame();
+                            _interstitialAd1?.show();
                             Navigator.push(
                               context,
                               MaterialPageRoute(
-                                  builder: (context) => QOBOAdminCALScreen(
+                                  builder: (context) => QOBOGuestScreen(
                                       backgroundColor: backgroundColor)),
                             );
                           } else if (newValue == 'Exams') {
+                            _startNewGame();
+                            _interstitialAd1?.show();
                             Navigator.push(
                               context,
                               MaterialPageRoute(
-                                  builder: (context) => EOBOAdminCALScreen(
+                                  builder: (context) => EOBOGuestScreen(
                                       backgroundColor: backgroundColor)),
                             );
                           }
@@ -371,24 +518,30 @@ class _TODOGuestScreenState extends State<TODOGuestScreen> {
                             _selectedOption = newValue ?? '';
                           });
                           if (newValue == 'Assignments') {
+                            _startNewGame();
+                            _interstitialAd1?.show();
                             Navigator.push(
                               context,
                               MaterialPageRoute(
-                                  builder: (context) => AdminENGScreen(
+                                  builder: (context) => AENGGuestScreen(
                                       backgroundColor: backgroundColor)),
                             );
                           } else if (newValue == 'Quizzes') {
+                            _startNewGame();
+                            _interstitialAd1?.show();
                             Navigator.push(
                               context,
                               MaterialPageRoute(
-                                  builder: (context) => QENGAdminCALScreen(
+                                  builder: (context) => QENGGuestScreen(
                                       backgroundColor: backgroundColor)),
                             );
                           } else if (newValue == 'Exams') {
+                            _startNewGame();
+                            _interstitialAd1?.show();
                             Navigator.push(
                               context,
                               MaterialPageRoute(
-                                  builder: (context) => EENGAdminCALScreen(
+                                  builder: (context) => EENGGuestScreen(
                                       backgroundColor: backgroundColor)),
                             );
                           }
@@ -434,24 +587,30 @@ class _TODOGuestScreenState extends State<TODOGuestScreen> {
                             _selectedOption = newValue ?? '';
                           });
                           if (newValue == 'Assignments') {
+                            _startNewGame();
+                            _interstitialAd1?.show();
                             Navigator.push(
                               context,
                               MaterialPageRoute(
-                                  builder: (context) => AdminDSTScreen(
+                                  builder: (context) => ADSTGuestScreen(
                                       backgroundColor: backgroundColor)),
                             );
                           } else if (newValue == 'Quizzes') {
+                            _startNewGame();
+                            _interstitialAd1?.show();
                             Navigator.push(
                               context,
                               MaterialPageRoute(
-                                  builder: (context) => QDSTAdminCALScreen(
+                                  builder: (context) => QDSTGuestScreen(
                                       backgroundColor: backgroundColor)),
                             );
                           } else if (newValue == 'Exams') {
+                            _startNewGame();
+                            _interstitialAd1?.show();
                             Navigator.push(
                               context,
                               MaterialPageRoute(
-                                  builder: (context) => EDSTAdminCALScreen(
+                                  builder: (context) => EDSTGuestScreen(
                                       backgroundColor: backgroundColor)),
                             );
                           }
@@ -497,24 +656,30 @@ class _TODOGuestScreenState extends State<TODOGuestScreen> {
                             _selectedOption = newValue ?? '';
                           });
                           if (newValue == 'Assignments') {
+                            _startNewGame();
+                            _interstitialAd1?.show();
                             Navigator.push(
                               context,
                               MaterialPageRoute(
-                                  builder: (context) => AdminPEDScreen(
+                                  builder: (context) => APEDGuestScreen(
                                       backgroundColor: backgroundColor)),
                             );
                           } else if (newValue == 'Quizzes') {
+                            _startNewGame();
+                            _interstitialAd1?.show();
                             Navigator.push(
                               context,
                               MaterialPageRoute(
-                                  builder: (context) => QPEDAdminCALScreen(
+                                  builder: (context) => QPEDGuestScreen(
                                       backgroundColor: backgroundColor)),
                             );
                           } else if (newValue == 'Exams') {
+                            _startNewGame();
+                            _interstitialAd1?.show();
                             Navigator.push(
                               context,
                               MaterialPageRoute(
-                                  builder: (context) => EPEDAdminCALScreen(
+                                  builder: (context) => EPEDGuestScreen(
                                       backgroundColor: backgroundColor)),
                             );
                           }
@@ -560,24 +725,30 @@ class _TODOGuestScreenState extends State<TODOGuestScreen> {
                             _selectedOption = newValue ?? '';
                           });
                           if (newValue == 'Assignments') {
+                            _startNewGame();
+                            _interstitialAd1?.show();
                             Navigator.push(
                               context,
                               MaterialPageRoute(
-                                  builder: (context) => AdminPURScreen(
+                                  builder: (context) => APURGuestScreen(
                                       backgroundColor: backgroundColor)),
                             );
                           } else if (newValue == 'Quizzes') {
+                            _startNewGame();
+                            _interstitialAd1?.show();
                             Navigator.push(
                               context,
                               MaterialPageRoute(
-                                  builder: (context) => QPURAdminCALScreen(
+                                  builder: (context) => QPURGuestScreen(
                                       backgroundColor: backgroundColor)),
                             );
                           } else if (newValue == 'Exams') {
+                            _startNewGame();
+                            _interstitialAd1?.show();
                             Navigator.push(
                               context,
                               MaterialPageRoute(
-                                  builder: (context) => EPURAdminCALScreen(
+                                  builder: (context) => EPURGuestScreen(
                                       backgroundColor: backgroundColor)),
                             );
                           }
@@ -624,24 +795,30 @@ class _TODOGuestScreenState extends State<TODOGuestScreen> {
                             _selectedOption = newValue ?? '';
                           });
                           if (newValue == 'Assignments') {
+                            _startNewGame();
+                            _interstitialAd1?.show();
                             Navigator.push(
                               context,
                               MaterialPageRoute(
-                                  builder: (context) => AdminNSTScreen(
+                                  builder: (context) => ANSTGuestScreen(
                                       backgroundColor: backgroundColor)),
                             );
                           } else if (newValue == 'Quizzes') {
+                            _startNewGame();
+                            _interstitialAd1?.show();
                             Navigator.push(
                               context,
                               MaterialPageRoute(
-                                  builder: (context) => QNSTAdminCALScreen(
+                                  builder: (context) => QNSTGuestScreen(
                                       backgroundColor: backgroundColor)),
                             );
                           } else if (newValue == 'Exams') {
+                            _startNewGame();
+                            _interstitialAd1?.show();
                             Navigator.push(
                               context,
                               MaterialPageRoute(
-                                  builder: (context) => ENSTAdminCALScreen(
+                                  builder: (context) => ENSTGuestScreen(
                                       backgroundColor: backgroundColor)),
                             );
                           }
@@ -687,24 +864,30 @@ class _TODOGuestScreenState extends State<TODOGuestScreen> {
                             _selectedOption = newValue ?? '';
                           });
                           if (newValue == 'Assignments') {
+                            _startNewGame();
+                            _interstitialAd1?.show();
                             Navigator.push(
                               context,
                               MaterialPageRoute(
-                                  builder: (context) => AdminCHEScreen(
+                                  builder: (context) => ACHEGuestScreen(
                                       backgroundColor: backgroundColor)),
                             );
                           } else if (newValue == 'Quizzes') {
+                            _startNewGame();
+                            _interstitialAd1?.show();
                             Navigator.push(
                               context,
                               MaterialPageRoute(
-                                  builder: (context) => QCHEAdminCALScreen(
+                                  builder: (context) => QCHEGuestScreen(
                                       backgroundColor: backgroundColor)),
                             );
                           } else if (newValue == 'Exams') {
+                            _startNewGame();
+                            _interstitialAd1?.show();
                             Navigator.push(
                               context,
                               MaterialPageRoute(
-                                  builder: (context) => ECHEAdminCALScreen(
+                                  builder: (context) => ECHEGuestScreen(
                                       backgroundColor: backgroundColor)),
                             );
                           }
@@ -751,24 +934,30 @@ class _TODOGuestScreenState extends State<TODOGuestScreen> {
                             _selectedOption = newValue ?? '';
                           });
                           if (newValue == 'Assignments') {
+                            _startNewGame();
+                            _interstitialAd1?.show();
                             Navigator.push(
                               context,
                               MaterialPageRoute(
-                                  builder: (context) => AdminARTScreen(
+                                  builder: (context) => AARTGuestScreen(
                                       backgroundColor: backgroundColor)),
                             );
                           } else if (newValue == 'Quizzes') {
+                            _startNewGame();
+                            _interstitialAd1?.show();
                             Navigator.push(
                               context,
                               MaterialPageRoute(
-                                  builder: (context) => QARTAdminCALScreen(
+                                  builder: (context) => QARTGuestScreen(
                                       backgroundColor: backgroundColor)),
                             );
                           } else if (newValue == 'Exams') {
+                            _startNewGame();
+                            _interstitialAd1?.show();
                             Navigator.push(
                               context,
                               MaterialPageRoute(
-                                  builder: (context) => EARTAdminCALScreen(
+                                  builder: (context) => EARTGuestScreen(
                                       backgroundColor: backgroundColor)),
                             );
                           }
@@ -814,24 +1003,30 @@ class _TODOGuestScreenState extends State<TODOGuestScreen> {
                             _selectedOption = newValue ?? '';
                           });
                           if (newValue == 'Assignments') {
+                            _startNewGame();
+                            _interstitialAd1?.show();
                             Navigator.push(
                               context,
                               MaterialPageRoute(
-                                  builder: (context) => AdminPHEScreen(
+                                  builder: (context) => APHEGuestScreen(
                                       backgroundColor: backgroundColor)),
                             );
                           } else if (newValue == 'Quizzes') {
+                            _startNewGame();
+                            _interstitialAd1?.show();
                             Navigator.push(
                               context,
                               MaterialPageRoute(
-                                  builder: (context) => QPHEAdminCALScreen(
+                                  builder: (context) => QPHEGuestScreen(
                                       backgroundColor: backgroundColor)),
                             );
                           } else if (newValue == 'Exams') {
+                            _startNewGame();
+                            _interstitialAd1?.show();
                             Navigator.push(
                               context,
                               MaterialPageRoute(
-                                  builder: (context) => EPHEAdminCALScreen(
+                                  builder: (context) => EPHEGuestScreen(
                                       backgroundColor: backgroundColor)),
                             );
                           }
@@ -877,6 +1072,8 @@ class _TODOGuestScreenState extends State<TODOGuestScreen> {
                   ),
                   child: TextButton(
                     onPressed: () {
+                      _startNewGame();
+                      _interstitialAd1?.show();
                       Navigator.push(
                         context,
                         MaterialPageRoute(
@@ -916,10 +1113,12 @@ class _TODOGuestScreenState extends State<TODOGuestScreen> {
                   ),
                   child: TextButton(
                     onPressed: () {
+                      _startNewGame();
+                      _interstitialAd1?.show();
                       Navigator.push(
                         context,
                         MaterialPageRoute(
-                            builder: (context) => TODOAdminScreen(
+                            builder: (context) => TODOGuestScreen(
                                 backgroundColor: backgroundColor)),
                       );
                     },
@@ -984,6 +1183,21 @@ class _TODOGuestScreenState extends State<TODOGuestScreen> {
           mainAxisAlignment: MainAxisAlignment.start,
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
+            Stack(
+              children: [
+                if (_bannerAd != null)
+                  Align(
+                    alignment: Alignment.bottomCenter,
+                    child: SafeArea(
+                      child: SizedBox(
+                        width: _bannerAd!.size.width.toDouble(),
+                        height: _bannerAd!.size.height.toDouble(),
+                        child: AdWidget(ad: _bannerAd!),
+                      ),
+                    ),
+                  )
+              ],
+            ),
             Row(
               children: [
                 Text(
@@ -1060,6 +1274,8 @@ class _TODOGuestScreenState extends State<TODOGuestScreen> {
                       crossAxisCount: 1,
                       children: snapshot.data!.docs
                           .map((note) => noteCard(() {
+                                _startNewGame();
+                                _interstitialAd1?.show();
                                 Navigator.push(
                                     context,
                                     MaterialPageRoute(

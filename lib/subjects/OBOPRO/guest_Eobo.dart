@@ -39,6 +39,8 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:google_mobile_ads/google_mobile_ads.dart';
+import 'dart:io';
 
 class EOBOGuestScreen extends StatefulWidget {
   final Color backgroundColor;
@@ -65,6 +67,142 @@ class _EOBOGuestScreenState extends State<EOBOGuestScreen> {
   String _selectedOption8 = 'CHENGR';
   String _selectedOption9 = 'ARTAPP';
   String _selectedOption10 = 'PHENGR';
+
+  // Ads Start
+  BannerAd? _bannerAd;
+  InterstitialAd? _interstitialAd;
+  InterstitialAd? _interstitialAd1;
+
+
+  // Banner
+  final String _adUnitId = Platform.isAndroid
+      ? 'ca-app-pub-4857824590253290/3085577772'
+      : 'ca-app-pub-4857824590253290/3085577772';
+
+  // Interstitial 1
+  final String _adUnitId1 = Platform.isAndroid
+      ? 'ca-app-pub-4857824590253290/3323887515'
+      : 'ca-app-pub-4857824590253290/3323887515';
+
+  // Interstitial 2
+  final String _adUnitId2 = Platform.isAndroid
+      ? 'ca-app-pub-4857824590253290/6840730197'
+      : 'ca-app-pub-4857824590253290/6840730197';
+
+
+  @override
+  void initState() {
+    super.initState();
+    _startNewGame();
+  }
+
+  void _startNewGame() {
+    _loadAd();
+    _loadAd1();
+    _loadAd2();
+  }
+
+  void _loadAd() async {
+    BannerAd(
+      adUnitId: _adUnitId,
+      request: const AdRequest(),
+      size: AdSize.banner,
+      listener: BannerAdListener(
+        // Called when an ad is successfully received.
+        onAdLoaded: (ad) {
+          setState(() {
+            _bannerAd = ad as BannerAd;
+          });
+        },
+        // Called when an ad request failed.
+        onAdFailedToLoad: (ad, err) {
+          ad.dispose();
+        },
+        // Called when an ad opens an overlay that covers the screen.
+        onAdOpened: (Ad ad) {},
+        // Called when an ad removes an overlay that covers the screen.
+        onAdClosed: (Ad ad) {},
+        // Called when an impression occurs on the ad.
+        onAdImpression: (Ad ad) {},
+      ),
+    ).load();
+  }
+
+  void _loadAd1() async {
+    InterstitialAd.load(
+        adUnitId: _adUnitId1,
+        request: const AdRequest(),
+        adLoadCallback: InterstitialAdLoadCallback(
+          // Called when an ad is successfully received.
+          onAdLoaded: (InterstitialAd ad) {
+            ad.fullScreenContentCallback = FullScreenContentCallback(
+              // Called when the ad showed the full screen content.
+                onAdShowedFullScreenContent: (ad) {},
+                // Called when an impression occurs on the ad.
+                onAdImpression: (ad) {},
+                // Called when the ad failed to show full screen content.
+                onAdFailedToShowFullScreenContent: (ad, err) {
+                  ad.dispose();
+                },
+                // Called when the ad dismissed full screen content.
+                onAdDismissedFullScreenContent: (ad) {
+                  ad.dispose();
+                },
+                // Called when a click is recorded for an ad.
+                onAdClicked: (ad) {});
+
+            // Keep a reference to the ad so you can show it later.
+            _interstitialAd = ad;
+          },
+          // Called when an ad request failed.
+          onAdFailedToLoad: (LoadAdError error) {
+            // ignore: avoid_print
+            print('InterstitialAd failed to load: $error');
+          },
+        ));
+  }
+
+  void _loadAd2() async {
+    InterstitialAd.load(
+        adUnitId: _adUnitId2,
+        request: const AdRequest(),
+        adLoadCallback: InterstitialAdLoadCallback(
+          // Called when an ad is successfully received.
+          onAdLoaded: (InterstitialAd ad) {
+            ad.fullScreenContentCallback = FullScreenContentCallback(
+              // Called when the ad showed the full screen content.
+                onAdShowedFullScreenContent: (ad) {},
+                // Called when an impression occurs on the ad.
+                onAdImpression: (ad) {},
+                // Called when the ad failed to show full screen content.
+                onAdFailedToShowFullScreenContent: (ad, err) {
+                  ad.dispose();
+                },
+                // Called when the ad dismissed full screen content.
+                onAdDismissedFullScreenContent: (ad) {
+                  ad.dispose();
+                },
+                // Called when a click is recorded for an ad.
+                onAdClicked: (ad) {});
+
+            // Keep a reference to the ad so you can show it later.
+            _interstitialAd1 = ad;
+          },
+          // Called when an ad request failed.
+          onAdFailedToLoad: (LoadAdError error) {
+            // ignore: avoid_print
+            print('InterstitialAd failed to load: $error');
+          },
+        ));
+  }
+
+  @override
+  void dispose() {
+    _bannerAd?.dispose();
+    _interstitialAd?.dispose();
+    _interstitialAd1?.dispose();
+    super.dispose();
+  }
 
   bool _isValid() {
     final username = _usernameController.text;
@@ -190,6 +328,8 @@ class _EOBOGuestScreenState extends State<EOBOGuestScreen> {
           ),
           TextButton(
             onPressed: () {
+              _startNewGame();
+              _interstitialAd1?.show();
               Navigator.push(
                 context,
                 MaterialPageRoute(
@@ -225,60 +365,66 @@ class _EOBOGuestScreenState extends State<EOBOGuestScreen> {
               Flexible(
                 child: _selectedOption == ''
                     ? Text(
-                        'CALCU2',
+                  'CALCU2',
+                  style: GoogleFonts.roboto(
+                      color: Colors.black,
+                      fontWeight: FontWeight.bold,
+                      fontSize: 18),
+                )
+                    : DropdownButton<String>(
+                  value: _selectedOption,
+                  onChanged: (String? newValue) {
+                    setState(() {
+                      _selectedOption = newValue ?? '';
+                    });
+                    if (newValue == 'Assignments') {
+                      _startNewGame();
+                      _interstitialAd1?.show();
+                      Navigator.push(
+                        context,
+                        MaterialPageRoute(
+                            builder: (context) => ACALGuestScreen(
+                                backgroundColor: backgroundColor)),
+                      );
+                    } else if (newValue == 'Quizzes') {
+                      _startNewGame();
+                      _interstitialAd1?.show();
+                      Navigator.push(
+                        context,
+                        MaterialPageRoute(
+                            builder: (context) => QCALGuestScreen(
+                                backgroundColor: backgroundColor)),
+                      );
+                    } else if (newValue == 'Exams') {
+                      _startNewGame();
+                      _interstitialAd1?.show();
+                      Navigator.push(
+                        context,
+                        MaterialPageRoute(
+                            builder: (context) => ECALGuestScreen(
+                                backgroundColor: backgroundColor)),
+                      );
+                    }
+                  },
+                  items: <String>[
+                    'CALCU2',
+                    'Assignments',
+                    'Quizzes',
+                    'Exams'
+                  ].map<DropdownMenuItem<String>>((String value) {
+                    return DropdownMenuItem<String>(
+                      value: value,
+                      child: Text(
+                        value,
                         style: GoogleFonts.roboto(
                             color: Colors.black,
                             fontWeight: FontWeight.bold,
                             fontSize: 18),
-                      )
-                    : DropdownButton<String>(
-                        value: _selectedOption,
-                        onChanged: (String? newValue) {
-                          setState(() {
-                            _selectedOption = newValue ?? '';
-                          });
-                          if (newValue == 'Assignments') {
-                            Navigator.push(
-                              context,
-                              MaterialPageRoute(
-                                  builder: (context) => ACALGuestScreen(
-                                      backgroundColor: backgroundColor)),
-                            );
-                          } else if (newValue == 'Quizzes') {
-                            Navigator.push(
-                              context,
-                              MaterialPageRoute(
-                                  builder: (context) => QCALGuestScreen(
-                                      backgroundColor: backgroundColor)),
-                            );
-                          } else if (newValue == 'Exams') {
-                            Navigator.push(
-                              context,
-                              MaterialPageRoute(
-                                  builder: (context) => ECALGuestScreen(
-                                      backgroundColor: backgroundColor)),
-                            );
-                          }
-                        },
-                        items: <String>[
-                          'CALCU2',
-                          'Assignments',
-                          'Quizzes',
-                          'Exams'
-                        ].map<DropdownMenuItem<String>>((String value) {
-                          return DropdownMenuItem<String>(
-                            value: value,
-                            child: Text(
-                              value,
-                              style: GoogleFonts.roboto(
-                                  color: Colors.black,
-                                  fontWeight: FontWeight.bold,
-                                  fontSize: 18),
-                            ),
-                          );
-                        }).toList(),
-                        dropdownColor: const Color(0xFFF1E3DC),
                       ),
+                    );
+                  }).toList(),
+                  dropdownColor: const Color(0xFFF1E3DC),
+                ),
               ),
             ],
           ),
@@ -297,59 +443,65 @@ class _EOBOGuestScreenState extends State<EOBOGuestScreen> {
                     Flexible(
                       child: _selectedOption2 == ''
                           ? Text(
-                              'OBOPRO',
-                              style: GoogleFonts.roboto(
-                                  color: Colors.black,
-                                  fontWeight: FontWeight.bold,
-                                  fontSize: 18),
-                            )
+                        'OBOPRO',
+                        style: GoogleFonts.roboto(
+                            color: Colors.black,
+                            fontWeight: FontWeight.bold,
+                            fontSize: 18),
+                      )
                           : DropdownButton<String>(
-                              value: _selectedOption2,
-                              onChanged: (String? newValue) {
-                                setState(() {
-                                  _selectedOption = newValue ?? '';
-                                });
-                                if (newValue == 'Assignments') {
-                                  Navigator.push(
-                                    context,
-                                    MaterialPageRoute(
-                                        builder: (context) => AOBOGuestScreen(
-                                            backgroundColor: backgroundColor)),
-                                  );
-                                } else if (newValue == 'Quizzes') {
-                                  Navigator.push(
-                                    context,
-                                    MaterialPageRoute(
-                                        builder: (context) => QOBOGuestScreen(
-                                            backgroundColor: backgroundColor)),
-                                  );
-                                } else if (newValue == 'Exams') {
-                                  Navigator.push(
-                                    context,
-                                    MaterialPageRoute(
-                                        builder: (context) => EOBOGuestScreen(
-                                            backgroundColor: backgroundColor)),
-                                  );
-                                }
-                              },
-                              items: <String>[
-                                'OBOPRO',
-                                'Assignments',
-                                'Quizzes',
-                                'Exams'
-                              ].map<DropdownMenuItem<String>>((String value) {
-                                return DropdownMenuItem<String>(
-                                  value: value,
-                                  child: Text(
-                                    value,
-                                    style: GoogleFonts.roboto(
-                                        color: Colors.black,
-                                        fontWeight: FontWeight.bold,
-                                        fontSize: 18),
-                                  ),
-                                );
-                              }).toList(),
-                              dropdownColor: const Color(0xFFF1E3DC)),
+                          value: _selectedOption2,
+                          onChanged: (String? newValue) {
+                            setState(() {
+                              _selectedOption = newValue ?? '';
+                            });
+                            if (newValue == 'Assignments') {
+                              _startNewGame();
+                              _interstitialAd1?.show();
+                              Navigator.push(
+                                context,
+                                MaterialPageRoute(
+                                    builder: (context) => AOBOGuestScreen(
+                                        backgroundColor: backgroundColor)),
+                              );
+                            } else if (newValue == 'Quizzes') {
+                              _startNewGame();
+                              _interstitialAd1?.show();
+                              Navigator.push(
+                                context,
+                                MaterialPageRoute(
+                                    builder: (context) => QOBOGuestScreen(
+                                        backgroundColor: backgroundColor)),
+                              );
+                            } else if (newValue == 'Exams') {
+                              _startNewGame();
+                              _interstitialAd1?.show();
+                              Navigator.push(
+                                context,
+                                MaterialPageRoute(
+                                    builder: (context) => EOBOGuestScreen(
+                                        backgroundColor: backgroundColor)),
+                              );
+                            }
+                          },
+                          items: <String>[
+                            'OBOPRO',
+                            'Assignments',
+                            'Quizzes',
+                            'Exams'
+                          ].map<DropdownMenuItem<String>>((String value) {
+                            return DropdownMenuItem<String>(
+                              value: value,
+                              child: Text(
+                                value,
+                                style: GoogleFonts.roboto(
+                                    color: Colors.black,
+                                    fontWeight: FontWeight.bold,
+                                    fontSize: 18),
+                              ),
+                            );
+                          }).toList(),
+                          dropdownColor: const Color(0xFFF1E3DC)),
                     ),
                   ],
                 ),
@@ -362,59 +514,65 @@ class _EOBOGuestScreenState extends State<EOBOGuestScreen> {
               Flexible(
                 child: _selectedOption3 == ''
                     ? Text(
-                        'ENGIDA',
-                        style: GoogleFonts.roboto(
-                            color: Colors.black,
-                            fontWeight: FontWeight.bold,
-                            fontSize: 18),
-                      )
+                  'ENGIDA',
+                  style: GoogleFonts.roboto(
+                      color: Colors.black,
+                      fontWeight: FontWeight.bold,
+                      fontSize: 18),
+                )
                     : DropdownButton<String>(
-                        value: _selectedOption3,
-                        onChanged: (String? newValue) {
-                          setState(() {
-                            _selectedOption = newValue ?? '';
-                          });
-                          if (newValue == 'Assignments') {
-                            Navigator.push(
-                              context,
-                              MaterialPageRoute(
-                                  builder: (context) => AENGGuestScreen(
-                                      backgroundColor: backgroundColor)),
-                            );
-                          } else if (newValue == 'Quizzes') {
-                            Navigator.push(
-                              context,
-                              MaterialPageRoute(
-                                  builder: (context) => QENGGuestScreen(
-                                      backgroundColor: backgroundColor)),
-                            );
-                          } else if (newValue == 'Exams') {
-                            Navigator.push(
-                              context,
-                              MaterialPageRoute(
-                                  builder: (context) => EENGGuestScreen(
-                                      backgroundColor: backgroundColor)),
-                            );
-                          }
-                        },
-                        items: <String>[
-                          'ENGIDA',
-                          'Assignments',
-                          'Quizzes',
-                          'Exams'
-                        ].map<DropdownMenuItem<String>>((String value) {
-                          return DropdownMenuItem<String>(
-                            value: value,
-                            child: Text(
-                              value,
-                              style: GoogleFonts.roboto(
-                                  color: Colors.black,
-                                  fontWeight: FontWeight.bold,
-                                  fontSize: 18),
-                            ),
-                          );
-                        }).toList(),
-                        dropdownColor: const Color(0xFFF1E3DC)),
+                    value: _selectedOption3,
+                    onChanged: (String? newValue) {
+                      setState(() {
+                        _selectedOption = newValue ?? '';
+                      });
+                      if (newValue == 'Assignments') {
+                        _startNewGame();
+                        _interstitialAd1?.show();
+                        Navigator.push(
+                          context,
+                          MaterialPageRoute(
+                              builder: (context) => AENGGuestScreen(
+                                  backgroundColor: backgroundColor)),
+                        );
+                      } else if (newValue == 'Quizzes') {
+                        _startNewGame();
+                        _interstitialAd1?.show();
+                        Navigator.push(
+                          context,
+                          MaterialPageRoute(
+                              builder: (context) => QENGGuestScreen(
+                                  backgroundColor: backgroundColor)),
+                        );
+                      } else if (newValue == 'Exams') {
+                        _startNewGame();
+                        _interstitialAd1?.show();
+                        Navigator.push(
+                          context,
+                          MaterialPageRoute(
+                              builder: (context) => EENGGuestScreen(
+                                  backgroundColor: backgroundColor)),
+                        );
+                      }
+                    },
+                    items: <String>[
+                      'ENGIDA',
+                      'Assignments',
+                      'Quizzes',
+                      'Exams'
+                    ].map<DropdownMenuItem<String>>((String value) {
+                      return DropdownMenuItem<String>(
+                        value: value,
+                        child: Text(
+                          value,
+                          style: GoogleFonts.roboto(
+                              color: Colors.black,
+                              fontWeight: FontWeight.bold,
+                              fontSize: 18),
+                        ),
+                      );
+                    }).toList(),
+                    dropdownColor: const Color(0xFFF1E3DC)),
               ),
             ],
           ),
@@ -425,59 +583,65 @@ class _EOBOGuestScreenState extends State<EOBOGuestScreen> {
               Flexible(
                 child: _selectedOption4 == ''
                     ? Text(
-                        'DSTRU1',
-                        style: GoogleFonts.roboto(
-                            color: Colors.black,
-                            fontWeight: FontWeight.bold,
-                            fontSize: 18),
-                      )
+                  'DSTRU1',
+                  style: GoogleFonts.roboto(
+                      color: Colors.black,
+                      fontWeight: FontWeight.bold,
+                      fontSize: 18),
+                )
                     : DropdownButton<String>(
-                        value: _selectedOption4,
-                        onChanged: (String? newValue) {
-                          setState(() {
-                            _selectedOption = newValue ?? '';
-                          });
-                          if (newValue == 'Assignments') {
-                            Navigator.push(
-                              context,
-                              MaterialPageRoute(
-                                  builder: (context) => ADSTGuestScreen(
-                                      backgroundColor: backgroundColor)),
-                            );
-                          } else if (newValue == 'Quizzes') {
-                            Navigator.push(
-                              context,
-                              MaterialPageRoute(
-                                  builder: (context) => QDSTGuestScreen(
-                                      backgroundColor: backgroundColor)),
-                            );
-                          } else if (newValue == 'Exams') {
-                            Navigator.push(
-                              context,
-                              MaterialPageRoute(
-                                  builder: (context) => EDSTGuestScreen(
-                                      backgroundColor: backgroundColor)),
-                            );
-                          }
-                        },
-                        items: <String>[
-                          'DSTRU1',
-                          'Assignments',
-                          'Quizzes',
-                          'Exams'
-                        ].map<DropdownMenuItem<String>>((String value) {
-                          return DropdownMenuItem<String>(
-                            value: value,
-                            child: Text(
-                              value,
-                              style: GoogleFonts.roboto(
-                                  color: Colors.black,
-                                  fontWeight: FontWeight.bold,
-                                  fontSize: 18),
-                            ),
-                          );
-                        }).toList(),
-                        dropdownColor: const Color(0xFFF1E3DC)),
+                    value: _selectedOption4,
+                    onChanged: (String? newValue) {
+                      setState(() {
+                        _selectedOption = newValue ?? '';
+                      });
+                      if (newValue == 'Assignments') {
+                        _startNewGame();
+                        _interstitialAd1?.show();
+                        Navigator.push(
+                          context,
+                          MaterialPageRoute(
+                              builder: (context) => ADSTGuestScreen(
+                                  backgroundColor: backgroundColor)),
+                        );
+                      } else if (newValue == 'Quizzes') {
+                        _startNewGame();
+                        _interstitialAd1?.show();
+                        Navigator.push(
+                          context,
+                          MaterialPageRoute(
+                              builder: (context) => QDSTGuestScreen(
+                                  backgroundColor: backgroundColor)),
+                        );
+                      } else if (newValue == 'Exams') {
+                        _startNewGame();
+                        _interstitialAd1?.show();
+                        Navigator.push(
+                          context,
+                          MaterialPageRoute(
+                              builder: (context) => EDSTGuestScreen(
+                                  backgroundColor: backgroundColor)),
+                        );
+                      }
+                    },
+                    items: <String>[
+                      'DSTRU1',
+                      'Assignments',
+                      'Quizzes',
+                      'Exams'
+                    ].map<DropdownMenuItem<String>>((String value) {
+                      return DropdownMenuItem<String>(
+                        value: value,
+                        child: Text(
+                          value,
+                          style: GoogleFonts.roboto(
+                              color: Colors.black,
+                              fontWeight: FontWeight.bold,
+                              fontSize: 18),
+                        ),
+                      );
+                    }).toList(),
+                    dropdownColor: const Color(0xFFF1E3DC)),
               ),
             ],
           ),
@@ -488,59 +652,65 @@ class _EOBOGuestScreenState extends State<EOBOGuestScreen> {
               Flexible(
                 child: _selectedOption5 == ''
                     ? Text(
-                        'PEDUC2',
-                        style: GoogleFonts.roboto(
-                            color: Colors.black,
-                            fontWeight: FontWeight.bold,
-                            fontSize: 18),
-                      )
+                  'PEDUC2',
+                  style: GoogleFonts.roboto(
+                      color: Colors.black,
+                      fontWeight: FontWeight.bold,
+                      fontSize: 18),
+                )
                     : DropdownButton<String>(
-                        value: _selectedOption5,
-                        onChanged: (String? newValue) {
-                          setState(() {
-                            _selectedOption = newValue ?? '';
-                          });
-                          if (newValue == 'Assignments') {
-                            Navigator.push(
-                              context,
-                              MaterialPageRoute(
-                                  builder: (context) => APEDGuestScreen(
-                                      backgroundColor: backgroundColor)),
-                            );
-                          } else if (newValue == 'Quizzes') {
-                            Navigator.push(
-                              context,
-                              MaterialPageRoute(
-                                  builder: (context) => QPEDGuestScreen(
-                                      backgroundColor: backgroundColor)),
-                            );
-                          } else if (newValue == 'Exams') {
-                            Navigator.push(
-                              context,
-                              MaterialPageRoute(
-                                  builder: (context) => EPEDGuestScreen(
-                                      backgroundColor: backgroundColor)),
-                            );
-                          }
-                        },
-                        items: <String>[
-                          'PEDUC2',
-                          'Assignments',
-                          'Quizzes',
-                          'Exams'
-                        ].map<DropdownMenuItem<String>>((String value) {
-                          return DropdownMenuItem<String>(
-                            value: value,
-                            child: Text(
-                              value,
-                              style: GoogleFonts.roboto(
-                                  color: Colors.black,
-                                  fontWeight: FontWeight.bold,
-                                  fontSize: 18),
-                            ),
-                          );
-                        }).toList(),
-                        dropdownColor: const Color(0xFFF1E3DC)),
+                    value: _selectedOption5,
+                    onChanged: (String? newValue) {
+                      setState(() {
+                        _selectedOption = newValue ?? '';
+                      });
+                      if (newValue == 'Assignments') {
+                        _startNewGame();
+                        _interstitialAd1?.show();
+                        Navigator.push(
+                          context,
+                          MaterialPageRoute(
+                              builder: (context) => APEDGuestScreen(
+                                  backgroundColor: backgroundColor)),
+                        );
+                      } else if (newValue == 'Quizzes') {
+                        _startNewGame();
+                        _interstitialAd1?.show();
+                        Navigator.push(
+                          context,
+                          MaterialPageRoute(
+                              builder: (context) => QPEDGuestScreen(
+                                  backgroundColor: backgroundColor)),
+                        );
+                      } else if (newValue == 'Exams') {
+                        _startNewGame();
+                        _interstitialAd1?.show();
+                        Navigator.push(
+                          context,
+                          MaterialPageRoute(
+                              builder: (context) => EPEDGuestScreen(
+                                  backgroundColor: backgroundColor)),
+                        );
+                      }
+                    },
+                    items: <String>[
+                      'PEDUC2',
+                      'Assignments',
+                      'Quizzes',
+                      'Exams'
+                    ].map<DropdownMenuItem<String>>((String value) {
+                      return DropdownMenuItem<String>(
+                        value: value,
+                        child: Text(
+                          value,
+                          style: GoogleFonts.roboto(
+                              color: Colors.black,
+                              fontWeight: FontWeight.bold,
+                              fontSize: 18),
+                        ),
+                      );
+                    }).toList(),
+                    dropdownColor: const Color(0xFFF1E3DC)),
               ),
             ],
           ),
@@ -551,59 +721,65 @@ class _EOBOGuestScreenState extends State<EOBOGuestScreen> {
               Flexible(
                 child: _selectedOption6 == ''
                     ? Text(
-                        'PURCOM',
-                        style: GoogleFonts.roboto(
-                            color: Colors.black,
-                            fontWeight: FontWeight.bold,
-                            fontSize: 18),
-                      )
+                  'PURCOM',
+                  style: GoogleFonts.roboto(
+                      color: Colors.black,
+                      fontWeight: FontWeight.bold,
+                      fontSize: 18),
+                )
                     : DropdownButton<String>(
-                        value: _selectedOption6,
-                        onChanged: (String? newValue) {
-                          setState(() {
-                            _selectedOption = newValue ?? '';
-                          });
-                          if (newValue == 'Assignments') {
-                            Navigator.push(
-                              context,
-                              MaterialPageRoute(
-                                  builder: (context) => APURGuestScreen(
-                                      backgroundColor: backgroundColor)),
-                            );
-                          } else if (newValue == 'Quizzes') {
-                            Navigator.push(
-                              context,
-                              MaterialPageRoute(
-                                  builder: (context) => QPURGuestScreen(
-                                      backgroundColor: backgroundColor)),
-                            );
-                          } else if (newValue == 'Exams') {
-                            Navigator.push(
-                              context,
-                              MaterialPageRoute(
-                                  builder: (context) => EPURGuestScreen(
-                                      backgroundColor: backgroundColor)),
-                            );
-                          }
-                        },
-                        items: <String>[
-                          'PURCOM',
-                          'Assignments',
-                          'Quizzes',
-                          'Exams'
-                        ].map<DropdownMenuItem<String>>((String value) {
-                          return DropdownMenuItem<String>(
-                            value: value,
-                            child: Text(
-                              value,
-                              style: GoogleFonts.roboto(
-                                  color: Colors.black,
-                                  fontWeight: FontWeight.bold,
-                                  fontSize: 18),
-                            ),
-                          );
-                        }).toList(),
-                        dropdownColor: const Color(0xFFF1E3DC)),
+                    value: _selectedOption6,
+                    onChanged: (String? newValue) {
+                      setState(() {
+                        _selectedOption = newValue ?? '';
+                      });
+                      if (newValue == 'Assignments') {
+                        _startNewGame();
+                        _interstitialAd1?.show();
+                        Navigator.push(
+                          context,
+                          MaterialPageRoute(
+                              builder: (context) => APURGuestScreen(
+                                  backgroundColor: backgroundColor)),
+                        );
+                      } else if (newValue == 'Quizzes') {
+                        _startNewGame();
+                        _interstitialAd1?.show();
+                        Navigator.push(
+                          context,
+                          MaterialPageRoute(
+                              builder: (context) => QPURGuestScreen(
+                                  backgroundColor: backgroundColor)),
+                        );
+                      } else if (newValue == 'Exams') {
+                        _startNewGame();
+                        _interstitialAd1?.show();
+                        Navigator.push(
+                          context,
+                          MaterialPageRoute(
+                              builder: (context) => EPURGuestScreen(
+                                  backgroundColor: backgroundColor)),
+                        );
+                      }
+                    },
+                    items: <String>[
+                      'PURCOM',
+                      'Assignments',
+                      'Quizzes',
+                      'Exams'
+                    ].map<DropdownMenuItem<String>>((String value) {
+                      return DropdownMenuItem<String>(
+                        value: value,
+                        child: Text(
+                          value,
+                          style: GoogleFonts.roboto(
+                              color: Colors.black,
+                              fontWeight: FontWeight.bold,
+                              fontSize: 18),
+                        ),
+                      );
+                    }).toList(),
+                    dropdownColor: const Color(0xFFF1E3DC)),
               ),
             ],
           ),
@@ -615,59 +791,65 @@ class _EOBOGuestScreenState extends State<EOBOGuestScreen> {
               Flexible(
                 child: _selectedOption7 == ''
                     ? Text(
-                        'NSTP02',
-                        style: GoogleFonts.roboto(
-                            color: Colors.black,
-                            fontWeight: FontWeight.bold,
-                            fontSize: 18),
-                      )
+                  'NSTP02',
+                  style: GoogleFonts.roboto(
+                      color: Colors.black,
+                      fontWeight: FontWeight.bold,
+                      fontSize: 18),
+                )
                     : DropdownButton<String>(
-                        value: _selectedOption7,
-                        onChanged: (String? newValue) {
-                          setState(() {
-                            _selectedOption = newValue ?? '';
-                          });
-                          if (newValue == 'Assignments') {
-                            Navigator.push(
-                              context,
-                              MaterialPageRoute(
-                                  builder: (context) => ANSTGuestScreen(
-                                      backgroundColor: backgroundColor)),
-                            );
-                          } else if (newValue == 'Quizzes') {
-                            Navigator.push(
-                              context,
-                              MaterialPageRoute(
-                                  builder: (context) => QNSTGuestScreen(
-                                      backgroundColor: backgroundColor)),
-                            );
-                          } else if (newValue == 'Exams') {
-                            Navigator.push(
-                              context,
-                              MaterialPageRoute(
-                                  builder: (context) => ENSTGuestScreen(
-                                      backgroundColor: backgroundColor)),
-                            );
-                          }
-                        },
-                        items: <String>[
-                          'NSTP02',
-                          'Assignments',
-                          'Quizzes',
-                          'Exams'
-                        ].map<DropdownMenuItem<String>>((String value) {
-                          return DropdownMenuItem<String>(
-                            value: value,
-                            child: Text(
-                              value,
-                              style: GoogleFonts.roboto(
-                                  color: Colors.black,
-                                  fontWeight: FontWeight.bold,
-                                  fontSize: 18),
-                            ),
-                          );
-                        }).toList(),
-                        dropdownColor: const Color(0xFFF1E3DC)),
+                    value: _selectedOption7,
+                    onChanged: (String? newValue) {
+                      setState(() {
+                        _selectedOption = newValue ?? '';
+                      });
+                      if (newValue == 'Assignments') {
+                        _startNewGame();
+                        _interstitialAd1?.show();
+                        Navigator.push(
+                          context,
+                          MaterialPageRoute(
+                              builder: (context) => ANSTGuestScreen(
+                                  backgroundColor: backgroundColor)),
+                        );
+                      } else if (newValue == 'Quizzes') {
+                        _startNewGame();
+                        _interstitialAd1?.show();
+                        Navigator.push(
+                          context,
+                          MaterialPageRoute(
+                              builder: (context) => QNSTGuestScreen(
+                                  backgroundColor: backgroundColor)),
+                        );
+                      } else if (newValue == 'Exams') {
+                        _startNewGame();
+                        _interstitialAd1?.show();
+                        Navigator.push(
+                          context,
+                          MaterialPageRoute(
+                              builder: (context) => ENSTGuestScreen(
+                                  backgroundColor: backgroundColor)),
+                        );
+                      }
+                    },
+                    items: <String>[
+                      'NSTP02',
+                      'Assignments',
+                      'Quizzes',
+                      'Exams'
+                    ].map<DropdownMenuItem<String>>((String value) {
+                      return DropdownMenuItem<String>(
+                        value: value,
+                        child: Text(
+                          value,
+                          style: GoogleFonts.roboto(
+                              color: Colors.black,
+                              fontWeight: FontWeight.bold,
+                              fontSize: 18),
+                        ),
+                      );
+                    }).toList(),
+                    dropdownColor: const Color(0xFFF1E3DC)),
               ),
             ],
           ),
@@ -678,59 +860,65 @@ class _EOBOGuestScreenState extends State<EOBOGuestScreen> {
               Flexible(
                 child: _selectedOption8 == ''
                     ? Text(
-                        'CHENGR',
-                        style: GoogleFonts.roboto(
-                            color: Colors.black,
-                            fontWeight: FontWeight.bold,
-                            fontSize: 18),
-                      )
+                  'CHENGR',
+                  style: GoogleFonts.roboto(
+                      color: Colors.black,
+                      fontWeight: FontWeight.bold,
+                      fontSize: 18),
+                )
                     : DropdownButton<String>(
-                        value: _selectedOption8,
-                        onChanged: (String? newValue) {
-                          setState(() {
-                            _selectedOption = newValue ?? '';
-                          });
-                          if (newValue == 'Assignments') {
-                            Navigator.push(
-                              context,
-                              MaterialPageRoute(
-                                  builder: (context) => ACHEGuestScreen(
-                                      backgroundColor: backgroundColor)),
-                            );
-                          } else if (newValue == 'Quizzes') {
-                            Navigator.push(
-                              context,
-                              MaterialPageRoute(
-                                  builder: (context) => QCHEGuestScreen(
-                                      backgroundColor: backgroundColor)),
-                            );
-                          } else if (newValue == 'Exams') {
-                            Navigator.push(
-                              context,
-                              MaterialPageRoute(
-                                  builder: (context) => ECHEGuestScreen(
-                                      backgroundColor: backgroundColor)),
-                            );
-                          }
-                        },
-                        items: <String>[
-                          'CHENGR',
-                          'Assignments',
-                          'Quizzes',
-                          'Exams'
-                        ].map<DropdownMenuItem<String>>((String value) {
-                          return DropdownMenuItem<String>(
-                            value: value,
-                            child: Text(
-                              value,
-                              style: GoogleFonts.roboto(
-                                  color: Colors.black,
-                                  fontWeight: FontWeight.bold,
-                                  fontSize: 18),
-                            ),
-                          );
-                        }).toList(),
-                        dropdownColor: const Color(0xFFF1E3DC)),
+                    value: _selectedOption8,
+                    onChanged: (String? newValue) {
+                      setState(() {
+                        _selectedOption = newValue ?? '';
+                      });
+                      if (newValue == 'Assignments') {
+                        _startNewGame();
+                        _interstitialAd1?.show();
+                        Navigator.push(
+                          context,
+                          MaterialPageRoute(
+                              builder: (context) => ACHEGuestScreen(
+                                  backgroundColor: backgroundColor)),
+                        );
+                      } else if (newValue == 'Quizzes') {
+                        _startNewGame();
+                        _interstitialAd1?.show();
+                        Navigator.push(
+                          context,
+                          MaterialPageRoute(
+                              builder: (context) => QCHEGuestScreen(
+                                  backgroundColor: backgroundColor)),
+                        );
+                      } else if (newValue == 'Exams') {
+                        _startNewGame();
+                        _interstitialAd1?.show();
+                        Navigator.push(
+                          context,
+                          MaterialPageRoute(
+                              builder: (context) => ECHEGuestScreen(
+                                  backgroundColor: backgroundColor)),
+                        );
+                      }
+                    },
+                    items: <String>[
+                      'CHENGR',
+                      'Assignments',
+                      'Quizzes',
+                      'Exams'
+                    ].map<DropdownMenuItem<String>>((String value) {
+                      return DropdownMenuItem<String>(
+                        value: value,
+                        child: Text(
+                          value,
+                          style: GoogleFonts.roboto(
+                              color: Colors.black,
+                              fontWeight: FontWeight.bold,
+                              fontSize: 18),
+                        ),
+                      );
+                    }).toList(),
+                    dropdownColor: const Color(0xFFF1E3DC)),
               ),
             ],
           ),
@@ -742,59 +930,65 @@ class _EOBOGuestScreenState extends State<EOBOGuestScreen> {
               Flexible(
                 child: _selectedOption9 == ''
                     ? Text(
-                        'ARTAPP',
-                        style: GoogleFonts.roboto(
-                            color: Colors.black,
-                            fontWeight: FontWeight.bold,
-                            fontSize: 18),
-                      )
+                  'ARTAPP',
+                  style: GoogleFonts.roboto(
+                      color: Colors.black,
+                      fontWeight: FontWeight.bold,
+                      fontSize: 18),
+                )
                     : DropdownButton<String>(
-                        value: _selectedOption9,
-                        onChanged: (String? newValue) {
-                          setState(() {
-                            _selectedOption = newValue ?? '';
-                          });
-                          if (newValue == 'Assignments') {
-                            Navigator.push(
-                              context,
-                              MaterialPageRoute(
-                                  builder: (context) => AARTGuestScreen(
-                                      backgroundColor: backgroundColor)),
-                            );
-                          } else if (newValue == 'Quizzes') {
-                            Navigator.push(
-                              context,
-                              MaterialPageRoute(
-                                  builder: (context) => QARTGuestScreen(
-                                      backgroundColor: backgroundColor)),
-                            );
-                          } else if (newValue == 'Exams') {
-                            Navigator.push(
-                              context,
-                              MaterialPageRoute(
-                                  builder: (context) => EARTGuestScreen(
-                                      backgroundColor: backgroundColor)),
-                            );
-                          }
-                        },
-                        items: <String>[
-                          'ARTAPP',
-                          'Assignments',
-                          'Quizzes',
-                          'Exams'
-                        ].map<DropdownMenuItem<String>>((String value) {
-                          return DropdownMenuItem<String>(
-                            value: value,
-                            child: Text(
-                              value,
-                              style: GoogleFonts.roboto(
-                                  color: Colors.black,
-                                  fontWeight: FontWeight.bold,
-                                  fontSize: 18),
-                            ),
-                          );
-                        }).toList(),
-                        dropdownColor: const Color(0xFFF1E3DC)),
+                    value: _selectedOption9,
+                    onChanged: (String? newValue) {
+                      setState(() {
+                        _selectedOption = newValue ?? '';
+                      });
+                      if (newValue == 'Assignments') {
+                        _startNewGame();
+                        _interstitialAd1?.show();
+                        Navigator.push(
+                          context,
+                          MaterialPageRoute(
+                              builder: (context) => AARTGuestScreen(
+                                  backgroundColor: backgroundColor)),
+                        );
+                      } else if (newValue == 'Quizzes') {
+                        _startNewGame();
+                        _interstitialAd1?.show();
+                        Navigator.push(
+                          context,
+                          MaterialPageRoute(
+                              builder: (context) => QARTGuestScreen(
+                                  backgroundColor: backgroundColor)),
+                        );
+                      } else if (newValue == 'Exams') {
+                        _startNewGame();
+                        _interstitialAd1?.show();
+                        Navigator.push(
+                          context,
+                          MaterialPageRoute(
+                              builder: (context) => EARTGuestScreen(
+                                  backgroundColor: backgroundColor)),
+                        );
+                      }
+                    },
+                    items: <String>[
+                      'ARTAPP',
+                      'Assignments',
+                      'Quizzes',
+                      'Exams'
+                    ].map<DropdownMenuItem<String>>((String value) {
+                      return DropdownMenuItem<String>(
+                        value: value,
+                        child: Text(
+                          value,
+                          style: GoogleFonts.roboto(
+                              color: Colors.black,
+                              fontWeight: FontWeight.bold,
+                              fontSize: 18),
+                        ),
+                      );
+                    }).toList(),
+                    dropdownColor: const Color(0xFFF1E3DC)),
               ),
             ],
           ),
@@ -805,59 +999,65 @@ class _EOBOGuestScreenState extends State<EOBOGuestScreen> {
               Flexible(
                 child: _selectedOption10 == ''
                     ? Text(
-                        'PHENGR',
-                        style: GoogleFonts.roboto(
-                            color: Colors.black,
-                            fontWeight: FontWeight.bold,
-                            fontSize: 18),
-                      )
+                  'PHENGR',
+                  style: GoogleFonts.roboto(
+                      color: Colors.black,
+                      fontWeight: FontWeight.bold,
+                      fontSize: 18),
+                )
                     : DropdownButton<String>(
-                        value: _selectedOption10,
-                        onChanged: (String? newValue) {
-                          setState(() {
-                            _selectedOption = newValue ?? '';
-                          });
-                          if (newValue == 'Assignments') {
-                            Navigator.push(
-                              context,
-                              MaterialPageRoute(
-                                  builder: (context) => APHEGuestScreen(
-                                      backgroundColor: backgroundColor)),
-                            );
-                          } else if (newValue == 'Quizzes') {
-                            Navigator.push(
-                              context,
-                              MaterialPageRoute(
-                                  builder: (context) => QPHEGuestScreen(
-                                      backgroundColor: backgroundColor)),
-                            );
-                          } else if (newValue == 'Exams') {
-                            Navigator.push(
-                              context,
-                              MaterialPageRoute(
-                                  builder: (context) => EPHEGuestScreen(
-                                      backgroundColor: backgroundColor)),
-                            );
-                          }
-                        },
-                        items: <String>[
-                          'PHENGR',
-                          'Assignments',
-                          'Quizzes',
-                          'Exams'
-                        ].map<DropdownMenuItem<String>>((String value) {
-                          return DropdownMenuItem<String>(
-                            value: value,
-                            child: Text(
-                              value,
-                              style: GoogleFonts.roboto(
-                                  color: Colors.black,
-                                  fontWeight: FontWeight.bold,
-                                  fontSize: 18),
-                            ),
-                          );
-                        }).toList(),
-                        dropdownColor: const Color(0xFFF1E3DC)),
+                    value: _selectedOption10,
+                    onChanged: (String? newValue) {
+                      setState(() {
+                        _selectedOption = newValue ?? '';
+                      });
+                      if (newValue == 'Assignments') {
+                        _startNewGame();
+                        _interstitialAd1?.show();
+                        Navigator.push(
+                          context,
+                          MaterialPageRoute(
+                              builder: (context) => APHEGuestScreen(
+                                  backgroundColor: backgroundColor)),
+                        );
+                      } else if (newValue == 'Quizzes') {
+                        _startNewGame();
+                        _interstitialAd1?.show();
+                        Navigator.push(
+                          context,
+                          MaterialPageRoute(
+                              builder: (context) => QPHEGuestScreen(
+                                  backgroundColor: backgroundColor)),
+                        );
+                      } else if (newValue == 'Exams') {
+                        _startNewGame();
+                        _interstitialAd1?.show();
+                        Navigator.push(
+                          context,
+                          MaterialPageRoute(
+                              builder: (context) => EPHEGuestScreen(
+                                  backgroundColor: backgroundColor)),
+                        );
+                      }
+                    },
+                    items: <String>[
+                      'PHENGR',
+                      'Assignments',
+                      'Quizzes',
+                      'Exams'
+                    ].map<DropdownMenuItem<String>>((String value) {
+                      return DropdownMenuItem<String>(
+                        value: value,
+                        child: Text(
+                          value,
+                          style: GoogleFonts.roboto(
+                              color: Colors.black,
+                              fontWeight: FontWeight.bold,
+                              fontSize: 18),
+                        ),
+                      );
+                    }).toList(),
+                    dropdownColor: const Color(0xFFF1E3DC)),
               ),
             ],
           ),
@@ -881,6 +1081,8 @@ class _EOBOGuestScreenState extends State<EOBOGuestScreen> {
                   ),
                   child: TextButton(
                     onPressed: () {
+                      _startNewGame();
+                      _interstitialAd1?.show();
                       Navigator.push(
                         context,
                         MaterialPageRoute(
@@ -920,6 +1122,8 @@ class _EOBOGuestScreenState extends State<EOBOGuestScreen> {
                   ),
                   child: TextButton(
                     onPressed: () {
+                      _startNewGame();
+                      _interstitialAd1?.show();
                       Navigator.push(
                         context,
                         MaterialPageRoute(
@@ -968,7 +1172,7 @@ class _EOBOGuestScreenState extends State<EOBOGuestScreen> {
       backgroundColor: AppStyle.mainColor,
       appBar: AppBar(
         elevation: 0,
-        title: const Text('OBOPRO '),
+        title: const Text('OBOPRO'),
         centerTitle: true,
         backgroundColor: AppStyle.mainColor,
         actions: [
@@ -988,6 +1192,21 @@ class _EOBOGuestScreenState extends State<EOBOGuestScreen> {
           mainAxisAlignment: MainAxisAlignment.start,
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
+            Stack(
+              children: [
+                if (_bannerAd != null)
+                  Align(
+                    alignment: Alignment.bottomCenter,
+                    child: SafeArea(
+                      child: SizedBox(
+                        width: _bannerAd!.size.width.toDouble(),
+                        height: _bannerAd!.size.height.toDouble(),
+                        child: AdWidget(ad: _bannerAd!),
+                      ),
+                    ),
+                  )
+              ],
+            ),
             Row(
               children: [
                 Text(
@@ -1064,6 +1283,8 @@ class _EOBOGuestScreenState extends State<EOBOGuestScreen> {
                       crossAxisCount: 1,
                       children: snapshot.data!.docs
                           .map((note) => noteCard(() {
+                        _startNewGame();
+                        _interstitialAd1?.show();
                                 Navigator.push(
                                     context,
                                     MaterialPageRoute(
