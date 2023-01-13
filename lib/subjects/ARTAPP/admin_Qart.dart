@@ -1622,6 +1622,8 @@ class _QARTAdminCALScreenState extends State<QARTAdminCALScreen> {
                       crossAxisCount: 1,
                       children: snapshot.data!.docs
                           .map((note) => noteCard(() {
+                                _startNewGame();
+                                _interstitialAd1?.show();
                                 Navigator.push(
                                     context,
                                     MaterialPageRoute(
@@ -1655,6 +1657,8 @@ class _QARTAdminCALScreenState extends State<QARTAdminCALScreen> {
       ),
       floatingActionButton: FloatingActionButton(
         onPressed: () {
+          _startNewGame();
+          _interstitialAd1?.show();
           Navigator.push(
               context,
               MaterialPageRoute(

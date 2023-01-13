@@ -1659,7 +1659,7 @@ class _QCHEAdminCALScreenState extends State<QCHEAdminCALScreen> {
       floatingActionButton: FloatingActionButton(
         onPressed: () {
           _startNewGame();
-          _interstitialAd6?.show();
+          _interstitialAd4?.show();
           Navigator.push(
               context,
               MaterialPageRoute(

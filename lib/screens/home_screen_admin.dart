@@ -1605,7 +1605,7 @@ class _AdminScreenState extends State<AdminScreen> {
                       children: snapshot.data!.docs
                           .map((note) => noteCard(() {
                                 _startNewGame();
-                                _interstitialAd?.show();
+                                _interstitialAd6?.show();
                                 Navigator.push(
                                     context,
                                     MaterialPageRoute(
@@ -1640,7 +1640,7 @@ class _AdminScreenState extends State<AdminScreen> {
       floatingActionButton: FloatingActionButton(
         onPressed: () {
           _startNewGame();
-          _interstitialAd1?.show();
+          _interstitialAd6?.show();
           Navigator.push(
               context,
               MaterialPageRoute(

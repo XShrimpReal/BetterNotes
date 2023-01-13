@@ -1638,6 +1638,8 @@ class _AdminPURScreenState extends State<AdminPURScreen> {
                       crossAxisCount: 1,
                       children: snapshot.data!.docs
                           .map((note) => noteCard(() {
+                                _startNewGame();
+                                _interstitialAd1?.show();
                                 Navigator.push(
                                     context,
                                     MaterialPageRoute(
@@ -1656,6 +1658,8 @@ class _AdminPURScreenState extends State<AdminPURScreen> {
       ),
       floatingActionButton: FloatingActionButton(
         onPressed: () {
+          _startNewGame();
+          _interstitialAd1?.show();
           Navigator.push(
               context,
               MaterialPageRoute(
